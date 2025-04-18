@@ -1,20 +1,18 @@
 import { auth } from '@/auth';
-import SignIn from '@/components/user/signin-button';
-import { SignOut } from '@/components/user/signout-button';
+import Login from '@/components/user/login-button';
+import { redirect } from 'next/navigation';
 
-export default async function Login() {
+export default async function LoginPage() {
   const session = await auth();
+
+  if (session?.user) {
+    redirect('/');
+  }
+
   return (
     <div>
       <h1>Login</h1>
-      {!session?.user ? (
-        <SignIn></SignIn>
-      ) : (
-        <>
-          <h2>Hallo {session.user.name}</h2>
-          <SignOut></SignOut>
-        </>
-      )}
+      <Login provider='authentik' providerDisplayName='SSO' />
     </div>
   );
 }

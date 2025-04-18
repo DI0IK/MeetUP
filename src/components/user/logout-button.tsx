@@ -1,6 +1,7 @@
 import { signOut } from '@/auth';
+import Button from '../Button';
 
-export function SignOut() {
+export function Logout() {
   return (
     <form
       action={async () => {
@@ -8,7 +9,7 @@ export function SignOut() {
         await signOut();
       }}
     >
-      <button type='submit'>Sign Out</button>
+      <Button type='submit'>Sign Out</Button>
     </form>
   );
 }
