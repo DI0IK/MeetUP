@@ -1,0 +1,43 @@
+name: container-scan
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+jobs:
+  container-scan:
+    name: Container Scan
+    runs-on: docker
+    container:
+      image: node:20-bullseye
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Docker
+        run: |
+          apt-get update
+          apt-get install -y ca-certificates curl
+          install -m 0755 -d /etc/apt/keyrings
+          curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
+          chmod a+r /etc/apt/keyrings/docker.asc
+          echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
+          apt-get update
+          apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+      - name: Build an image from Dockerfile
+        run: docker build -t git.dominikstahl.dev/dhbw-we/meetup:${{ github.sha }} .
+
+      - name: Install Trivy
+        run: |
+          curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.61.0
+
+      - name: Run Trivy vulnerability scanner
+        run: |
+          trivy image --exit-code 1 --severity HIGH,CRITICAL,MEDIUM --ignore-unfixed --no-progress --format table git.dominikstahl.dev/dhbw-we/meetup:${{ github.sha }}
+          trivy image --exit-code 1 --severity HIGH,CRITICAL,MEDIUM --ignore-unfixed --no-progress --format json git.dominikstahl.dev/dhbw-we/meetup:${{ github.sha }} > trivy-report.json
+
+      - name: Upload Trivy report
+        uses: forgejo/upload-artifact@v4
+        with:
+          path: trivy-report.json
