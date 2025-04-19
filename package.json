@@ -15,15 +15,15 @@
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@types/node": "^20",
+    "@eslint/eslintrc": "3.3.1",
+    "@types/node": "20.17.30",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "eslint": "^9",
+    "eslint": "9.24.0",
     "eslint-config-next": "15.3.0",
-    "eslint-config-prettier": "^10.1.2",
-    "prettier": "^3.5.3",
-    "typescript": "^5"
+    "eslint-config-prettier": "10.1.2",
+    "prettier": "3.5.3",
+    "typescript": "5.8.3"
   },
   "packageManager": "yarn@1.22.22+sha1.ac34549e6aa8e7ead463a7407e1c7390f61a6610"
 }
