@@ -1,5 +1,5 @@
 import { signIn } from '@/auth';
-import Button from '../Button';
+import Button from '../button';
 import { faOpenid } from '@fortawesome/free-brands-svg-icons';
 
 export default function Login({
