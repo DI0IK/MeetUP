@@ -1,4 +1,5 @@
 {
   "$schema": "https://json.schemastore.org/renovate",
-  "extends": ["config:best-practices", ":semanticCommits"]
+  "extends": ["config:best-practices", ":semanticCommits"],
+  "automergeType": "branch"
 }
