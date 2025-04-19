@@ -19,18 +19,21 @@ export default async function LoginPage() {
     <div className={style.loginContainer}>
       <h1>Login</h1>
 
-      <LabeledInput
-        type='email'
-        size='login'
-        label='E-Mail'
-        placeholder='Enter your E-Mail'
-      />
-      <LabeledInput
-        type='password'
-        size='login'
-        label='Password'
-        placeholder='Enter your Password'
-      />
+      <form>
+        <LabeledInput
+          type='email'
+          label='E-Mail'
+          placeholder='Enter your E-Mail'
+        />
+        <LabeledInput
+          type='password'
+          label='Password'
+          placeholder='Enter your Password'
+        />
+      </form>
+
+      <hr style={{ width: 230 }} />
+
       <Login provider='authentik' providerDisplayName='SSO' />
     </div>
   );

@@ -16,7 +16,7 @@ export default function Login({
         await signIn(provider);
       }}
     >
-      <Button type='submit' mode='warning' icon={faOpenid}>
+      <Button type='submit' mode='warning' icon={faOpenid} width={250}>
         Login with {providerDisplayName}
       </Button>
     </form>

@@ -8,17 +8,22 @@ export default function Button({
   children,
   mode = 'primary',
   icon,
+  width,
 }: {
   type?: 'button' | 'submit' | 'reset';
   children?: React.ReactNode;
   mode?: 'primary' | 'warning' | 'success' | 'danger';
   icon?: IconProp;
+  width?: number;
 }) {
   if (!icon) {
     return (
       <button
         className={style.button + ' ' + style['style_' + mode]}
         type={type}
+        style={{
+          width: width ? `${width}px` : '100%',
+        }}
       >
         <span>{children}</span>
       </button>
@@ -30,6 +35,9 @@ export default function Button({
           style.button + ' ' + style['style_' + mode] + ' ' + style['icon']
         }
         type={type}
+        style={{
+          width: width ? `${width}px` : '100%',
+        }}
       >
         <FontAwesomeIcon icon={icon} height={25} />
         <span>{children}</span>

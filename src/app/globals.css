@@ -25,12 +25,20 @@
   --textbox-50: rgb(204, 204, 204, 0.5);
   --textbox-75: rgb(204, 204, 204, 0.75);
   --textbox-100: rgb(204, 204, 204, 1);
+
+  --base-1: #f3f3f3;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #e5e7eb;
+
+    --textbox-50: rgb(75, 85, 99, 0.5);
+    --textbox-75: rgb(75, 85, 99, 0.75);
+    --textbox-100: rgb(75, 85, 99, 1);
+
+    --base-1: #111111;
   }
 }
 
