@@ -21,6 +21,10 @@
   --danger-100: rgba(220, 38, 38, 1);
 
   --button-text-size: 18px;
+
+  --textbox-50: rgb(204, 204, 204, 0.5);
+  --textbox-75: rgb(204, 204, 204, 0.75);
+  --textbox-100: rgb(204, 204, 204, 1);
 }
 
 @media (prefers-color-scheme: dark) {
