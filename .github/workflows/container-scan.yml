@@ -9,7 +9,7 @@ jobs:
     name: Container Scan
     runs-on: docker
     container:
-      image: node:22-bullseye@sha256:1a956cf7ae435192dcdd18b8aba7349d649f0947795eac8b0b247b7024c60299
+      image: node:22-bullseye@sha256:2dc553e4b9a2d8eadd5c575053cb8ae5bb1fd890581b4d0c1ad3e6fc7abe02e9
     steps:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
