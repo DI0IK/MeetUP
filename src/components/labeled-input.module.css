@@ -13,7 +13,7 @@
   width: 100%;
   height: 50px;
   border: 1px solid var(--textbox-75);
-  border-radius: 9999px;
+  border-radius: 16px;
   padding: 10px 20px;
   background-color: var(--textbox-50);
   color: var(--foreground);

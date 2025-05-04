@@ -1,4 +1,4 @@
-import { Logout } from '@/components/user/logout-button';
+import { Logout } from '@/components/user/sso-logout-button';
 
 export default function Home() {
   return (

@@ -1,7 +1,7 @@
 // /home/max/Git/MeetUp/src/app/login/page.tsx
 import { auth } from '@/auth';
 import LabeledInput from '@/components/labeled-input';
-import Login from '@/components/user/login-button';
+import Login from '@/components/user/sso-login-button';
 import { redirect } from 'next/navigation';
 
 import style from './login.module.css';
