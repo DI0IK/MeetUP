@@ -2,7 +2,7 @@ import { signIn } from '@/auth';
 import Button from '../button';
 import { faOpenid } from '@fortawesome/free-brands-svg-icons';
 
-export default function Login({
+export default function SSOLogin({
   provider,
   providerDisplayName,
 }: {

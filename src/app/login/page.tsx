@@ -7,6 +7,8 @@ import { redirect } from 'next/navigation';
 import style from './login.module.css';
 
 import '@/app/globals.css';
+import SSOLogin from '@/components/user/sso-login-button';
+import Login from '@/components/user/login-button';
 
 export default async function LoginPage() {
   const session = await auth();
@@ -32,9 +34,11 @@ export default async function LoginPage() {
         />
       </form>
 
+      <Login provider={''} providerDisplayName={''}></Login>
+
       <hr style={{ width: 230 }} />
 
-      <Login provider='authentik' providerDisplayName='SSO' />
+      <SSOLogin provider='authentik' providerDisplayName='SSO' />
     </div>
   );
 }
