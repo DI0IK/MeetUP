@@ -12,7 +12,7 @@ export default function Button({
 }: {
   type?: 'button' | 'submit' | 'reset';
   children?: React.ReactNode;
-  mode?: 'primary' | 'warning' | 'success' | 'danger';
+  mode?: 'primary' | 'warning' | 'success' | 'danger' | 'neutral';
   icon?: IconProp;
   width?: number;
 }) {

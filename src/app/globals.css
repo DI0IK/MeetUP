@@ -22,6 +22,10 @@
 
   --button-text-size: 18px;
 
+  --neutral-50: rgb(204, 204, 204, 0.5);
+  --neutral-75: rgb(204, 204, 204, 0.75);
+  --neutral-100: rgb(204, 204, 204, 1);
+
   --textbox-50: rgb(204, 204, 204, 0.5);
   --textbox-75: rgb(204, 204, 204, 0.75);
   --textbox-100: rgb(204, 204, 204, 1);

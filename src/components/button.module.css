@@ -52,3 +52,9 @@
   --color-75: var(--danger-75);
   --color-100: var(--danger-100);
 }
+
+.style_neutral {
+  --color-50: var(--neutral-50);
+  --color-75: var(--neutral-75);
+  --color-100: var(--neutral-100);
+}

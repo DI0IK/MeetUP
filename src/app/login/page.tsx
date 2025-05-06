@@ -1,14 +1,13 @@
 // /home/max/Git/MeetUp/src/app/login/page.tsx
 import { auth } from '@/auth';
 import LabeledInput from '@/components/labeled-input';
-import Login from '@/components/user/sso-login-button';
+import SSOLogin from '@/components/user/sso-login-button';
+import Login from '@/components/user/login-button';
 import { redirect } from 'next/navigation';
 
 import style from './login.module.css';
 
 import '@/app/globals.css';
-import SSOLogin from '@/components/user/sso-login-button';
-import Login from '@/components/user/login-button';
 
 export default async function LoginPage() {
   const session = await auth();
@@ -34,7 +33,7 @@ export default async function LoginPage() {
         />
       </form>
 
-      <Login provider={''} providerDisplayName={''}></Login>
+      <Login></Login>
 
       <hr style={{ width: 230 }} />
 
