@@ -40,9 +40,6 @@ export default async function LoginPage() {
       {process.env.AUTH_AUTHENTIK_ISSUER && (
         <SSOLogin provider='authentik' providerDisplayName='SSO' />
       )}
-      {process.env.AUTH_AUTHENTIK_ISSUER && (
-        <SSOLogin provider='authentik' providerDisplayName='SSO' />
-      )}
     </div>
   );
 }
