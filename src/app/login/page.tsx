@@ -37,7 +37,12 @@ export default async function LoginPage() {
 
       <hr style={{ width: 230 }} />
 
-      <SSOLogin provider='authentik' providerDisplayName='SSO' />
+      {process.env.AUTH_AUTHENTIK_ISSUER && (
+        <SSOLogin provider='authentik' providerDisplayName='SSO' />
+      )}
+      {process.env.AUTH_AUTHENTIK_ISSUER && (
+        <SSOLogin provider='authentik' providerDisplayName='SSO' />
+      )}
     </div>
   );
 }
