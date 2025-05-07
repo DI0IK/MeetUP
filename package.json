@@ -17,6 +17,7 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "next": "15.3.2",
     "next-auth": "^5.0.0-beta.25",
+    "prisma": "^6.7.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
