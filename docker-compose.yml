@@ -5,3 +5,5 @@ services:
       dockerfile: Dockerfile
     ports:
       - '3000:3000'
+    environment:
+      - AUTH_SECRET=secret
