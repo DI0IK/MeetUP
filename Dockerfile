@@ -27,6 +27,10 @@ COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next/standalone ./
 COPY --from=builder /app/.next/static ./.next/static
 
+LABEL org.opencontainers.image.source="https://git.dominikstahl.dev/DHBW-WE/MeetUp"
+LABEL org.opencontainers.image.title="MeetUp"
+LABEL org.opencontainers.image.description="A web application for managing meetups"
+
 EXPOSE 3000
 
 ENV HOSTNAME="0.0.0.0"
