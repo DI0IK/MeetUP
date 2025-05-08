@@ -15,7 +15,11 @@ export default function LoginForm() {
           label='Password'
           placeholder='Enter your Password'
         />
-        <Button type='submit' variant='secondary'>
+        <Button
+          className='hover:bg-blue-600 hover:text-white'
+          type='submit'
+          variant='secondary'
+        >
           Login
         </Button>
       </form>
