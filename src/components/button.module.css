@@ -1,0 +1,60 @@
+.button {
+  background-color: var(--color-50);
+  border-radius: 16px;
+  padding: 10px 20px;
+  outline: none;
+  border: 2px solid var(--color-100);
+  transition: background-color 0.3s ease;
+  height: 50px;
+}
+
+.button:hover {
+  background-color: var(--color-75);
+}
+
+.button:active {
+  background-color: var(--color-100);
+}
+
+.button span {
+  color: var(--foreground);
+  font-size: var(--button-text-size);
+  font-weight: 600;
+}
+
+.icon {
+  display: grid;
+  grid-template-columns: 25px 1fr;
+  gap: 10px;
+  align-items: center;
+}
+
+.style_primary {
+  --color-50: var(--primary-50);
+  --color-75: var(--primary-75);
+  --color-100: var(--primary-100);
+}
+
+.style_warning {
+  --color-50: var(--warning-50);
+  --color-75: var(--warning-75);
+  --color-100: var(--warning-100);
+}
+
+.style_success {
+  --color-50: var(--success-50);
+  --color-75: var(--success-75);
+  --color-100: var(--success-100);
+}
+
+.style_danger {
+  --color-50: var(--danger-50);
+  --color-75: var(--danger-75);
+  --color-100: var(--danger-100);
+}
+
+.style_neutral {
+  --color-50: var(--neutral-50);
+  --color-75: var(--neutral-75);
+  --color-100: var(--neutral-100);
+}

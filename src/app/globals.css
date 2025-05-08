@@ -1,12 +1,48 @@
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: #3a3a3a;
+
+  --neutral: #808080;
+
+  --primary-50: rgba(59, 130, 246, 0.5);
+  --primary-75: rgba(59, 130, 246, 0.75);
+  --primary-100: rgba(59, 130, 246, 1);
+
+  --warning-50: rgba(245, 158, 11, 0.5);
+  --warning-75: rgba(245, 158, 11, 0.75);
+  --warning-100: rgba(245, 158, 11, 1);
+
+  --success-50: rgba(22, 163, 74, 0.5);
+  --success-75: rgba(22, 163, 74, 0.75);
+  --success-100: rgba(22, 163, 74, 1);
+
+  --danger-50: rgba(220, 38, 38, 0.5);
+  --danger-75: rgba(220, 38, 38, 0.75);
+  --danger-100: rgba(220, 38, 38, 1);
+
+  --button-text-size: 18px;
+
+  --neutral-50: rgb(204, 204, 204, 0.5);
+  --neutral-75: rgb(204, 204, 204, 0.75);
+  --neutral-100: rgb(204, 204, 204, 1);
+
+  --textbox-50: rgb(204, 204, 204, 0.5);
+  --textbox-75: rgb(204, 204, 204, 0.75);
+  --textbox-100: rgb(204, 204, 204, 1);
+
+  --base-1: #f3f3f3;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
-    --foreground: #ededed;
+    --foreground: #e5e7eb;
+
+    --textbox-50: rgb(75, 85, 99, 0.5);
+    --textbox-75: rgb(75, 85, 99, 0.75);
+    --textbox-100: rgb(75, 85, 99, 1);
+
+    --base-1: #111111;
   }
 }
 
