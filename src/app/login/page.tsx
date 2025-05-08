@@ -1,4 +1,3 @@
-// /home/max/Git/MeetUp/src/app/login/page.tsx
 import { auth } from '@/auth';
 import SSOLogin from '@/components/user/sso-login-button';
 import LoginForm from '@/components/user/login-form';
