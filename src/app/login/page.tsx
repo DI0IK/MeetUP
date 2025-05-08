@@ -1,8 +1,7 @@
 // /home/max/Git/MeetUp/src/app/login/page.tsx
 import { auth } from '@/auth';
-import LabeledInput from '@/components/labeled-input';
 import SSOLogin from '@/components/user/sso-login-button';
-import Login from '@/components/user/login-button';
+import LoginForm from '@/components/user/login-form';
 import { redirect } from 'next/navigation';
 
 import style from './login.module.css';
@@ -20,20 +19,7 @@ export default async function LoginPage() {
     <div className={style.loginContainer}>
       <h1>Login</h1>
 
-      <form>
-        <LabeledInput
-          type='email'
-          label='E-Mail'
-          placeholder='Enter your E-Mail'
-        />
-        <LabeledInput
-          type='password'
-          label='Password'
-          placeholder='Enter your Password'
-        />
-      </form>
-
-      <Login></Login>
+      <LoginForm></LoginForm>
 
       <hr style={{ width: 230 }} />
 
