@@ -1,5 +1,3 @@
-import style from './labeled-input.module.css';
-
 export default function LabeledInput({
   type,
   width,
@@ -17,8 +15,9 @@ export default function LabeledInput({
 
   if (!label) {
     return (
-      <div className={style.input}>
+      <div className='flex flex-col gap-2'>
         <input
+          className='border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
           type={type}
           placeholder={placeholder}
           defaultValue={value}
@@ -30,12 +29,11 @@ export default function LabeledInput({
     );
   } else {
     return (
-      <div className={style.input}>
-        <label htmlFor={randomId} className={style['label']}>
-          {label}
-        </label>
+      <div className='flex flex-col gap-2'>
+        <label htmlFor={randomId}>{label}</label>
 
         <input
+          className='border border-gray-300 rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-blue-500'
           id={randomId}
           type={type}
           placeholder={placeholder}
