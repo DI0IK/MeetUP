@@ -122,8 +122,6 @@ This project is built with a modern tech stack:
 
 ## Contributing
 
-_(This section can be expanded as your project grows and you're open to contributions.)_
-
 Contributions are welcome! If you'd like to contribute, please:
 
 1.  Fork the repository.
@@ -134,8 +132,6 @@ Contributions are welcome! If you'd like to contribute, please:
 6.  Open a Pull Request against the `main` (or `develop`) branch.
 
 Please ensure your code adheres to the project's coding standards (e.g., run linters/formatters if configured) and that any database schema changes are accompanied by a Prisma migration.
-
-_(Optional: You can add more details about reporting bugs, suggesting features, or coding style guides here.)_
 
 ---
 
