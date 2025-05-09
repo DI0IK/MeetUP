@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button';
 
 export default function LoginForm() {
   return (
-    <form className='flex flex-col gap-4 w-7/8'>
+    <form className='flex flex-col gap-4 w-full'>
       <LabeledInput
         type='email'
         label='E-Mail'

@@ -4,6 +4,7 @@ import LoginForm from '@/components/user/login-form';
 import { redirect } from 'next/navigation';
 
 import '@/app/globals.css';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 
 export default async function LoginPage() {
   const session = await auth();
@@ -14,17 +15,20 @@ export default async function LoginPage() {
 
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
-      <div className='flex flex-col items-center justify-center w-full max-w-sm p-15 gap-10 bg-white border border-gray-300 rounded-lg shadow-md'>
-        <h1>Login</h1>
+      <Card className='w-[350px] max-w-screen'>
+        <CardHeader>
+          <CardTitle className='text-lg text-center'>Login</CardTitle>
+        </CardHeader>
+        <CardContent className='gap-6 flex flex-col'>
+          <LoginForm />
 
-        <LoginForm></LoginForm>
+          <hr />
 
-        <hr style={{ width: 230 }} />
-
-        {process.env.AUTH_AUTHENTIK_ISSUER && (
-          <SSOLogin provider='authentik' providerDisplayName='SSO' />
-        )}
-      </div>
+          {process.env.AUTH_AUTHENTIK_ISSUER && (
+            <SSOLogin provider='authentik' providerDisplayName='SSO' />
+          )}
+        </CardContent>
+      </Card>
     </div>
   );
 }
