@@ -60,7 +60,6 @@ jobs:
 
       - name: Clean up Docker
         run: |
-          docker system prune -af
-          docker volume prune -f
-          docker network prune -f
-          docker builder prune -af
+          docker builder prune -af --keep-storage 2GB
+          docker rmi $(docker images --filter=reference="git.dominikstahl.dev/dhbw-we/meetup:*" -q)
+          docker image prune -f
