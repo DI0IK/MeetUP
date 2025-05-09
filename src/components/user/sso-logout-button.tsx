@@ -1,6 +1,6 @@
 import { signOut } from '@/auth';
-import { Button } from '@/components/ui/button';
-//import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
+import { IconButton } from '@/components/icon-button';
+import { faDoorOpen } from '@fortawesome/free-solid-svg-icons';
 
 export function Logout() {
   return (
@@ -10,9 +10,9 @@ export function Logout() {
         await signOut({ redirectTo: '/login' });
       }}
     >
-      <Button type='submit' variant='destructive' /*icon={faDoorOpen}*/>
+      <IconButton type='submit' variant='destructive' icon={faDoorOpen}>
         Sign Out
-      </Button>
+      </IconButton>
     </form>
   );
 }
