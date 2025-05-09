@@ -13,3 +13,347 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+enum participant_status {
+    PENDING
+    ACCEPTED
+    DECLINED
+    TENTATIVE
+}
+
+enum meeting_status {
+    TENTATIVE
+    CONFIRMED
+    CANCELLED
+}
+
+enum friendship_status {
+    PENDING
+    ACCEPTED
+    DECLINED
+    BLOCKED
+}
+
+enum notification_type {
+    FRIEND_REQUEST
+    FRIEND_ACCEPT
+    MEETING_INVITE
+    MEETING_UPDATE
+    MEETING_CANCEL
+    MEETING_REMINDER
+    GROUP_MEMBER_ADDED
+    CALENDAR_SYNC_ERROR
+}
+
+enum group_member_role {
+    ADMIN
+    MEMBER
+}
+
+enum calendar_export_scope {
+    MEETINGS_ONLY
+    MEETINGS_AND_BLOCKED
+    BLOCKED_ONLY
+}
+
+enum email_queue_status {
+    PENDING
+    PROCESSING
+    SENT
+    FAILED
+    CANCELLED
+}
+
+model User {
+    id            String    @id @default(cuid())
+    username      String    @unique
+    first_name    String?
+    last_name     String?
+    email         String    @unique
+    emailVerified DateTime? @map("email_verified")
+    password_hash String?
+    image         String?
+    timezone      String    @default("UTC")
+    created_at    DateTime  @default(now())
+    updated_at    DateTime  @updatedAt
+
+    accounts       Account[]
+    sessions       Session[]
+    authenticators Authenticator[]
+    friendships1   Friendship[]                 @relation("FriendshipUser1")
+    friendships2   Friendship[]                 @relation("FriendshipUser2")
+    groupsCreated  Group[]                      @relation("GroupCreator")
+    groupMembers   GroupMember[]
+    blockedSlots   BlockedSlot[]
+    meetingsOrg    Meeting[]                    @relation("MeetingOrganizer")
+    meetingParts   MeetingParticipant[]
+    notifications  Notification[]
+    notifPrefs     UserNotificationPreference[]
+    emailQueue     EmailQueue[]
+    calendarTokens CalendarExportToken[]
+    subscriptions  CalendarSubscription[]
+
+    @@map("users")
+}
+
+model Account {
+    id                String  @id @default(cuid())
+    userId            String  @map("user_id")
+    type              String
+    provider          String
+    providerAccountId String  @map("provider_account_id")
+    refresh_token     String? @db.Text
+    access_token      String? @db.Text
+    expires_at        Int?
+    token_type        String?
+    scope             String?
+    id_token          String? @db.Text
+    session_state     String?
+
+    user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@unique([provider, providerAccountId])
+    @@map("accounts")
+}
+
+model Session {
+    id           String   @id @default(cuid())
+    sessionToken String   @unique @map("session_token")
+    userId       String   @map("user_id")
+    expires      DateTime
+    user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+    @@map("sessions")
+}
+
+model VerificationToken {
+    identifier String
+    token      String
+    expires    DateTime
+
+    @@unique([identifier, token])
+    @@map("verification_tokens")
+}
+
+model Authenticator {
+    user_id                String
+    credential_id          String
+    provider_account_id    String
+    credential_public_key  String
+    counter                Int
+    credential_device_type String
+    credential_backed_up   Boolean
+    transports             String?
+
+    user User @relation(fields: [user_id], references: [id], onDelete: Cascade)
+
+    @@id([user_id, credential_id])
+    @@map("authenticators")
+}
+
+model Friendship {
+    user_id_1    String
+    user_id_2    String
+    status       friendship_status @default(PENDING)
+    requested_at DateTime          @default(now())
+    accepted_at  DateTime?
+
+    user1 User @relation("FriendshipUser1", fields: [user_id_1], references: [id])
+    user2 User @relation("FriendshipUser2", fields: [user_id_2], references: [id])
+
+    @@id([user_id_1, user_id_2])
+    @@index([user_id_2, status], name: "idx_friendships_user2_status")
+    @@map("friendships")
+}
+
+model Group {
+    id          String   @id @default(cuid())
+    name        String
+    description String?
+    creator_id  String
+    created_at  DateTime @default(now())
+    updated_at  DateTime @updatedAt
+
+    creator User          @relation("GroupCreator", fields: [creator_id], references: [id])
+    members GroupMember[]
+
+    @@index([creator_id])
+    @@map("groups")
+}
+
+model GroupMember {
+    group_id String
+    user_id  String
+    role     group_member_role @default(MEMBER)
+    added_at DateTime          @default(now())
+
+    group Group @relation(fields: [group_id], references: [id])
+    user  User  @relation(fields: [user_id], references: [id])
+
+    @@id([group_id, user_id])
+    @@index([user_id])
+    @@map("group_members")
+}
+
+model BlockedSlot {
+    id                  String    @id @default(cuid())
+    user_id             String
+    start_time          DateTime
+    end_time            DateTime
+    reason              String?
+    is_recurring        Boolean   @default(false)
+    rrule               String?
+    recurrence_end_date DateTime?
+    created_at          DateTime  @default(now())
+    updated_at          DateTime  @updatedAt
+
+    user User @relation(fields: [user_id], references: [id])
+
+    @@index([user_id, start_time, end_time])
+    @@index([user_id, is_recurring])
+    @@map("blocked_slots")
+}
+
+model Meeting {
+    id           String         @id @default(cuid())
+    title        String
+    description  String?
+    start_time   DateTime
+    end_time     DateTime
+    organizer_id String
+    location     String?
+    status       meeting_status @default(CONFIRMED)
+    created_at   DateTime       @default(now())
+    updated_at   DateTime       @updatedAt
+
+    organizer    User                 @relation("MeetingOrganizer", fields: [organizer_id], references: [id])
+    participants MeetingParticipant[]
+
+    @@index([start_time, end_time])
+    @@index([organizer_id])
+    @@index([status])
+    @@map("meetings")
+}
+
+model MeetingParticipant {
+    meeting_id String
+    user_id    String
+    status     participant_status @default(PENDING)
+    added_at   DateTime           @default(now())
+
+    meeting Meeting @relation(fields: [meeting_id], references: [id])
+    user    User    @relation(fields: [user_id], references: [id])
+
+    @@id([meeting_id, user_id])
+    @@index([user_id, status], name: "idx_participants_user_status")
+    @@map("meeting_participants")
+}
+
+model Notification {
+    id                  String            @id @default(cuid())
+    user_id             String
+    type                notification_type
+    related_entity_type String?
+    related_entity_id   String?
+    message             String
+    is_read             Boolean           @default(false)
+    created_at          DateTime          @default(now())
+
+    user User @relation(fields: [user_id], references: [id])
+
+    @@index([user_id, is_read, created_at], name: "idx_notifications_user_read_time")
+    @@map("notifications")
+}
+
+model UserNotificationPreference {
+    user_id           String
+    notification_type notification_type
+    email_enabled     Boolean           @default(false)
+    updated_at        DateTime          @default(now())
+
+    user User @relation(fields: [user_id], references: [id])
+
+    @@id([user_id, notification_type])
+    @@map("user_notification_preferences")
+}
+
+model EmailQueue {
+    id              String             @id @default(cuid())
+    user_id         String
+    subject         String
+    body_html       String
+    body_text       String?
+    status          email_queue_status @default(PENDING)
+    scheduled_at    DateTime           @default(now())
+    attempts        Int                @default(0)
+    last_attempt_at DateTime?
+    sent_at         DateTime?
+    error_message   String?
+    created_at      DateTime           @default(now())
+    updated_at      DateTime           @updatedAt
+
+    user User @relation(fields: [user_id], references: [id])
+
+    @@index([status, scheduled_at], name: "idx_email_queue_pending_jobs")
+    @@index([user_id, created_at], name: "idx_email_queue_user_history")
+    @@map("email_queue")
+}
+
+model CalendarExportToken {
+    id               String                @id @default(cuid())
+    user_id          String
+    token            String                @unique
+    scope            calendar_export_scope @default(MEETINGS_ONLY)
+    is_active        Boolean               @default(true)
+    created_at       DateTime              @default(now())
+    last_accessed_at DateTime?
+
+    user User @relation(fields: [user_id], references: [id])
+
+    @@index([user_id])
+    @@map("calendar_export_tokens")
+}
+
+model CalendarSubscription {
+    id                     String    @id @default(cuid())
+    user_id                String
+    feed_url               String
+    name                   String?
+    color                  String?
+    is_enabled             Boolean   @default(true)
+    last_synced_at         DateTime?
+    last_sync_error        String?
+    sync_frequency_minutes Int?      @default(60)
+    created_at             DateTime  @default(now())
+    updated_at             DateTime  @updatedAt
+
+    user           User            @relation(fields: [user_id], references: [id])
+    externalEvents ExternalEvent[]
+
+    @@index([user_id, is_enabled])
+    @@map("calendar_subscriptions")
+}
+
+model ExternalEvent {
+    id              String    @id @default(cuid())
+    subscription_id String
+    ical_uid        String
+    summary         String?
+    description     String?
+    start_time      DateTime
+    end_time        DateTime
+    is_all_day      Boolean   @default(false)
+    location        String?
+    rrule           String?
+    dtstamp         DateTime?
+    sequence        Int?
+    show_as_free    Boolean   @default(false)
+    last_fetched_at DateTime  @default(now())
+
+    subscription CalendarSubscription @relation(fields: [subscription_id], references: [id])
+
+    @@unique([subscription_id, ical_uid], name: "uq_external_event_sub_uid")
+    @@index([subscription_id, start_time, end_time])
+    @@index([subscription_id, show_as_free])
+    @@map("external_events")
+}
