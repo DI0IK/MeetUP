@@ -3,5 +3,9 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
+    image: git.dominikstahl.dev/dhbw-we/meetup:main
     ports:
       - '3000:3000'
+    environment:
+      - AUTH_SECRET=secret
+      - AUTH_URL=http://localhost:3000

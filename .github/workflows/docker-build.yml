@@ -12,18 +12,9 @@ on:
 jobs:
   docker:
     runs-on: docker
+    container:
+      image: ghcr.io/di0ik/forgejo_runner_container:main
     steps:
-      - name: Install Docker
-        run: |
-          apt-get update
-          apt-get install -y ca-certificates curl
-          install -m 0755 -d /etc/apt/keyrings
-          curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-          chmod a+r /etc/apt/keyrings/docker.asc
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-          apt-get update
-          apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
       - name: Login to Docker Hub
         uses: docker/login-action@74a5d142397b4f367a81961eba4e8cd7edddf772 # v3
         with:
@@ -46,14 +37,14 @@ jobs:
 
       - name: lowercase repo name
         run: |
-          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
+          echo "REPO=$(echo $GITHUB_REPOSITORY | tr '[:upper:]' '[:lower:]')" >>${GITHUB_ENV}
 
       - name: Build and push (pull_request)
         uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6
         if: github.event_name == 'pull_request'
         with:
           push: true
-          tags: git.dominikstahl.dev/${{ env.REPO }}:sha_${{ github.sha }},git.dominikstahl.dev/${{ env.REPO }}:${{ steps.get-ref.outputs.tag}}
+          tags: git.dominikstahl.dev/${{ env.REPO }}:${{ steps.get-ref.outputs.tag}}
 
       - name: Build and push (push_tag)
         uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6
@@ -67,4 +58,9 @@ jobs:
         if: github.event_name == 'push' && github.ref_type == 'branch'
         with:
           push: true
-          tags: git.dominikstahl.dev/${{ env.REPO }}:sha_${{ github.sha }},git.dominikstahl.dev/${{ env.REPO }}:main
+          tags: git.dominikstahl.dev/${{ env.REPO }}:${{ steps.get-ref.outputs.tag }}
+
+      - name: Clean up Docker
+        run: |
+          docker builder prune -af --keep-storage 2GB
+          docker image prune -f

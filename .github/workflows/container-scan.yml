@@ -9,21 +9,10 @@ jobs:
     name: Container Scan
     runs-on: docker
     container:
-      image: node:22-bullseye@sha256:ed0338dd02fd86861a59dc1cbc2e12152f3a93c4ce5933d347d6677232000dc7
+      image: ghcr.io/di0ik/forgejo_runner_container:main
     steps:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
-
-      - name: Install Docker
-        run: |
-          apt-get update
-          apt-get install -y ca-certificates curl
-          install -m 0755 -d /etc/apt/keyrings
-          curl -fsSL https://download.docker.com/linux/debian/gpg -o /etc/apt/keyrings/docker.asc
-          chmod a+r /etc/apt/keyrings/docker.asc
-          echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/debian $(. /etc/os-release && echo "$VERSION_CODENAME") stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-          apt-get update
-          apt-get install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
       - name: Build an image from Dockerfile
         run: docker build -t git.dominikstahl.dev/dhbw-we/meetup:${{ github.sha }} .
@@ -41,3 +30,9 @@ jobs:
         uses: forgejo/upload-artifact@v4
         with:
           path: trivy-report.json
+
+      - name: Clean up Docker
+        run: |
+          docker builder prune -af --keep-storage 2GB
+          docker rmi $(docker images --filter=reference="git.dominikstahl.dev/dhbw-we/meetup:*" -q)
+          docker image prune -f
