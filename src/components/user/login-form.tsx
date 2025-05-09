@@ -1,24 +1,26 @@
 import LabeledInput from '@/components/labeled-input';
-import Button from '../button';
+import { Button } from '@/components/ui/button';
 
 export default function LoginForm() {
   return (
-    <div>
-      <form>
-        <LabeledInput
-          type='email'
-          label='E-Mail'
-          placeholder='Enter your E-Mail'
-        />
-        <LabeledInput
-          type='password'
-          label='Password'
-          placeholder='Enter your Password'
-        />
-        <Button type='submit' mode='neutral' width={250}>
-          Login
-        </Button>
-      </form>
-    </div>
+    <form className='flex flex-col gap-4 w-full'>
+      <LabeledInput
+        type='email'
+        label='E-Mail'
+        placeholder='Enter your E-Mail'
+      />
+      <LabeledInput
+        type='password'
+        label='Password'
+        placeholder='Enter your Password'
+      />
+      <Button
+        className='hover:bg-blue-600 hover:text-white'
+        type='submit'
+        variant='secondary'
+      >
+        Login
+      </Button>
+    </form>
   );
 }

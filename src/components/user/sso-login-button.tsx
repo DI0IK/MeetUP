@@ -1,5 +1,5 @@
 import { signIn } from '@/auth';
-import Button from '../button';
+import { IconButton } from '@/components/icon-button';
 import { faOpenid } from '@fortawesome/free-brands-svg-icons';
 
 export default function SSOLogin({
@@ -11,14 +11,20 @@ export default function SSOLogin({
 }) {
   return (
     <form
+      className='flex flex-col items-center gap-4 w-full'
       action={async () => {
         'use server';
         await signIn(provider);
       }}
     >
-      <Button type='submit' mode='warning' icon={faOpenid} width={250}>
+      <IconButton
+        className='w-full'
+        type='submit'
+        variant='default'
+        icon={faOpenid}
+      >
         Login with {providerDisplayName}
-      </Button>
+      </IconButton>
     </form>
   );
 }

@@ -1,50 +1,28 @@
-import style from './labeled-input.module.css';
+import { Input } from '@/components/ui/input';
 
 export default function LabeledInput({
   type,
-  width,
   label,
   placeholder,
   value,
 }: {
   type: 'text' | 'email' | 'password';
-  width?: number;
-  label?: string;
+  label: string;
   placeholder?: string;
   value?: string;
 }) {
   const randomId = Math.random().toString(36).substring(2, 15);
 
-  if (!label) {
-    return (
-      <div className={style.input}>
-        <input
-          type={type}
-          placeholder={placeholder}
-          defaultValue={value}
-          style={{
-            width: width ? `${width}px` : '100%',
-          }}
-        />
-      </div>
-    );
-  } else {
-    return (
-      <div className={style.input}>
-        <label htmlFor={randomId} className={style['label']}>
-          {label}
-        </label>
+  return (
+    <div className='flex flex-col gap-2'>
+      <label htmlFor={randomId}>{label}</label>
 
-        <input
-          id={randomId}
-          type={type}
-          placeholder={placeholder}
-          defaultValue={value}
-          style={{
-            width: width ? `${width}px` : '100%',
-          }}
-        />
-      </div>
-    );
-  }
+      <Input
+        type={type}
+        placeholder={placeholder}
+        defaultValue={value}
+        id={randomId}
+      />
+    </div>
+  );
 }
