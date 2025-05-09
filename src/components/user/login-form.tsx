@@ -3,26 +3,24 @@ import { Button } from '@/components/ui/button';
 
 export default function LoginForm() {
   return (
-    <div>
-      <form className='flex flex-col gap-4'>
-        <LabeledInput
-          type='email'
-          label='E-Mail'
-          placeholder='Enter your E-Mail'
-        />
-        <LabeledInput
-          type='password'
-          label='Password'
-          placeholder='Enter your Password'
-        />
-        <Button
-          className='hover:bg-blue-600 hover:text-white'
-          type='submit'
-          variant='secondary'
-        >
-          Login
-        </Button>
-      </form>
-    </div>
+    <form className='flex flex-col gap-4 w-7/8'>
+      <LabeledInput
+        type='email'
+        label='E-Mail'
+        placeholder='Enter your E-Mail'
+      />
+      <LabeledInput
+        type='password'
+        label='Password'
+        placeholder='Enter your Password'
+      />
+      <Button
+        className='hover:bg-blue-600 hover:text-white'
+        type='submit'
+        variant='secondary'
+      >
+        Login
+      </Button>
+    </form>
   );
 }
