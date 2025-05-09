@@ -68,3 +68,10 @@ jobs:
         with:
           push: true
           tags: git.dominikstahl.dev/${{ env.REPO }}:${{ steps.get-ref.outputs.tag }}
+
+      - name: Clean up Docker
+        run: |
+          docker system prune -af
+          docker volume prune -f
+          docker network prune -f
+          docker builder prune -af
