@@ -94,6 +94,10 @@ This project is built with a modern tech stack:
 
       # Base URL of your application
       NEXT_PUBLIC_APP_URL="http://localhost:3000"
+
+      # Development: Skip login flow (set to "true" to bypass authentication)
+      # Ensure this is NOT set to "true" in production.
+      MEETUP_SKIP_LOGIN="false"
       ```
 
 4.  **Apply database migrations (Prisma):**
