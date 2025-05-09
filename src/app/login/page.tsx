@@ -48,7 +48,6 @@ export default async function LoginPage() {
             width='150'
             height='150'
             alt='dancing penguin'
-            unoptimized={true}
           ></Image>
         </HoverCardContent>
       </HoverCard>
