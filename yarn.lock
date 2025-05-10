@@ -1335,6 +1335,32 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-tabs@npm:^1.1.11":
+  version: 1.1.11
+  resolution: "@radix-ui/react-tabs@npm:1.1.11"
+  dependencies:
+    "@radix-ui/primitive": "npm:1.1.2"
+    "@radix-ui/react-context": "npm:1.1.2"
+    "@radix-ui/react-direction": "npm:1.1.1"
+    "@radix-ui/react-id": "npm:1.1.1"
+    "@radix-ui/react-presence": "npm:1.1.4"
+    "@radix-ui/react-primitive": "npm:2.1.2"
+    "@radix-ui/react-roving-focus": "npm:1.1.9"
+    "@radix-ui/react-use-controllable-state": "npm:1.2.2"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/eebecb25f4e245c4abf0968b86bb4ee468965e4d3524d48147298715cd54a58dab8b813cd65ed12ceb2a3e1410f80097e2b0532da01de79e78fb398e002578a3
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-use-callback-ref@npm:1.1.1":
   version: 1.1.1
   resolution: "@radix-ui/react-use-callback-ref@npm:1.1.1"
@@ -4408,6 +4434,7 @@ __metadata:
     "@radix-ui/react-hover-card": "npm:^1.1.13"
     "@radix-ui/react-label": "npm:^2.1.6"
     "@radix-ui/react-slot": "npm:^1.2.2"
+    "@radix-ui/react-tabs": "npm:^1.1.11"
     "@tailwindcss/postcss": "npm:4.1.6"
     "@types/node": "npm:22.15.17"
     "@types/react": "npm:19.1.3"
