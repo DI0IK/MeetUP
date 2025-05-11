@@ -45,6 +45,7 @@ jobs:
         with:
           push: true
           tags: git.dominikstahl.dev/${{ env.REPO }}:${{ steps.get-ref.outputs.tag}}
+          cache-from: type=registry,ref=git.dominikstahl.dev/${{ env.REPO }}:buildcache
 
       - name: Build and push (push_tag)
         uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6
@@ -52,6 +53,7 @@ jobs:
         with:
           push: true
           tags: git.dominikstahl.dev/${{ env.REPO }}:${{ steps.get-ref.outputs.tag }},git.dominikstahl.dev/${{ env.REPO }}:latest
+          cache-from: type=registry,ref=git.dominikstahl.dev/${{ env.REPO }}:buildcache
 
       - name: Build and push (push_branch)
         uses: docker/build-push-action@14487ce63c7a62a4a324b0bfb37086795e31c6c1 # v6
@@ -59,6 +61,8 @@ jobs:
         with:
           push: true
           tags: git.dominikstahl.dev/${{ env.REPO }}:${{ steps.get-ref.outputs.tag }}
+          cache-from: type=registry,ref=git.dominikstahl.dev/${{ env.REPO }}:buildcache
+          cache-to: type=registry,ref=git.dominikstahl.dev/${{ env.REPO }}:buildcache,mode=max
 
       - name: Clean up Docker
         run: |
