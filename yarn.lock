@@ -1042,6 +1042,25 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@radix-ui/react-label@npm:^2.1.6":
+  version: 2.1.6
+  resolution: "@radix-ui/react-label@npm:2.1.6"
+  dependencies:
+    "@radix-ui/react-primitive": "npm:2.1.2"
+  peerDependencies:
+    "@types/react": "*"
+    "@types/react-dom": "*"
+    react: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+    react-dom: ^16.8 || ^17.0 || ^18.0 || ^19.0 || ^19.0.0-rc
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    "@types/react-dom":
+      optional: true
+  checksum: 10c0/1c94bd363b965aeeb6010539399da4bb894c29bcb777d11f6e9a0ab22c43621be59529f1a23cfbda1f3c0ba3d8a6fdd2a50200b6e9b5839a3fbf0c2299de163e
+  languageName: node
+  linkType: hard
+
 "@radix-ui/react-popper@npm:1.2.6":
   version: 1.2.6
   resolution: "@radix-ui/react-popper@npm:1.2.6"
@@ -4191,6 +4210,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@fortawesome/react-fontawesome": "npm:^0.2.2"
     "@radix-ui/react-hover-card": "npm:^1.1.13"
+    "@radix-ui/react-label": "npm:^2.1.6"
     "@radix-ui/react-slot": "npm:^1.2.2"
     "@tailwindcss/postcss": "npm:4.1.6"
     "@types/node": "npm:22.15.17"
