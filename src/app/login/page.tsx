@@ -7,6 +7,7 @@ import Image from 'next/image';
 
 import '@/app/globals.css';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { ThemePicker } from '@/components/user/theme-picker';
 import {
   HoverCard,
   HoverCardTrigger,
@@ -23,20 +24,25 @@ export default async function LoginPage() {
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
       <div className='flex flex-col items-center justify-center h-screen'>
-        <Card className='w-[350px] max-w-screen'>
-          <CardHeader>
-            <CardTitle className='text-lg text-center'>Login</CardTitle>
-          </CardHeader>
-          <CardContent className='gap-6 flex flex-col'>
-            <LoginForm />
+        <div className='absolute top-4 right-4'>
+          <ThemePicker />
+        </div>
+        <div>
+          <Card className='w-[350px] max-w-screen'>
+            <CardHeader>
+              <CardTitle className='text-lg text-center'>Login</CardTitle>
+            </CardHeader>
+            <CardContent className='gap-6 flex flex-col'>
+              <LoginForm />
 
-            <hr />
+              <hr />
 
-            {process.env.AUTH_AUTHENTIK_ISSUER && (
-              <SSOLogin provider='authentik' providerDisplayName='SSO' />
-            )}
-          </CardContent>
-        </Card>
+              {process.env.AUTH_AUTHENTIK_ISSUER && (
+                <SSOLogin provider='authentik' providerDisplayName='SSO' />
+              )}
+            </CardContent>
+          </Card>
+        </div>
       </div>
       <HoverCard>
         <HoverCardTrigger className='text-sm text-muted-foreground hover:underline'>
