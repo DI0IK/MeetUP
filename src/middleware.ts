@@ -8,6 +8,9 @@ export default auth((req) => {
   ) {
     const newUrl = new URL('/login', req.nextUrl.origin);
     return Response.redirect(newUrl);
+  } else if (req.auth != null && req.nextUrl.pathname === '/') {
+    const newUrl = new URL('/home', req.nextUrl.origin);
+    return Response.redirect(newUrl);
   }
 });
 
