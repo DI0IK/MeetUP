@@ -15,7 +15,7 @@ jobs:
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
 
       - name: Build an image from Dockerfile
-        run: docker build -t git.dominikstahl.dev/dhbw-we/meetup:${{ github.sha }} .
+        run: docker buildx build -t meetup_trivy .
 
       - name: Install Trivy
         run: |
@@ -23,8 +23,8 @@ jobs:
 
       - name: Run Trivy vulnerability scanner
         run: |
-          trivy image --exit-code 1 --severity HIGH,CRITICAL,MEDIUM --ignore-unfixed --no-progress --format table git.dominikstahl.dev/dhbw-we/meetup:${{ github.sha }}
-          trivy image --exit-code 1 --severity HIGH,CRITICAL,MEDIUM --ignore-unfixed --no-progress --format json git.dominikstahl.dev/dhbw-we/meetup:${{ github.sha }} > trivy-report.json
+          trivy image --exit-code 1 --severity HIGH,CRITICAL,MEDIUM --ignore-unfixed --no-progress --format table meetup_trivy
+          trivy image --exit-code 1 --severity HIGH,CRITICAL,MEDIUM --ignore-unfixed --no-progress --format json meetup_trivy > trivy-report.json
 
       - name: Upload Trivy report
         uses: forgejo/upload-artifact@v4
@@ -33,6 +33,5 @@ jobs:
 
       - name: Clean up Docker
         run: |
-          docker builder prune -af --keep-storage 2GB
-          docker rmi $(docker images --filter=reference="git.dominikstahl.dev/dhbw-we/meetup:*" -q)
-          docker image prune -f
+          docker buildx prune --filter=until=48h -f
+          docker image rm meetup_trivy

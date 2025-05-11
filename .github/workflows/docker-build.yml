@@ -62,5 +62,4 @@ jobs:
 
       - name: Clean up Docker
         run: |
-          docker builder prune -af --keep-storage 2GB
-          docker image prune -f
+          docker buildx prune --filter=until=48h -f

@@ -4,13 +4,15 @@ FROM node:22-alpine@sha256:ad1aedbcc1b0575074a91ac146d6956476c1f9985994810e4ee02
 FROM base AS deps
 
 WORKDIR /app
-COPY package.json yarn.lock ./
+RUN corepack enable
+COPY package.json yarn.lock .yarnrc.yml ./
 RUN yarn install --frozen-lockfile
 
 # ----- Build -----
 FROM base AS builder
 
 WORKDIR /app
+RUN corepack enable
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN yarn build
