@@ -6,23 +6,24 @@ export default function LabeledInput({
   label,
   placeholder,
   value,
+  name,
 }: {
   type: 'text' | 'email' | 'password';
   label: string;
   placeholder?: string;
   value?: string;
+  name?: string;
 }) {
-  const elementId = Math.random().toString(36).substring(2, 15);
-
   return (
     <div className='flex flex-col gap-1'>
-      <Label htmlFor={elementId}>{label}</Label>
+      <Label htmlFor={name}>{label}</Label>
 
       <Input
         type={type}
         placeholder={placeholder}
         defaultValue={value}
-        id={elementId}
+        id={name}
+        name={name}
       />
     </div>
   );
