@@ -1,4 +1,5 @@
 import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 
 export default function LabeledInput({
   type,
@@ -11,17 +12,17 @@ export default function LabeledInput({
   placeholder?: string;
   value?: string;
 }) {
-  const randomId = Math.random().toString(36).substring(2, 15);
+  const elementId = Math.random().toString(36).substring(2, 15);
 
   return (
-    <div className='flex flex-col gap-2'>
-      <label htmlFor={randomId}>{label}</label>
+    <div className='flex flex-col gap-1'>
+      <Label htmlFor={elementId}>{label}</Label>
 
       <Input
         type={type}
         placeholder={placeholder}
         defaultValue={value}
-        id={randomId}
+        id={elementId}
       />
     </div>
   );
