@@ -1,4 +1,5 @@
 import { Logout } from '@/components/user/sso-logout-button';
+import { RedirectButton } from '@/components/user/redirect-button';
 import { ThemePicker } from '@/components/user/theme-picker';
 
 export default function Home() {
@@ -8,6 +9,7 @@ export default function Home() {
       <div>
         <h1>Home</h1>
         <Logout />
+        <RedirectButton redirectUrl='/settings' buttonText='Settings' />
       </div>
     </div>
   );
