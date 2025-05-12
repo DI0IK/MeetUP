@@ -125,11 +125,22 @@ This project is built with a modern tech stack:
 Contributions are welcome! If you'd like to contribute, please:
 
 1.  Fork the repository.
-2.  Create a new branch (`git checkout -b feature/your-feature-name` or `fix/your-bug-fix`).
+2.  Create a new branch (`git checkout -b <action>/<issue#>-action_name`).
 3.  Make your changes.
-4.  Commit your changes (`git commit -m 'Add some feature'`).
-5.  Push to the branch (`git push origin feature/your-feature-name`).
-6.  Open a Pull Request against the `main` (or `develop`) branch.
+4.  Commit your changes (`git commit -m '<action>: add some feature'`).
+5.  Push to the branch (`git push origin <action>/<issue#>-action_name`).
+6.  Open a Pull Request against the `main` branch.
+
+Possible actions are:
+
+    *feat* -> Feature added
+    *fix* -> Fixed a bug
+    *test* -> Modified or added tests
+    *docs* -> Modified documentation
+    *chore* -> changes to non code files (workflows, lock files, ...)
+    *refactor* -> rewritten code without changing functionality
+    *style* -> code style (yarn format)
+    *revert* -> reverts a previous commit
 
 Please ensure your code adheres to the project's coding standards (e.g., run linters/formatters if configured) and that any database schema changes are accompanied by a Prisma migration.
 
