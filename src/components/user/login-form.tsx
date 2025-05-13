@@ -24,14 +24,14 @@ export default function LoginForm() {
     >
       <LabeledInput
         type='email'
-        label='E-Mail'
-        placeholder='Enter your E-Mail'
+        label='E-Mail or Username'
+        placeholder='What you are known as.'
         name='email'
       />
       <LabeledInput
         type='password'
         label='Password'
-        placeholder='Enter your Password'
+        placeholder="Let's hope you remember it."
         name='password'
       />
       <Button
