@@ -1,4 +1,4 @@
-import { auth } from '@/auth';
+import { auth, providerMap } from '@/auth';
 import SSOLogin from '@/components/user/sso-login-button';
 import LoginForm from '@/components/user/login-form';
 import { redirect } from 'next/navigation';
@@ -35,11 +35,15 @@ export default async function LoginPage() {
             <CardContent className='gap-6 flex flex-col'>
               <LoginForm />
 
-              <hr />
+              {providerMap.length > 0 && <hr />}
 
-              {process.env.AUTH_AUTHENTIK_ISSUER && (
-                <SSOLogin provider='authentik' providerDisplayName='SSO' />
-              )}
+              {providerMap.map((provider) => (
+                <SSOLogin
+                  key={provider.id}
+                  provider={provider.id}
+                  providerDisplayName={provider.name}
+                />
+              ))}
             </CardContent>
           </Card>
         </div>
