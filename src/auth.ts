@@ -36,7 +36,7 @@ export const providerMap = providers
   .filter((provider) => provider.id !== 'credentials');
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
-  providers: [],
+  providers,
   adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
