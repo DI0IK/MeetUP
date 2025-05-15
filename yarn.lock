@@ -2402,7 +2402,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"dotenv-cli@npm:^8.0.0":
+"dotenv-cli@npm:8.0.0":
   version: 8.0.0
   resolution: "dotenv-cli@npm:8.0.0"
   dependencies:
@@ -3825,7 +3825,7 @@ __metadata:
     class-variance-authority: "npm:^0.7.1"
     clsx: "npm:^2.1.1"
     dotenv-cli: "npm:^8.0.0"
-    eslint: "npm:9.27.0"
+    eslint: "npm:9.26.0"
     eslint-config-next: "npm:15.3.2"
     eslint-config-prettier: "npm:10.1.5"
     lucide-react: "npm:^0.510.0"
@@ -3834,7 +3834,7 @@ __metadata:
     next-themes: "npm:^0.4.6"
     postcss: "npm:8.5.3"
     prettier: "npm:3.5.3"
-    prisma: "npm:^6.7.0"
+    prisma: "npm:6.7.0"
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     tailwind-merge: "npm:^3.2.0"
@@ -4281,8 +4281,8 @@ __metadata:
   linkType: hard
 
 "prisma@npm:^6.7.0":
-  version: 6.8.2
-  resolution: "prisma@npm:6.8.2"
+  version: 6.7.0
+  resolution: "prisma@npm:6.7.0"
   dependencies:
     "@prisma/config": "npm:6.8.2"
     "@prisma/engines": "npm:6.8.2"
