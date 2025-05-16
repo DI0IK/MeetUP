@@ -18,7 +18,7 @@ COPY . .
 RUN yarn build
 
 # ----- Runner -----
-FROM gcr.io/distroless/nodejs22-debian12:nonroot@sha256:7461370c8473cfcbf5def249423d5e8301b0e6b98cb256b3c8707f0201c2ea4a AS runner
+FROM gcr.io/distroless/nodejs22-debian12:nonroot@sha256:92c2a6c01faeda49fab04f4c3c2fd3c652271bf19e99e5a0e8f2974622b9274f AS runner
 
 WORKDIR /app
 
