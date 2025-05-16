@@ -9,7 +9,7 @@ jobs:
     name: Container Scan
     runs-on: docker
     container:
-      image: ghcr.io/di0ik/forgejo_runner_container:main@sha256:672aee9a5dfc35531db3a218ad9486eb5c5d7d9ac10bdcba13110470c10403ee
+      image: ghcr.io/di0ik/forgejo_runner_container:main@sha256:c66a37d9af18f8f0f34d16890082bc08d842d52ff2a2bc36d993e3d347b498ac
     steps:
       - name: Checkout code
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
