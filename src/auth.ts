@@ -5,6 +5,9 @@ import Credentials from 'next-auth/providers/credentials';
 
 import Authentik from 'next-auth/providers/authentik';
 
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { prisma } from '@/prisma';
+
 const providers: Provider[] = [
   !process.env.DISABLE_PASSWORD_LOGIN &&
     Credentials({
@@ -34,6 +37,7 @@ export const providerMap = providers
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers,
+  adapter: PrismaAdapter(prisma),
   session: {
     strategy: 'jwt',
   },
