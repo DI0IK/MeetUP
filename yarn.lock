@@ -3838,7 +3838,7 @@ __metadata:
     react: "npm:^19.0.0"
     react-dom: "npm:^19.0.0"
     tailwind-merge: "npm:^3.2.0"
-    tailwindcss: "npm:4.1.6"
+    tailwindcss: "npm:4.1.7"
     tw-animate-css: "npm:1.2.9"
     typescript: "npm:5.8.3"
   languageName: unknown
@@ -4902,13 +4902,6 @@ __metadata:
   version: 3.3.0
   resolution: "tailwind-merge@npm:3.3.0"
   checksum: 10c0/a50cd141100486f98541dfab3705712af5860556689b7496dc6b0284374f02d12d5471f0f40035f6bb8b1c749c422060a1f3e5f8900057d8a7786b111c8472e6
-  languageName: node
-  linkType: hard
-
-"tailwindcss@npm:4.1.6":
-  version: 4.1.6
-  resolution: "tailwindcss@npm:4.1.6"
-  checksum: 10c0/de5a442d23d20872bfccb2b451720e8031dde27e1984a1ccb1d8c7308915213f1b3b62724ce5176d1b7031fbedc6a75fe844b73e3f13443141c11739447d8808
   languageName: node
   linkType: hard
 
