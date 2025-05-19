@@ -34,11 +34,7 @@ export default function LoginForm() {
         placeholder="Let's hope you remember it."
         name='password'
       />
-      <Button
-        className='hover:bg-blue-600 hover:text-white'
-        type='submit'
-        variant='secondary'
-      >
+      <Button type='submit' variant='primary'>
         Login
       </Button>
     </form>
