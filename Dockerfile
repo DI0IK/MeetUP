@@ -22,6 +22,8 @@ FROM base AS runner
 
 WORKDIR /app
 
+RUN yarn add prisma -D
+
 ENV NODE_ENV=production
 ENV NEXT_TELEMETRY_DISABLED=1
 
@@ -36,4 +38,4 @@ LABEL org.opencontainers.image.description="A web application for managing meetu
 EXPOSE 3000
 
 ENV HOSTNAME="0.0.0.0"
-CMD ["server.js"]
+CMD ["/bin/ash", "entrypoint.sh"]
