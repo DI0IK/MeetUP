@@ -34,9 +34,14 @@ export default function LoginForm() {
         placeholder="Let's hope you remember it."
         name='password'
       />
-      <Button type='submit' variant='primary'>
-        Login
-      </Button>
+      <div className='grid grid-rows-2 gap-2'>
+        <Button type='submit' variant='primary'>
+          Login
+        </Button>
+        <Button type='submit' variant='outline'>
+          Sign Up
+        </Button>
+      </div>
     </form>
   );
 }
