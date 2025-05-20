@@ -15,7 +15,7 @@ export default function LabeledInput({
   name?: string;
 }) {
   return (
-    <div className='flex flex-col gap-1'>
+    <div className='grid grid-cols-1 gap-1'>
       <Label htmlFor={name}>{label}</Label>
 
       <Input
