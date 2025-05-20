@@ -4,6 +4,8 @@ import LoginForm from '@/components/user/login-form';
 import { redirect } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
+import { Separator } from '@/components/custom-ui/separator';
+import Logo from '@/components/logo';
 
 import '@/app/globals.css';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -30,12 +32,20 @@ export default async function LoginPage() {
         <div>
           <Card className='w-[350px] max-w-screen'>
             <CardHeader>
-              <CardTitle className='text-lg text-center'>Login</CardTitle>
+              <Logo
+                colorType='colored'
+                logoType='secondary'
+                theme='light'
+                width={200}
+                height={200}
+              ></Logo>
             </CardHeader>
-            <CardContent className='gap-6 flex flex-col'>
+            <CardContent className='gap-6 flex flex-col items-center'>
               <LoginForm />
 
-              {providerMap.length > 0 && <hr />}
+              <Separator className='h-[1px] rounded-sm w-[60%] bg-neutral-000' />
+
+              {providerMap.length > 0}
 
               {providerMap.map((provider) => (
                 <SSOLogin
@@ -49,7 +59,7 @@ export default async function LoginPage() {
         </div>
       </div>
       <HoverCard>
-        <HoverCardTrigger className='text-sm text-muted-foreground hover:underline'>
+        <HoverCardTrigger className='text-sm text-neutral-000 hover:underline'>
           <Button variant='link'>made with love</Button>
         </HoverCardTrigger>
         <HoverCardContent className='flex items-center justify-center'>
