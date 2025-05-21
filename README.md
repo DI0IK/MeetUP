@@ -99,12 +99,20 @@ This project is built with a modern tech stack:
 4.  **Apply database migrations (Prisma):**
 
     - Ensure your Prisma schema (`prisma/schema.prisma`) is defined.
+    - Setup/update the database with these commands:
+      ```bash
+      yarn prisma:generate
+      ```
+      ```bash
+      yarn prisa:db:push
+      ```
     - Run the following command to apply migrations and generate Prisma Client:
       ```bash
       npx prisma migrate dev
       # You might be prompted to name your first migration.
       ```
-    - (Optional: If you need to generate Prisma Client without running migrations, use `npx prisma generate`)
+    
+    Tipp: You can open the prisma database UI with ```yarn prisma:studio```
 
 5.  **Run the development server:**
 
