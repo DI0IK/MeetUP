@@ -35,7 +35,6 @@ export default async function LoginPage() {
               <Logo
                 colorType='colored'
                 logoType='secondary'
-                theme='light'
                 width={200}
                 height={200}
               ></Logo>
