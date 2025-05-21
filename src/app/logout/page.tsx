@@ -1,5 +1,5 @@
 import { signOut } from '@/auth';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/custom-ui/button';
 import {
   Card,
   CardContent,

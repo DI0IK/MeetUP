@@ -2,13 +2,17 @@ import { auth, providerMap } from '@/auth';
 import SSOLogin from '@/components/user/sso-login-button';
 import LoginForm from '@/components/user/login-form';
 import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/custom-ui/button';
 import Image from 'next/image';
 import { Separator } from '@/components/custom-ui/separator';
 import Logo from '@/components/logo';
 
 import '@/app/globals.css';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import {
+  Card,
+  CardContent,
+  CardHeader,
+} from '@/components/custom-ui/login-card';
 import { ThemePicker } from '@/components/user/theme-picker';
 import {
   HoverCard,
@@ -30,14 +34,9 @@ export default async function LoginPage() {
           <ThemePicker />
         </div>
         <div>
-          <Card className='w-[350px] max-w-screen'>
-            <CardHeader>
-              <Logo
-                colorType='colored'
-                logoType='secondary'
-                width={200}
-                height={200}
-              ></Logo>
+          <Card className='w-[350px] max-w-screen;'>
+            <CardHeader className='grid place-items-center'>
+              <Logo colorType='colored' logoType='secondary'></Logo>
             </CardHeader>
             <CardContent className='gap-6 flex flex-col items-center'>
               <LoginForm />

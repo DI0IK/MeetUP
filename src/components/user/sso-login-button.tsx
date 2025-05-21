@@ -22,7 +22,6 @@ export default function SSOLogin({
         type='submit'
         variant='secondary'
         icon={faOpenid}
-        icon={faOpenid}
       >
         Login with {providerDisplayName}
       </IconButton>

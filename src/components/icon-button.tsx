@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/custom-ui/button';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -12,7 +12,7 @@ export function IconButton({
   children: React.ReactNode;
 } & React.ComponentProps<typeof Button>) {
   return (
-    <Button type='button' variant='default' {...props}>
+    <Button type='button' variant='secondary' {...props}>
       <FontAwesomeIcon icon={icon} className='mr-2' />
       {children}
     </Button>

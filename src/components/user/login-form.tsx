@@ -1,6 +1,6 @@
 import { signIn } from '@/auth';
 import LabeledInput from '@/components/labeled-input';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/custom-ui/button';
 import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
 
