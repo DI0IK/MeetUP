@@ -4,6 +4,8 @@
     "vivaxy.vscode-conventional-commits",
     "dbaeumer.vscode-eslint",
     "bradlc.vscode-tailwindcss",
-    "bourhaouta.tailwindshades"
+    "bourhaouta.tailwindshades",
+    "nize.oklch-preview",
+    "azizziy.oklch-as"
   ]
 }
