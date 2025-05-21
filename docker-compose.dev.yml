@@ -1,0 +1,27 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - '3000:3000'
+    environment:
+      - AUTH_SECRET=secret
+      - AUTH_URL=http://localhost:3000
+      - DATABASE_URL=file:/data/db.sqlite
+    env_file:
+      - .env.local
+    volumes:
+      - ./data:/data
+    develop:
+      watch:
+        - action: sync
+          path: ./src
+          target: /app/src
+          ignore:
+            - node_modules/
+        - action: rebuild
+          path: package.json
+        - action: sync+restart
+          path: prisma
+          target: /app/prisma
