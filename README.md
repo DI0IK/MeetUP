@@ -111,8 +111,8 @@ This project is built with a modern tech stack:
       npx prisma migrate dev
       # You might be prompted to name your first migration.
       ```
-    
-    Tipp: You can open the prisma database UI with ```yarn prisma:studio```
+
+    Tipp: You can open the prisma database UI with `yarn prisma:studio`
 
 5.  **Run the development server:**
 
