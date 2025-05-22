@@ -6,6 +6,9 @@
 :root {
   /* Custom values */
 
+  --font-heading: 'Comfortaa', sans-serif;
+  --font-label: 'Varela Round', sans-serif;
+
   --transparent: transparent;
 
   --neutral-000: oklch(0 0 0);
@@ -30,9 +33,9 @@
   --radius: 0.688rem;
 
   --primary: oklch(0.7493 0.1551 74.95);
-  --hover-primary: oklch(0.6568 0.1358 74.86 / 0.8);
-  --active-primary: oklch(0.5911 0.1135 78.29);
-  --disabled-primary: oklch(0.6568 0.1358 74.86 / 0.5);
+  --hover-primary: oklch(0.7493 0.1551 74.95 / 0.8);
+  --active-primary: oklch(0.6191 0.1218 77.58);
+  --disabled-primary: oklch(0.7493 0.1551 74.95 / 0.5);
 
   --secondary: oklch(0.4937 0.1697 271.26);
   --hover-secondary: oklch(0.4937 0.1697 271.26 / 0.8);
@@ -44,8 +47,6 @@
   /* ------------------- */
 
   --foreground: oklch(0.13 0.028 261.692);
-
-  --card: oklch(1 0 0);
 
   --card-foreground: oklch(0.13 0.028 261.692);
 
@@ -100,7 +101,25 @@
   --sidebar-ring: oklch(0.707 0.022 261.325);
 }
 
+@font-face {
+  font-family: 'Comfortaa';
+  font-style: normal;
+  font-weight: 300 700;
+  src: url('/Fonts/Comfortaa/Comfortaa-VariableFont_weight.ttf')
+    format('truetype');
+}
+
+@font-face {
+  font-family: 'Varela Round';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/Fonts/VarelaRound/VarelaRound-Regular.ttf') format('truetype');
+}
+
 @theme inline {
+  --font-heading: var(--font-heading);
+  --font-label: var(--font-label);
+
   --transparent: var(--transparent);
 
   --color-neutral-000: var(--neutral-000);
@@ -132,7 +151,7 @@
   --color-secondary: var(--secondary);
   --color-hover-secondary: var(--hover-secondary);
   --color-active-secondary: var(--active-secondary);
-  --disabled-secondary: var(--disabled-secondary);
+  --color-disabled-secondary: var(--disabled-secondary);
 
   /* Custom values */
 
@@ -152,7 +171,7 @@
 
   --color-card-foreground: var(--card-foreground);
 
-  --color-popover: var(--popover);
+  --color-popover: var(--color-background);
 
   --color-popover-foreground: var(--popover-foreground);
 
@@ -168,7 +187,7 @@
 
   --color-muted-foreground: var(--muted-foreground);
 
-  --color-accent: var(--accent);
+  --color-accent: var(--color-neutral-750);
 
   --color-accent-foreground: var(--accent-foreground);
 

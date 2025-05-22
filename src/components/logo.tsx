@@ -110,6 +110,18 @@ export default function Logo({
   // Match the varName with the Logo-Asset name and store it in "logoVar"
   const logoVar = logoAssets[varName as keyof typeof logoAssets];
 
+  if (!logoVar) {
+    console.error(`Logo: Could not find logo asset for ${varName}`);
+    return (
+      <div
+        role='alert'
+        className='p-2 text-red-700 bg-red-100 border border-red-500 rounded-md text-xs'
+      >
+        Error: Logo asset not found. Check console.
+      </div>
+    );
+  }
+
   return (
     <Image
       src={logoVar}
