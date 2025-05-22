@@ -28,6 +28,9 @@
   --base: var(--neutral-800);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
+  --text-input: var(--text);
+  --text-muted-input: var(--neutral-600);
+  --muted-input: var(--neutral-600);
   --background-disabled: var(--neutral-500);
   --text-disabled: var(--neutral-700);
   --radius: 0.688rem;
@@ -55,6 +58,8 @@
   --popover-foreground: oklch(0.13 0.028 261.692);
 
   --primary-foreground: oklch(0.985 0.002 247.839);
+
+  --popover-hover: var(--neutral-750);
 
   --secondary-foreground: oklch(0.21 0.034 264.665);
 
@@ -139,6 +144,10 @@
   --color-base: var(--neutral-800);
   --color-text: var(--text);
   --color-text-alt: var(--text-alt);
+  --color-text-input: var(--text-input);
+  --color-text-muted-input: var(--text-muted-input);
+  --color-muted-input: var(--muted-input);
+
   --color-background-disabled: var(--neutral-500);
   --color-text-disabled: var(--neutral-700);
   --radius: 0.688rem;
@@ -174,6 +183,8 @@
   --color-popover: var(--color-background);
 
   --color-popover-foreground: var(--popover-foreground);
+
+  --color-popover-hover: var(--popover-hover);
 
   --color-primary: var(--primary);
 
@@ -232,13 +243,13 @@
   --transparent: transparent;
 
   --neutral-000: oklch(1 0 0);
-  --neutral-100: oklch(0.9128 0 0);
-  --neutral-150: oklch(0.9702 0 0);
+  --neutral-100: oklch(0.9702 0 0);
+  --neutral-150: oklch(0.9128 0 0);
   --neutral-200: oklch(0.8266 0 0);
   --neutral-300: oklch(0.738 0 0);
   --neutral-400: oklch(0.6434 0 0);
-  --neutral-600: oklch(0.4495 0 0);
   --neutral-500: oklch(0.5486 0 0);
+  --neutral-600: oklch(0.4495 0 0);
   --neutral-700: oklch(0.3407 0 0);
   --neutral-750: oklch(0.2972 0 0);
   --neutral-800: oklch(0.2264 0 0);
@@ -248,6 +259,9 @@
   --base: var(--neutral-750);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
+  --text-input: var(--text);
+  --text-muted-input: var(--neutral-600);
+  --muted-input: var(--neutral-500);
   --background-disabled: var(--neutral-500);
   --text-disabled: var(--neutral-700);
 
@@ -274,6 +288,8 @@
   --popover-foreground: oklch(0.985 0.002 247.839);
 
   --primary-foreground: oklch(0.21 0.034 264.665);
+
+  --popover-hover: var(--neutral-700);
 
   --secondary-foreground: oklch(0.985 0.002 247.839);
 
