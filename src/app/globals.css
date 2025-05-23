@@ -17,6 +17,7 @@
   --neutral-200: oklch(0.3407 0 0);
   --neutral-300: oklch(0.4495 0 0);
   --neutral-400: oklch(0.5486 0 0);
+  --neutral-450: oklch(0.6 0 0);
   --neutral-500: oklch(0.6434 0 0);
   --neutral-600: oklch(0.738 0 0);
   --neutral-700: oklch(0.8266 0 0);
@@ -29,7 +30,7 @@
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
   --text-input: var(--text);
-  --text-muted-input: var(--neutral-600);
+  --text-muted-input: var(--neutral-450);
   --muted-input: var(--neutral-600);
   --background-disabled: var(--neutral-500);
   --text-disabled: var(--neutral-700);
@@ -248,6 +249,7 @@
   --neutral-200: oklch(0.8266 0 0);
   --neutral-300: oklch(0.738 0 0);
   --neutral-400: oklch(0.6434 0 0);
+  --neutral-450: oklch(0.6 0 0);
   --neutral-500: oklch(0.5486 0 0);
   --neutral-600: oklch(0.4495 0 0);
   --neutral-700: oklch(0.3407 0 0);
@@ -260,7 +262,7 @@
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
   --text-input: var(--text);
-  --text-muted-input: var(--neutral-600);
+  --text-muted-input: var(--neutral-450);
   --muted-input: var(--neutral-500);
   --background-disabled: var(--neutral-500);
   --text-disabled: var(--neutral-700);
