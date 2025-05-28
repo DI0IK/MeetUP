@@ -62,8 +62,6 @@ export default function Logo({
     return null;
   }
 
-  console.log(colorType, logoType, theme);
-
   if (!colorType || !logoType || !theme) {
     const errorMessage =
       'Logo: colorType, logoType, and theme props are required.';
@@ -129,7 +127,6 @@ export default function Logo({
       className={className}
       width={width}
       height={height}
-      // onError={handleImageError}
       {...imageProps}
     />
   );
