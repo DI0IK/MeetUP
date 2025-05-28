@@ -1,0 +1,139 @@
+/* custom-toolbar.css */
+
+/* Container der Toolbar */
+.custom-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  /*border-radius: 8px;*/
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Style für den Bereich, in dem die Ansichten (Month, Week, etc.) gewechselt werden */
+.custom-toolbar .view-change .view-switcher {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.custom-toolbar .view-change .view-switcher button {
+  padding: 8px 16px;
+  background-color: #c1830d;
+  /*border: 1px solid #ccc;*/
+  border-radius: 11px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  height: 30px;
+  margin-top: 3.5px;
+  color: #ffffff;
+}
+
+.custom-toolbar .view-change .view-switcher button:hover:not(:disabled) {
+  background-color: #e0e0e0;
+  border-color: #999;
+}
+
+.custom-toolbar .view-change .view-switcher button:disabled {
+  background-color: #d0d0d0;
+  border-color: #aaa;
+  cursor: default;
+}
+
+/* Anzeige des aktuellen Datums (Monat und Jahr) */
+.custom-toolbar .current-date {
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  color: #ffffff;
+  margin: 4px 0;
+  background-color: #717171;
+  width: 178px;
+  height: 37px;
+  border-radius: 11px;
+}
+
+/* Navigationsbereich (Today, Prev, Next) */
+.custom-toolbar .navigation-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.custom-toolbar .navigation-controls button {
+  padding: 8px 12px;
+  /*background-color: #2196F3;*/
+  color: #ffffff;
+  border: none;
+  border-radius: 11px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.custom-toolbar .navigation-controls button:hover {
+  background-color: #1976D2;
+}
+
+.custom-toolbar .navigation-controls button:active {
+  background-color: #1565C0;
+}
+
+/* Dropdown-Bereich für Woche und Jahr */
+.custom-toolbar .dropdowns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  height: 30px;
+  font-size: 10px;
+  margin-top: 3.5px;
+  border-radius: 11px;
+}
+
+.custom-toolbar .dropdowns select {
+  padding: 8px 12px;
+  /*border: 1px solid #ccc;*/
+  border-radius: 11px;
+  font-size: 10px;
+  background-color: #555555;
+  color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.custom-toolbar .dropdowns select:hover {
+  border-color: #999;
+}
+
+.right-section {
+    background-color: #717171;
+    width: 393px;
+    height: 37px;
+    border-radius: 11px;
+}
+
+.custom-toolbar .navigation-controls .handleWeek button {
+    background-color: #717171;
+    height: 30px;
+    width: 30px;
+    margin-bottom: 3.5px;
+}
+
+.custom-toolbar .navigation-controls .today button {
+    background-color: #c6c6c6;
+    height: 30px;
+    width: 100px;
+    color: #000000;
+    margin-top: 3.5px;
+}
+
+.view-change {
+    background-color: #717171;
+    height: 37px;
+    width: 290px;
+    border-radius: 11px;
+}
