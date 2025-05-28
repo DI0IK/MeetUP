@@ -6,8 +6,6 @@ import { Button } from '@/components/custom-ui/button';
 import Image from 'next/image';
 import { Separator } from '@/components/custom-ui/separator';
 import Logo from '@/components/logo';
-
-import '@/app/globals.css';
 import {
   Card,
   CardContent,
@@ -28,12 +26,12 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
-      <div className='flex flex-col items-center justify-center h-screen'>
-        <div className='absolute top-4 right-4'>
+    <div className='flex flex-col items-center min-h-screen'>
+      <div className='flex flex-col items-center min-h-screen'>
+        <div className='fixed top-4 right-4'>
           <ThemePicker />
         </div>
-        <div>
+        <div className='mt-auto mb-auto'>
           <Card className='w-[350px] max-w-screen;'>
             <CardHeader className='grid place-items-center'>
               <Logo colorType='colored' logoType='secondary'></Logo>
@@ -42,8 +40,6 @@ export default async function LoginPage() {
               <LoginForm />
 
               <Separator className='h-[1px] rounded-sm w-[60%] bg-border' />
-
-              {providerMap.length > 0}
 
               {providerMap.map((provider) => (
                 <SSOLogin
