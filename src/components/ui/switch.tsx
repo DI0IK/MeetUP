@@ -13,7 +13,33 @@ function Switch({
     <SwitchPrimitive.Root
       data-slot='switch'
       className={cn(
-        'peer data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring focus-visible:ring-ring/50 dark:data-[state=unchecked]:bg-input/80 inline-flex h-[1.15rem] w-8 shrink-0 items-center rounded-full border border-transparent shadow-xs transition-all outline-none focus-visible:ring-[3px] disabled:cursor-not-allowed disabled:opacity-50',
+        /* Text */
+        '',
+        /* Background */
+        'data-[state=checked]:bg-primary data-[state=unchecked]:bg-input focus-visible:border-ring dark:data-[state=unchecked]:bg-input/80',
+        /* Border */
+        'border border-transparent rounded-full',
+        /* Font */
+        '',
+        /* Cursor */
+        'disabled:cursor-not-allowed',
+        /* Ring */
+        'focus-visible:ring-ring/50',
+        /* Outline */
+        'outline-none',
+        /* Shadow */
+        'shadow-xs',
+        /* Opacity */
+        'disabled:opacity-50',
+        /* Scaling */
+        'h-[1.15rem] w-8',
+        /* Spacing */
+        '',
+        /* Alignment */
+        'inline-flex shrink-0 items-center',
+        /* Miscellaneous */
+        'peer transition-all focus-visible:ring-[3px]',
+        /* ////////// */
         className,
       )}
       {...props}
@@ -21,7 +47,35 @@ function Switch({
       <SwitchPrimitive.Thumb
         data-slot='switch-thumb'
         className={cn(
-          'bg-background dark:data-[state=unchecked]:bg-foreground dark:data-[state=checked]:bg-primary-foreground pointer-events-none block size-4 rounded-full ring-0 transition-transform data-[state=checked]:translate-x-[calc(100%-2px)] data-[state=unchecked]:translate-x-0',
+          /* Text */
+          '',
+          /* Background */
+          'bg-background dark:data-[state=unchecked]:bg-foreground',
+          'dark:data-[state=checked]:bg-primary-foreground',
+          /* Border */
+          'rounded-full',
+          /* Font */
+          '',
+          /* Cursor */
+          'pointer-events-none',
+          /* Ring */
+          'ring-0',
+          /* Outline */
+          '',
+          /* Shadow */
+          '',
+          /* Opacity */
+          '',
+          /* Scaling */
+          'size-4',
+          /* Spacing */
+          '',
+          /* Alignment */
+          '',
+          /* Miscellaneous */
+          'block transition-transform data-[state=checked]:translate-x-[calc(100%-2px)]',
+          'data-[state=unchecked]:translate-x-0',
+          /* ////////// */
         )}
       />
     </SwitchPrimitive.Root>

@@ -7,7 +7,31 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot='card'
       className={cn(
-        'bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm',
+        /* Text */
+        'text-card-foreground',
+        /* Background */
+        'bg-card',
+        /* Border */
+        'border rounded-xl',
+        /* Font */
+        '',
+        /* Cursor */
+        '',
+        /* Ring */
+        '',
+        /* Outline */
+        '',
+        /* Shadow */
+        'shadow-sm',
+        /* Opacity */
+        '',
+        /* Scaling */
+        '',
+        /* Spacing */
+        'py-6 gap-6',
+        /* Alignment */
+        'flex flex-col',
+        /* ////////// */
         className,
       )}
       {...props}
@@ -20,7 +44,34 @@ function CardHeader({ className, ...props }: React.ComponentProps<'div'>) {
     <div
       data-slot='card-header'
       className={cn(
-        '@container/card-header grid auto-rows-min grid-rows-[auto_auto] items-start gap-1.5 px-6 has-data-[slot=card-action]:grid-cols-[1fr_auto] [.border-b]:pb-6',
+        /* Text */
+        '',
+        /* Background */
+        '',
+        /* Border */
+        '',
+        /* Font */
+        '',
+        /* Cursor */
+        '',
+        /* Ring */
+        '',
+        /* Outline */
+        '',
+        /* Shadow */
+        '',
+        /* Opacity */
+        '',
+        /* Scaling */
+        '',
+        /* Spacing */
+        'gap-1.5 px-6 [.border-b]:pb-6',
+        /* Alignment */
+        'grid auto-rows-min grid-rows-[auto_auto]',
+        'items-start has-data-[slot=card-action]:grid-cols-[1fr_auto]',
+        /* Miscellanneous */
+        '@container/card-header',
+        /* ////////// */
         className,
       )}
       {...props}
