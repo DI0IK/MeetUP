@@ -57,7 +57,7 @@ export default async function LoginPage() {
         </div>
       </div>
       <HoverCard>
-        <HoverCardTrigger className='text-sm text-neutral-000 hover:underline'>
+        <HoverCardTrigger>
           <Button variant='link'>made with love</Button>
         </HoverCardTrigger>
         <HoverCardContent className='flex items-center justify-center'>
