@@ -3,22 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Image, { ImageProps } from 'next/image';
 
-import logo_colored_combo_light from '@/assets/logo/logo_colored_combo_light.svg';
-import logo_colored_combo_dark from '@/assets/logo/logo_colored_combo_dark.svg';
-import logo_colored_primary_light from '@/assets/logo/logo_colored_primary_light.svg';
-import logo_colored_primary_dark from '@/assets/logo/logo_colored_primary_dark.svg';
-import logo_colored_secondary_light from '@/assets/logo/logo_colored_secondary_light.svg';
-import logo_colored_secondary_dark from '@/assets/logo/logo_colored_secondary_dark.svg';
-import logo_mono_combo_light from '@/assets/logo/logo_mono_combo_light.svg';
-import logo_mono_combo_dark from '@/assets/logo/logo_mono_combo_dark.svg';
-import logo_mono_primary_light from '@/assets/logo/logo_mono_primary_light.svg';
-import logo_mono_primary_dark from '@/assets/logo/logo_mono_primary_dark.svg';
-import logo_mono_secondary_light from '@/assets/logo/logo_mono_secondary_light.svg';
-import logo_mono_secondary_dark from '@/assets/logo/logo_mono_secondary_dark.svg';
-import logo_mono_submark_light from '@/assets/logo/logo_mono_submark_light.svg';
-import logo_mono_submark_dark from '@/assets/logo/logo_mono_submark_dark.svg';
-import logo_colored_submark_light from '@/assets/logo/logo_colored_submark_light.svg';
-import logo_colored_submark_dark from '@/assets/logo/logo_colored_submark_dark.svg';
+import * as logoAssets from '@/assets/logo/logo-export';
 import { useTheme } from 'next-themes';
 
 type ColorType = 'colored' | 'monochrome';
@@ -47,7 +32,9 @@ export default function Logo({
   ...imageProps
 }: LogoProps) {
   const [mounted, setMounted] = useState(false);
-  let { resolvedTheme: theme } = useTheme();
+  let { resolvedTheme: theme } = useTheme() as {
+    resolvedTheme?: Theme;
+  };
 
   useEffect(() => {
     setMounted(true);
@@ -84,29 +71,10 @@ export default function Logo({
 
   const colorTypeInFilename = colorType === 'monochrome' ? 'mono' : colorType;
   const defaultAltText = `Logo: ${colorType} ${logoType} ${theme}`;
-  const varName = `logo_${colorTypeInFilename}_${logoType}_${theme}`;
-
-  const logoAssets = {
-    logo_colored_combo_light,
-    logo_colored_combo_dark,
-    logo_colored_primary_light,
-    logo_colored_primary_dark,
-    logo_colored_secondary_light,
-    logo_colored_secondary_dark,
-    logo_mono_combo_light,
-    logo_mono_combo_dark,
-    logo_mono_primary_light,
-    logo_mono_primary_dark,
-    logo_mono_secondary_light,
-    logo_mono_secondary_dark,
-    logo_mono_submark_light,
-    logo_mono_submark_dark,
-    logo_colored_submark_light,
-    logo_colored_submark_dark,
-  };
+  const varName = `logo_${colorTypeInFilename}_${logoType}_${theme}` as const;
 
   // Match the varName with the Logo-Asset name and store it in "logoVar"
-  const logoVar = logoAssets[varName as keyof typeof logoAssets];
+  const logoVar = logoAssets[varName];
 
   if (!logoVar) {
     console.error(`Logo: Could not find logo asset for ${varName}`);
