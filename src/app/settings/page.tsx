@@ -1,4 +1,4 @@
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/custom-ui/button';
 import {
   Card,
   CardContent,
@@ -88,7 +88,7 @@ export default function SettingsPage() {
                     </Select>
                   </div>
                   <div className='pt-4'>
-                    <Button variant='destructive'>Delete Account</Button>
+                    <Button variant='secondary'>Delete Account</Button>
                     <p className='text-sm text-muted-foreground pt-1'>
                       Permanently delete your account and all associated data.
                     </p>

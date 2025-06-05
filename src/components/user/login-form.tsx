@@ -1,6 +1,6 @@
 import { signIn } from '@/auth';
 import LabeledInput from '@/components/labeled-input';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/components/custom-ui/button';
 import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
 
@@ -25,22 +25,23 @@ export default function LoginForm() {
       <LabeledInput
         type='email'
         label='E-Mail or Username'
-        placeholder='What you are known as.'
+        placeholder='What you are known as'
         name='email'
       />
       <LabeledInput
         type='password'
         label='Password'
-        placeholder="Let's hope you remember it."
+        placeholder="Let's hope you remember it"
         name='password'
       />
-      <Button
-        className='hover:bg-blue-600 hover:text-white'
-        type='submit'
-        variant='secondary'
-      >
-        Login
-      </Button>
+      <div className='grid grid-rows-2 gap-2'>
+        <Button type='submit' variant='primary'>
+          Login
+        </Button>
+        <Button type='submit' variant='outline'>
+          Sign Up
+        </Button>
+      </div>
     </form>
   );
 }

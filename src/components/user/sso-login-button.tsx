@@ -1,6 +1,6 @@
 import { signIn } from '@/auth';
-import { Button } from '@/components/ui/button';
-import { Fingerprint } from 'lucide-react';
+import { IconButton } from '@/components/icon-button';
+import { faOpenid } from '@fortawesome/free-brands-svg-icons';
 
 export default function SSOLogin({
   provider,
@@ -17,19 +17,14 @@ export default function SSOLogin({
         await signIn(provider);
       }}
     >
-      <Button
-        className='w-full flex items-center'
+      <IconButton
+        className='w-full'
         type='submit'
-        variant='default'
+        variant='secondary'
+        icon={faOpenid}
       >
-        <div className='flex justify-center'>
-          <Fingerprint />
-        </div>
-
-        <div className='flex justify-center'>
-          Login with {providerDisplayName}
-        </div>
-      </Button>
+        Login with {providerDisplayName}
+      </IconButton>
     </form>
   );
 }
