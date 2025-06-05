@@ -8,9 +8,32 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
       type={type}
       data-slot='input'
       className={cn(
-        'file:text-destructive placeholder:text-text-muted-input selection:bg-muted-input selection:text-text dark:bg-input/30 border-input flex h-9 w-full min-w-0 rounded-md border bg-transparent px-3 py-1 text-text-input shadow-xs transition-[color,box-shadow] outline-none file:inline-flex file:h-7 file:border-0 file:bg-transparent file:text-sm file:font-label disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50 md:text-sm',
-        'focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]',
-        'aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive',
+        /* Text */
+        'text-text-input selection:text-text md:text-sm file:text-destructive file:text-sm placeholder:text-text-muted-input',
+        /* Background */
+        'bg-transparent selection:bg-muted-input file:bg-transparent',
+        /* Border */
+        'rounded-md border border-input focus-visible:border-ring aria-invalid:border-destructive file:border-0',
+        /* Font */
+        'file:font-label',
+        /* Cursor */
+        'disabled:pointer-events-none disabled:cursor-not-allowed',
+        /* Ring */
+        'focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',
+        /* Outline */
+        'outline-none',
+        /* Shadow */
+        'shadow-md transition-[color,box-shadow] ',
+        /* Opacity */
+        'disabled:opacity-50 ',
+        /* Scaling */
+        'h-9 w-full min-w-0 file:h-7',
+        /* Spacing */
+        'px-3 py-1',
+        /* Alignment */
+        'flex file:inline-flex',
+        /* Miscellaneous */
+        /* ////////// */
         className,
       )}
       {...props}

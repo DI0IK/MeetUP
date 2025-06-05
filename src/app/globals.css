@@ -8,6 +8,7 @@
 
   --font-heading: 'Comfortaa', sans-serif;
   --font-label: 'Varela Round', sans-serif;
+  --font-button: 'Varela Round', sans-serif;
 
   --transparent: transparent;
 
@@ -26,6 +27,7 @@
   --neutral-900: oklch(1 0 0);
 
   --background: var(--neutral-800);
+  --background-reversed: var(--neutral-000);
   --base: var(--neutral-800);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
@@ -46,6 +48,11 @@
   --active-secondary: oklch(0.4254 0.133 272.15);
   --disabled-secondary: oklch(0.4937 0.1697 271.26 / 0.5);
 
+  --muted: var(--color-neutral-700);
+  --hover-muted: var(--color-neutral-600);
+  --active-muted: var(--color-neutral-400);
+  --disabled-muted: var(--color-neutral-400);
+
   --card: var(--neutral-800);
 
   /* ------------------- */
@@ -63,8 +70,6 @@
   --popover-hover: var(--neutral-750);
 
   --secondary-foreground: oklch(0.21 0.034 264.665);
-
-  --muted: oklch(0.967 0.003 264.542);
 
   --muted-foreground: oklch(0.551 0.027 264.364);
 
@@ -125,6 +130,7 @@
 @theme inline {
   --font-heading: var(--font-heading);
   --font-label: var(--font-label);
+  --font-button: var(--font-button);
 
   --transparent: var(--transparent);
 
@@ -136,12 +142,14 @@
   --color-neutral-400: var(--neutral-400);
   --color-neutral-500: var(--neutral-500);
   --color-neutral-600: var(--neutral-600);
+  --color-neutral-650: var(--neutral-650);
   --color-neutral-700: var(--neutral-700);
   --color-neutral-750: var(--neutral-750);
   --color-neutral-800: var(--neutral-800);
   --color-neutral-900: var(--neutral-900);
 
   --color-background: var(--neutral-750);
+  --color-background-reversed: var(--background-reversed);
   --color-base: var(--neutral-800);
   --color-text: var(--text);
   --color-text-alt: var(--text-alt);
@@ -162,6 +170,11 @@
   --color-hover-secondary: var(--hover-secondary);
   --color-active-secondary: var(--active-secondary);
   --color-disabled-secondary: var(--disabled-secondary);
+
+  --color-muted: var(--muted);
+  --color-hover-muted: var(--hover-muted);
+  --color-active-muted: var(--active-muted);
+  --color-disabled-muted: var(--disabled-muted);
 
   /* Custom values */
 
@@ -252,12 +265,14 @@
   --neutral-450: oklch(0.6 0 0);
   --neutral-500: oklch(0.5486 0 0);
   --neutral-600: oklch(0.4495 0 0);
+  --neutral-650: oklch(0.425 0 0);
   --neutral-700: oklch(0.3407 0 0);
   --neutral-750: oklch(0.2972 0 0);
   --neutral-800: oklch(0.2264 0 0);
   --neutral-900: oklch(0 0 0);
 
   --background: var(--neutral-750);
+  --background-reversed: var(--neutral-000);
   --base: var(--neutral-750);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
@@ -277,6 +292,11 @@
   --active-secondary: oklch(0.4471 0.15 271.61);
   --disabled-secondary: oklch(0.6065 0.213 271.11 / 0.4);
 
+  --muted: var(--color-neutral-650);
+  --hover-muted: var(--color-neutral-500);
+  --active-muted: var(--color-neutral-400);
+  --disabled-muted: var(--color-neutral-400);
+
   --card: var(--neutral-750);
 
   /* ------------------- */
@@ -294,8 +314,6 @@
   --popover-hover: var(--neutral-700);
 
   --secondary-foreground: oklch(0.985 0.002 247.839);
-
-  --muted: oklch(0.278 0.033 256.848);
 
   --muted-foreground: oklch(0.707 0.022 261.325);
 

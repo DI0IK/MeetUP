@@ -38,7 +38,7 @@ export default function LoginForm() {
         <Button type='submit' variant='primary'>
           Login
         </Button>
-        <Button type='submit' variant='outline'>
+        <Button type='submit' variant='outline_primary'>
           Sign Up
         </Button>
       </div>

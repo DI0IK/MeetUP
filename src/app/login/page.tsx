@@ -41,7 +41,7 @@ export default async function LoginPage() {
             <CardContent className='gap-6 flex flex-col items-center'>
               <LoginForm />
 
-              <Separator className='h-[1px] rounded-sm w-[60%] bg-neutral-000' />
+              <Separator className='h-[1px] rounded-sm w-[60%] bg-border' />
 
               {providerMap.length > 0}
 
@@ -57,7 +57,7 @@ export default async function LoginPage() {
         </div>
       </div>
       <HoverCard>
-        <HoverCardTrigger className='text-sm text-neutral-000 hover:underline'>
+        <HoverCardTrigger>
           <Button variant='link'>made with love</Button>
         </HoverCardTrigger>
         <HoverCardContent className='flex items-center justify-center'>

@@ -11,7 +11,7 @@ export default function SSOLogin({
 }) {
   return (
     <form
-      className='flex flex-col items-center gap-4 w-full'
+      className='flex flex-col items-center w-full'
       action={async () => {
         'use server';
         await signIn(provider);
