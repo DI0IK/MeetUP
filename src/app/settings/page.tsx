@@ -251,7 +251,7 @@ export default function SettingsPage() {
                         Define your typical available hours (e.g.,
                         Monday-Friday, 9 AM - 5 PM).
                       </p>
-                      <Button variant='outline' size='sm'>
+                      <Button variant='outline_muted' size='sm'>
                         Set Working Hours
                       </Button>
                     </div>
@@ -302,10 +302,14 @@ export default function SettingsPage() {
                     </div>
                     <div className='space-y-2'>
                       <Label>Export Your Calendar</Label>
-                      <Button variant='outline' size='sm'>
+                      <Button variant='outline_muted' size='sm'>
                         Get iCal Export URL
                       </Button>
-                      <Button variant='outline' size='sm' className='ml-2'>
+                      <Button
+                        variant='outline_muted'
+                        size='sm'
+                        className='ml-2'
+                      >
                         Download .ics File
                       </Button>
                     </div>
@@ -398,7 +402,9 @@ export default function SettingsPage() {
                   </div>
                   <div className='space-y-2'>
                     <Label>Blocked Users</Label>
-                    <Button variant='outline'>Manage Blocked Users</Button>
+                    <Button variant='outline_muted'>
+                      Manage Blocked Users
+                    </Button>
                     <p className='text-sm text-muted-foreground'>
                       Prevent specific users from seeing your calendar or
                       booking time.
