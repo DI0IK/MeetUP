@@ -12,7 +12,8 @@
     "prisma:generate": "dotenv -e .env.local -- prisma generate",
     "prisma:studio": "dotenv -e .env.local -- prisma studio",
     "prisma:db:push": "dotenv -e .env.local -- prisma db push",
-    "prisma:migrate:reset": "dotenv -e .env.local -- prisma migrate reset"
+    "prisma:migrate:reset": "dotenv -e .env.local -- prisma migrate reset",
+    "dev_container": "docker compose -f docker-compose.dev.yml up --watch --build"
   },
   "dependencies": {
     "@auth/prisma-adapter": "^2.9.1",

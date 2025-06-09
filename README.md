@@ -129,6 +129,14 @@ This project is built with a modern tech stack:
     password: password
     ```
 
+**Docker Development Environment:**
+
+- The docker development environment can be started with the following command:
+
+```bash
+yarn dev_container
+```
+
 **Self-Hosting with Docker (Planned):**
 
 - A Docker image and `docker-compose.yml` file will be provided in the future to allow for easy self-hosting of the MeetUP application. This setup will also include database services. Instructions will be updated here once available.
