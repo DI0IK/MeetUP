@@ -25,11 +25,7 @@ export default function SignOutPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className='gap-6 flex flex-col'>
-            <Button
-              className='hover:bg-blue-600 hover:text-white'
-              type='submit'
-              variant='secondary'
-            >
+            <Button type='submit' variant='secondary'>
               Logout
             </Button>
           </CardContent>
