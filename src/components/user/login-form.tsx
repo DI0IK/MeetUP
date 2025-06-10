@@ -4,15 +4,18 @@ import LabeledInput from '@/components/labeled-input';
 import { Button } from '@/components/custom-ui/button';
 import { AuthError } from 'next-auth';
 import { redirect } from 'next/navigation';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const SIGNIN_ERROR_URL = '/error';
 
 export default function LoginForm() {
   const [isSignUp, setIsSignUp] = useState(false);
 
+  const formRef = useRef<HTMLFormElement>(null);
+
   return (
     <form
+      ref={formRef}
       className='flex flex-col gap-5 w-full'
       action={async (formData) => {
         'use client';
@@ -91,7 +94,10 @@ export default function LoginForm() {
         <Button
           type='button'
           variant='outline_primary'
-          onClick={() => setIsSignUp((v) => !v)}
+          onClick={() => {
+            formRef.current?.reset();
+            setIsSignUp((v) => !v);
+          }}
         >
           {isSignUp ? 'Back to Login' : 'Sign Up'}
         </Button>
