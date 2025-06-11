@@ -7,12 +7,14 @@ export default function LabeledInput({
   placeholder,
   value,
   name,
+  autocomplete,
 }: {
   type: 'text' | 'email' | 'password';
   label: string;
   placeholder?: string;
   value?: string;
   name?: string;
+  autocomplete?: string;
 }) {
   return (
     <div className='grid grid-cols-1 gap-1'>
@@ -24,6 +26,7 @@ export default function LabeledInput({
         defaultValue={value}
         id={name}
         name={name}
+        autoComplete={autocomplete}
       />
     </div>
   );

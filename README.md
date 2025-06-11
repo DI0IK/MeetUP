@@ -104,7 +104,7 @@ This project is built with a modern tech stack:
       yarn prisma:generate
       ```
       ```bash
-      yarn prisa:db:push
+      yarn prisma:db:push
       ```
     - Run the following command to apply migrations and generate Prisma Client:
       ```bash
