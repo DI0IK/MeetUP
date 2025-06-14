@@ -8,6 +8,8 @@ export default function LabeledInput({
   value,
   name,
   autocomplete,
+  error,
+  ...rest
 }: {
   type: 'text' | 'email' | 'password';
   label: string;
@@ -15,7 +17,8 @@ export default function LabeledInput({
   value?: string;
   name?: string;
   autocomplete?: string;
-}) {
+  error?: string;
+} & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <div className='grid grid-cols-1 gap-1'>
       <Label htmlFor={name}>{label}</Label>
@@ -27,7 +30,9 @@ export default function LabeledInput({
         id={name}
         name={name}
         autoComplete={autocomplete}
+        {...rest}
       />
+      {error && <p className='text-red-500 text-sm mt-1'>{error}</p>}
     </div>
   );
 }
