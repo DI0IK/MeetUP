@@ -75,11 +75,11 @@
 }
 
 .custom-toolbar .navigation-controls button:hover {
-  background-color: #1976D2;
+  background-color: #1976d2;
 }
 
 .custom-toolbar .navigation-controls button:active {
-  background-color: #1565C0;
+  background-color: #1565c0;
 }
 
 /* Dropdown-Bereich für Woche und Jahr */

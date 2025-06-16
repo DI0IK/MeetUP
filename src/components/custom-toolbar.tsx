@@ -16,15 +16,21 @@ interface CustomToolbarProps {
   onView: (newView: 'month' | 'week' | 'day' | 'agenda') => void;
 }
 
-const CustomToolbar: React.FC<CustomToolbarProps> = ({ date, view, onNavigate, onView }) => {
-  
+const CustomToolbar: React.FC<CustomToolbarProps> = ({
+  date,
+  view,
+  onNavigate,
+  onView,
+}) => {
   //ISO-Wochennummer eines Datums ermitteln
   const getISOWeek = (date: Date): number => {
     const tmp = new Date(date.getTime());
     //Datum so verschieben, dass der nächste Donnerstag erreicht wird (ISO: Woche beginnt am Montag)
     tmp.setDate(tmp.getDate() + 4 - (tmp.getDay() || 7));
     const yearStart = new Date(tmp.getFullYear(), 0, 1);
-    const weekNo = Math.ceil((((tmp.getTime() - yearStart.getTime()) / 86400000) + 1) / 7);
+    const weekNo = Math.ceil(
+      ((tmp.getTime() - yearStart.getTime()) / 86400000 + 1) / 7,
+    );
     return weekNo;
   };
 
@@ -60,7 +66,9 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({ date, view, onNavigate, o
 
   //Lokaler State für Woche und ISO-Wochenjahr (statt des reinen Kalenderjahrs)
   const [selectedWeek, setSelectedWeek] = useState<number>(getISOWeek(date));
-  const [selectedYear, setSelectedYear] = useState<number>(getISOWeekYear(date));
+  const [selectedYear, setSelectedYear] = useState<number>(
+    getISOWeekYear(date),
+  );
 
   //Auswahl aktualisieren, wenn sich die Prop "date" ändert
   useEffect(() => {
@@ -73,7 +81,10 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({ date, view, onNavigate, o
   const weekOptions = Array.from({ length: totalWeeks }, (_, i) => i + 1);
 
   //Jahresliste
-  const yearOptions = Array.from({ length: 21 }, (_, i) => selectedYear - 10 + i);
+  const yearOptions = Array.from(
+    { length: 21 },
+    (_, i) => selectedYear - 10 + i,
+  );
 
   //Start (Montag) und Ende (Sonntag) der aktuell angezeigten Woche berechnen
   const weekStartDate = getDateOfISOWeek(selectedWeek, selectedYear);
@@ -175,11 +186,13 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({ date, view, onNavigate, o
     }
   };
 
-
   return (
-    <div className="custom-toolbar" style={{ display: 'flex', flexDirection: 'initial', gap: '8px' }}>
+    <div
+      className='custom-toolbar'
+      style={{ display: 'flex', flexDirection: 'initial', gap: '8px' }}
+    >
       <div className='view-change'>
-        <div className="view-switcher" style={{ display: 'flex', gap: '8px' }}>
+        <div className='view-switcher' style={{ display: 'flex', gap: '8px' }}>
           <Button
             //className='hover:bg-orange-600 hover:text-white'
             type='submit'
@@ -219,13 +232,19 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({ date, view, onNavigate, o
         </div>
       </div>
 
-      <div className="right-section" style={{ display: 'flex', flexDirection: 'initial', gap: '8px' }}>
-        <div className="navigation-controls" style={{ display: 'flex', gap: '8px' }}>
-          <div className="handleWeek">
+      <div
+        className='right-section'
+        style={{ display: 'flex', flexDirection: 'initial', gap: '8px' }}
+      >
+        <div
+          className='navigation-controls'
+          style={{ display: 'flex', gap: '8px' }}
+        >
+          <div className='handleWeek'>
             <button onClick={handlePrev}>&lt;</button>
             <button onClick={handleNext}>&gt;</button>
           </div>
-          <div className="today">
+          <div className='today'>
             <Button
               //className='hover:bg-orange-600 hover:text-white'
               type='submit'

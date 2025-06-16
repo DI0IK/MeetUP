@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
@@ -13,26 +13,25 @@ moment.updateLocale('en', {
   },
 });
 
-const localizer = momentLocalizer(moment)
+const localizer = momentLocalizer(moment);
 
 const MyCalendar = (props) => (
   <div>
     <Calendar
       localizer={localizer}
       //events={myEventsList}
-      startAccessor="start"
-      endAccessor="end"
+      startAccessor='start'
+      endAccessor='end'
       style={{ height: 500 }}
-      culture="de-DE"
+      culture='de-DE'
       defaultView='week'
-
       /*CustomToolbar*/
       components={{
-        toolbar: CustomToolbar
+        toolbar: CustomToolbar,
       }}
       /*CustomToolbar*/
     />
   </div>
-)
+);
 
 export default MyCalendar;
