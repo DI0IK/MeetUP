@@ -1,15 +1,13 @@
 'use client';
 
 import { RedirectButton } from '@/components/buttons/redirect-button';
-import { ThemePicker } from '@/components/misc/theme-picker';
 import { useGetApiUserMe } from '@/generated/api/user/user';
 
 export default function Home() {
   const { data, isLoading } = useGetApiUserMe();
 
   return (
-    <div className='flex flex-col items-center justify-center h-screen'>
-      <div className='absolute top-4 right-4'>{<ThemePicker />}</div>
+    <div className='flex flex-col items-center justify-center h-full'>
       <div>
         <h1>
           Hello{' '}
