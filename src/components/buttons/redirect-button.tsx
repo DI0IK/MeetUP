@@ -1,4 +1,4 @@
-import { Button } from '../custom-ui/button';
+import { Button } from '../ui/button';
 import Link from 'next/link';
 
 export function RedirectButton({

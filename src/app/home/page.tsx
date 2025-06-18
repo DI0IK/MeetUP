@@ -1,5 +1,5 @@
-import { RedirectButton } from '@/components/user/redirect-button';
-import { ThemePicker } from '@/components/user/theme-picker';
+import { RedirectButton } from '@/components/buttons/redirect-button';
+import { ThemePicker } from '@/components/misc/theme-picker';
 
 export default function Home() {
   return (
