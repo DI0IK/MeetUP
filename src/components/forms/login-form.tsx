@@ -3,8 +3,8 @@
 import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
-import LabeledInput from '@/components/labeled-input';
-import { Button } from '@/components/custom-ui/button';
+import LabeledInput from '@/components/custom-ui/labeled-input';
+import { Button } from '@/components/ui/button';
 import useZodForm from '@/lib/hooks/useZodForm';
 import { loginSchema, registerSchema } from '@/lib/validation/user';
 import { loginAction } from '@/lib/auth/login';

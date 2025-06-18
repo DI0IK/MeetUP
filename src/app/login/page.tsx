@@ -1,17 +1,17 @@
 import { auth, providerMap } from '@/auth';
-import SSOLogin from '@/components/user/sso-login-button';
-import LoginForm from '@/components/user/login-form';
+import SSOLogin from '@/components/buttons/sso-login-button';
+import LoginForm from '@/components/forms/login-form';
 import { redirect } from 'next/navigation';
-import { Button } from '@/components/custom-ui/button';
+import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { Separator } from '@/components/custom-ui/separator';
-import Logo from '@/components/logo';
+import { Separator } from '@/components/ui/separator';
+import Logo from '@/components/misc/logo';
 import {
   Card,
   CardContent,
   CardHeader,
 } from '@/components/custom-ui/login-card';
-import { ThemePicker } from '@/components/user/theme-picker';
+import { ThemePicker } from '@/components/misc/theme-picker';
 import {
   HoverCard,
   HoverCardTrigger,
@@ -26,7 +26,7 @@ export default async function LoginPage() {
   }
 
   return (
-    <div className='flex flex-col items-center min-h-screen'>
+    <div className='flex flex-col items-center max-h-screen overflow-y-auto'>
       <div className='flex flex-col items-center min-h-screen'>
         <div className='fixed top-4 right-4'>
           <ThemePicker />
@@ -51,20 +51,20 @@ export default async function LoginPage() {
             </CardContent>
           </Card>
         </div>
+        <HoverCard>
+          <HoverCardTrigger>
+            <Button variant='link'>made with love</Button>
+          </HoverCardTrigger>
+          <HoverCardContent className='flex items-center justify-center'>
+            <Image
+              src='https://img1.wikia.nocookie.net/__cb20140808110649/clubpenguin/images/a/a1/Action_Dance_Light_Blue.gif'
+              width='150'
+              height='150'
+              alt='dancing penguin'
+            ></Image>
+          </HoverCardContent>
+        </HoverCard>
       </div>
-      <HoverCard>
-        <HoverCardTrigger>
-          <Button variant='link'>made with love</Button>
-        </HoverCardTrigger>
-        <HoverCardContent className='flex items-center justify-center'>
-          <Image
-            src='https://img1.wikia.nocookie.net/__cb20140808110649/clubpenguin/images/a/a1/Action_Dance_Light_Blue.gif'
-            width='150'
-            height='150'
-            alt='dancing penguin'
-          ></Image>
-        </HoverCardContent>
-      </HoverCard>
     </div>
   );
 }

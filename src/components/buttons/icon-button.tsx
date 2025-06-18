@@ -1,4 +1,4 @@
-import { Button } from '@/components/custom-ui/button';
+import { Button } from '@/components/ui/button';
 
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
