@@ -2,6 +2,7 @@ import { ThemeProvider } from '@/components/wrappers/theme-provider';
 
 import type { Metadata } from 'next';
 import './globals.css';
+import { QueryProvider } from '@/components/query-provider';
 
 export const metadata: Metadata = {
   title: 'MeetUp',
@@ -55,7 +56,7 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <QueryProvider>{children}</QueryProvider>
         </ThemeProvider>
       </body>
     </html>

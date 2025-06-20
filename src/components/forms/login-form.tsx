@@ -6,7 +6,7 @@ import { useRouter } from 'next/navigation';
 import LabeledInput from '@/components/custom-ui/labeled-input';
 import { Button } from '@/components/ui/button';
 import useZodForm from '@/lib/hooks/useZodForm';
-import { loginSchema, registerSchema } from '@/lib/validation/user';
+import { loginSchema, registerSchema } from '@/lib/auth/validation';
 import { loginAction } from '@/lib/auth/login';
 import { registerAction } from '@/lib/auth/register';
 

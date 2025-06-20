@@ -8,9 +8,8 @@ import Authentik from 'next-auth/providers/authentik';
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/prisma';
 
-import { loginSchema } from './lib/validation/user';
-
-import { ZodError } from 'zod';
+import { loginSchema } from '@/lib/auth/validation';
+import { ZodError } from 'zod/v4';
 
 class InvalidLoginError extends CredentialsSignin {
   constructor(code: string) {
@@ -25,7 +24,11 @@ const providers: Provider[] = [
     Credentials({
       credentials: { password: { label: 'Password', type: 'password' } },
       async authorize(c) {
-        if (process.env.NODE_ENV === 'development' && c.password === 'password')
+        if (
+          process.env.NODE_ENV === 'development' &&
+          process.env.DISABLE_AUTH_TEST_USER !== 'true' &&
+          c.password === 'password'
+        )
           return {
             id: 'test',
             name: 'Test User',
@@ -37,7 +40,7 @@ const providers: Provider[] = [
           const { email, password } = await loginSchema.parseAsync(c);
 
           const user = await prisma.user.findFirst({
-            where: { email },
+            where: { OR: [{ email }, { name: email }] },
             include: { accounts: true },
           });
 
@@ -112,6 +115,18 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
   callbacks: {
     authorized({ auth }) {
       return !!auth?.user;
+    },
+    session: async ({ session, token }) => {
+      if (session?.user) {
+        session.user.id = token.sub as string;
+      }
+      return session;
+    },
+    jwt: async ({ user, token }) => {
+      if (user) {
+        token.uid = user.id;
+      }
+      return token;
     },
   },
   debug: process.env.NODE_ENV === 'development',

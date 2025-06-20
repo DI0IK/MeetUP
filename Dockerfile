@@ -16,6 +16,8 @@ RUN corepack enable
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN yarn prisma:generate
+RUN yarn swagger:generate
+RUN yarn orval:generate
 RUN yarn build
 
 # ----- Runner -----
