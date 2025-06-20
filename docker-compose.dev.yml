@@ -13,6 +13,7 @@ services:
       - .env.local
     volumes:
       - ./data:/data
+      - ./src/generated:/app/src/generated
     develop:
       watch:
         - action: sync
@@ -20,8 +21,12 @@ services:
           target: /app/src
           ignore:
             - node_modules/
+            - generated/
         - action: rebuild
           path: package.json
         - action: sync+restart
           path: prisma
           target: /app/prisma
+        - action: sync+restart
+          path: ./src/app/api
+          target: /app/src/app/api

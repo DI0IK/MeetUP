@@ -364,3 +364,8 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Fix for swagger ui readability */
+body:has(.swagger-ui) {
+  @apply bg-white text-black;
+}

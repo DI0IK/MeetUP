@@ -7,4 +7,7 @@ if [ -d "prisma" ]; then
   yarn prisma:db:push
 fi
 
+yarn swagger:generate
+yarn orval:generate
+
 exec yarn dev

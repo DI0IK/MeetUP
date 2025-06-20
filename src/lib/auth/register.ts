@@ -1,45 +1,23 @@
 'use server';
 
-import type { z } from 'zod';
+import type { z } from 'zod/v4';
 import bcrypt from 'bcryptjs';
-import { registerSchema } from '@/lib/validation/user';
+import { registerServerSchema } from './validation';
 import { prisma } from '@/prisma';
 
-export async function registerAction(data: z.infer<typeof registerSchema>) {
+export async function registerAction(
+  data: z.infer<typeof registerServerSchema>,
+) {
   try {
-    const result = await registerSchema.safeParseAsync(data);
+    const result = await registerServerSchema.safeParseAsync(data);
 
     if (!result.success) {
       return {
-        error: result.error.errors[0].message,
+        error: result.error.issues[0].message,
       };
     }
 
     const { email, password, firstName, lastName, username } = result.data;
-
-    const user = await prisma.user.findUnique({
-      where: {
-        email,
-      },
-    });
-
-    if (user) {
-      return {
-        error: 'User already exist with this email',
-      };
-    }
-
-    const existingUsername = await prisma.user.findUnique({
-      where: {
-        name: username,
-      },
-    });
-
-    if (existingUsername) {
-      return {
-        error: 'Username already exists',
-      };
-    }
 
     const passwordHash = await bcrypt.hash(password, 10);
 
