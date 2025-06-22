@@ -13,6 +13,7 @@ export const BlockedSlotSchema = zod
     start_time: eventStartTimeSchema,
     end_time: eventEndTimeSchema,
     type: zod.literal('blocked_private'),
+    id: zod.string(),
   })
   .openapi('BlockedSlotSchema', {
     description: 'Blocked time slot in the user calendar',

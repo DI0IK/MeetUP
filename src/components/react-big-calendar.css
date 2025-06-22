@@ -546,7 +546,8 @@ button.rbc-input::-moz-focus-inner {
   padding-right: 15px;
   text-transform: lowercase;
 }
-.rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td {
+.rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td,
+.rbc-agenda-view table.rbc-agenda-table tbody > tr > td.rbc-agenda-time-cell {
   border-left: 1px solid #ddd;
 }
 .rbc-rtl .rbc-agenda-view table.rbc-agenda-table tbody > tr > td + td {
@@ -767,7 +768,6 @@ button.rbc-input::-moz-focus-inner {
   -ms-flex: 1;
   flex: 1;
   width: 100%;
-  border: 1px solid #ddd;
   min-height: 0;
 }
 .rbc-time-view .rbc-time-gutter {
@@ -870,10 +870,18 @@ button.rbc-input::-moz-focus-inner {
   -ms-flex-align: start;
   align-items: flex-start;
   width: 100%;
-  border-top: 2px solid #717171; /*#ddd*/
   overflow-y: auto;
   position: relative;
 }
+
+.rbc-time-header-content {
+  border-bottom: 2px solid #717171; /*#ddd*/
+}
+
+.rbc-time-column :last-child {
+  border-bottom: 0;
+}
+
 .rbc-time-content > .rbc-time-gutter {
   -webkit-box-flex: 0;
   -ms-flex: none;

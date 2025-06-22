@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { format } from 'date-fns';
 import './custom-toolbar.css';
-import { Button } from '@/components/custom-ui/button';
+import { Button } from '@/components/ui/button';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { NavigateAction } from 'react-big-calendar';
 
 interface CustomToolbarProps {
   //Aktuell angezeigtes Datum
   date: Date;
   //Aktuelle Ansicht
-  view: 'month' | 'week' | 'day' | 'agenda';
+  view: 'month' | 'week' | 'day' | 'agenda' | 'work_week';
 
-  onNavigate: (action: string, newDate?: Date) => void;
+  onNavigate: (action: NavigateAction, newDate?: Date) => void;
   //Ansichtwechsel
-  onView: (newView: 'month' | 'week' | 'day' | 'agenda') => void;
+  onView: (newView: 'month' | 'week' | 'day' | 'agenda' | 'work_week') => void;
 }
 
 const CustomToolbar: React.FC<CustomToolbarProps> = ({
@@ -76,26 +76,10 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
     setSelectedYear(getISOWeekYear(date));
   }, [date]);
 
-  //Dropdown-Liste der Wochen
-  const totalWeeks = getISOWeeksInYear(selectedYear);
-  const weekOptions = Array.from({ length: totalWeeks }, (_, i) => i + 1);
-
-  //Jahresliste
-  const yearOptions = Array.from(
-    { length: 21 },
-    (_, i) => selectedYear - 10 + i,
-  );
-
   //Start (Montag) und Ende (Sonntag) der aktuell angezeigten Woche berechnen
   const weekStartDate = getDateOfISOWeek(selectedWeek, selectedYear);
   const weekEndDate = new Date(weekStartDate);
   weekEndDate.setDate(weekStartDate.getDate() + 6);
-
-  //Monat und Jahr von Start- und Enddatum ermitteln
-  const monthStart = format(weekStartDate, 'MMMM');
-  const monthEnd = format(weekEndDate, 'MMMM');
-  const yearAtStart = format(weekStartDate, 'yyyy');
-  const yearAtEnd = format(weekEndDate, 'yyyy');
 
   //Ansichtwechsel
   const handleViewChange = (newView: 'month' | 'week' | 'day' | 'agenda') => {
@@ -134,7 +118,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
     }
     //Datum im DatePicker aktualisieren
     setSelectedDate(newDate);
-    onNavigate('SET_DATE', newDate);
+    onNavigate('DATE', newDate);
   };
 
   //Pfeiltaste nach Hinten
@@ -160,7 +144,7 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
     }
     //Datum im DatePicker aktualisieren
     setSelectedDate(newDate);
-    onNavigate('SET_DATE', newDate);
+    onNavigate('DATE', newDate);
   };
 
   const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -174,14 +158,14 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
         setSelectedWeek(newWeek);
         setSelectedYear(newYear);
         const newDate = getDateOfISOWeek(newWeek, newYear);
-        onNavigate('SET_DATE', newDate);
+        onNavigate('DATE', newDate);
       } else if (view === 'day') {
-        onNavigate('SET_DATE', date);
+        onNavigate('DATE', date);
       } else if (view === 'month') {
         const newDate = new Date(date.getFullYear(), date.getMonth(), 1);
-        onNavigate('SET_DATE', newDate);
+        onNavigate('DATE', newDate);
       } else if (view === 'agenda') {
-        onNavigate('SET_DATE', date);
+        onNavigate('DATE', date);
       }
     }
   };
