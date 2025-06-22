@@ -84,30 +84,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@auth/core@npm:0.39.1":
-  version: 0.39.1
-  resolution: "@auth/core@npm:0.39.1"
-  dependencies:
-    "@panva/hkdf": "npm:^1.2.1"
-    jose: "npm:^6.0.6"
-    oauth4webapi: "npm:^3.3.0"
-    preact: "npm:10.24.3"
-    preact-render-to-string: "npm:6.5.11"
-  peerDependencies:
-    "@simplewebauthn/browser": ^9.0.1
-    "@simplewebauthn/server": ^9.0.2
-    nodemailer: ^6.8.0
-  peerDependenciesMeta:
-    "@simplewebauthn/browser":
-      optional: true
-    "@simplewebauthn/server":
-      optional: true
-    nodemailer:
-      optional: true
-  checksum: 10c0/ba2703656c266ce42f10a1e5ac90c2bcbc829bff651cc930ad95a4734aafaa249551d0af589a0c970fbd7f7aa6324c329439183bfb46ba1bee3f8cfa90128275
-  languageName: node
-  linkType: hard
-
 "@auth/core@npm:0.40.0":
   version: 0.40.0
   resolution: "@auth/core@npm:0.40.0"
@@ -133,13 +109,13 @@ __metadata:
   linkType: hard
 
 "@auth/prisma-adapter@npm:^2.9.1":
-  version: 2.9.1
-  resolution: "@auth/prisma-adapter@npm:2.9.1"
+  version: 2.10.0
+  resolution: "@auth/prisma-adapter@npm:2.10.0"
   dependencies:
-    "@auth/core": "npm:0.39.1"
+    "@auth/core": "npm:0.40.0"
   peerDependencies:
     "@prisma/client": ">=2.26.0 || >=3 || >=4 || >=5 || >=6"
-  checksum: 10c0/615ee7c02f690e35ccac8206607a4345ca6455c322a741ddd4dbd52e7a068ace9e5c46c4d8a50fe471ca2c2fb6a5b4bb9924cbd2e911613f671fe929c33278d4
+  checksum: 10c0/f6c95f144958c678e8cbc691b205c937cbc456beab3da035ab3e00d55e91b8b39be6ff8529dbe3c72d0f95365988db09bc5862445f70c2438061dbe69bca34f5
   languageName: node
   linkType: hard
 
