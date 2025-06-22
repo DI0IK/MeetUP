@@ -2,7 +2,7 @@ import { ThemeProvider } from '@/components/wrappers/theme-provider';
 
 import type { Metadata } from 'next';
 import './globals.css';
-import { QueryProvider } from '@/components/query-provider';
+import { QueryProvider } from '@/components/wrappers/query-provider';
 
 export const metadata: Metadata = {
   title: 'MeetUp',

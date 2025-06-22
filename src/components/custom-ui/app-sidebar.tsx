@@ -6,27 +6,27 @@ import {
   SidebarContent,
   SidebarFooter,
   SidebarGroup,
-  SidebarGroupAction,
+  // SidebarGroupAction,
   SidebarGroupContent,
   SidebarGroupLabel,
   SidebarHeader,
-  SidebarInput,
-  SidebarInset,
+  // SidebarInput,
+  // SidebarInset,
   SidebarMenu,
-  SidebarMenuAction,
-  SidebarMenuBadge,
+  // SidebarMenuAction,
+  // SidebarMenuBadge,
   SidebarMenuButton,
   SidebarMenuItem,
-  SidebarMenuSkeleton,
-  SidebarMenuSub,
-  SidebarMenuSubButton,
-  SidebarMenuSubItem,
-  SidebarProvider,
-  SidebarRail,
-  SidebarSeparator,
-  SidebarTrigger,
-  useSidebar,
-} from '@/components/ui/sidebar';
+  // SidebarMenuSkeleton,
+  // SidebarMenuSub,
+  // SidebarMenuSubButton,
+  // SidebarMenuSubItem,
+  // SidebarProvider,
+  // SidebarRail,
+  // SidebarSeparator,
+  // SidebarTrigger,
+  // useSidebar,
+} from '@/components/custom-ui/sidebar';
 
 import { ChevronDown } from 'lucide-react';
 import {
@@ -38,8 +38,6 @@ import {
 import Logo from '@/components/misc/logo';
 
 import Link from 'next/link';
-
-import { ThemePicker } from '@/components/misc/theme-picker';
 
 import {
   Star,

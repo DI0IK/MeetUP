@@ -1,5 +1,22 @@
-import { SidebarTrigger } from '@/components/ui/sidebar';
+import { SidebarTrigger } from '@/components/custom-ui/sidebar';
 import { ThemePicker } from '@/components/misc/theme-picker';
+import { NotificationButton } from '@/components/buttons/notification-button';
+
+import { BellRing, Inbox } from 'lucide-react';
+import UserDropdown from '@/components/misc/user-dropdown';
+
+const items = [
+  {
+    title: 'Calendar',
+    url: '#',
+    icon: Inbox,
+  },
+  {
+    title: 'Friends',
+    url: '#',
+    icon: BellRing,
+  },
+];
 
 export default function Header({
   children,
@@ -8,13 +25,24 @@ export default function Header({
 }>) {
   return (
     <div className='w-full grid grid-rows-[50px_1fr] h-screen'>
-      <header className='border-b-1 grid-cols-[1fr_3fr_1fr] grid items-center px-2'>
+      <header className='border-b-1 grid-cols-[1fr_3fr_1fr] grid items-center px-2 shadow-md'>
         <span className='flex justify-start'>
           <SidebarTrigger variant='outline_primary' size='icon' />
         </span>
         <span className='flex justify-center'>Search</span>
-        <span className='flex justify-end'>
+        <span className='flex gap-1 justify-end'>
           <ThemePicker />
+          {items.map((item) => (
+            <NotificationButton
+              key={item.title}
+              variant='outline_primary'
+              dotVariant='hidden'
+              size='icon'
+            >
+              <item.icon />
+            </NotificationButton>
+          ))}
+          <UserDropdown />
         </span>
       </header>
       <main>{children}</main>
