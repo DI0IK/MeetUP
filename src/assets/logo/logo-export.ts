@@ -1,5 +1,5 @@
-export { default as logo_colored_combo_light } from '@/assets/logo/logo_colored_combo_light.svg';
-export { default as logo_colored_combo_dark } from '@/assets/logo/logo_colored_combo_dark.svg';
+export { default as logo_colored_combo_light } from '@/assets/logo/new/logo_colored_combo_light.svg';
+export { default as logo_colored_combo_dark } from '@/assets/logo/new/logo_colored_combo_dark.svg';
 export { default as logo_colored_primary_light } from '@/assets/logo/logo_colored_primary_light.svg';
 export { default as logo_colored_primary_dark } from '@/assets/logo/logo_colored_primary_dark.svg';
 export { default as logo_colored_secondary_light } from '@/assets/logo/logo_colored_secondary_light.svg';
@@ -12,5 +12,5 @@ export { default as logo_mono_secondary_light } from '@/assets/logo/logo_mono_se
 export { default as logo_mono_secondary_dark } from '@/assets/logo/logo_mono_secondary_dark.svg';
 export { default as logo_mono_submark_light } from '@/assets/logo/logo_mono_submark_light.svg';
 export { default as logo_mono_submark_dark } from '@/assets/logo/logo_mono_submark_dark.svg';
-export { default as logo_colored_submark_light } from '@/assets/logo/logo_colored_submark_light.svg';
-export { default as logo_colored_submark_dark } from '@/assets/logo/logo_colored_submark_dark.svg';
+export { default as logo_colored_submark_light } from '@/assets/logo/new/logo_colored_submark_light.svg';
+export { default as logo_colored_submark_dark } from '@/assets/logo/new/logo_colored_submark_dark.svg';

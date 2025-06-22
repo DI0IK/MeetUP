@@ -81,14 +81,14 @@ export function AppSidebar() {
           <Logo
             colorType='colored'
             logoType='combo'
-            height={49.5}
+            height={50}
             className='group-data-[collapsible=icon]:hidden min-w-[203px]'
           ></Logo>
           <Logo
             colorType='colored'
             logoType='submark'
-            height={49.5}
-            className='group-data-[collapsible=]:hidden group-data-[mobile=true]/mobile:hidden mb-[2.45]'
+            height={50}
+            className='group-data-[collapsible=]:hidden group-data-[mobile=true]/mobile:hidden'
           ></Logo>
         </SidebarHeader>
         <SidebarContent className='grid grid-rows-[auto_1fr_auto]'>
