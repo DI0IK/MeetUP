@@ -5,6 +5,7 @@ import {
   newUserEmailServerSchema,
   newUserNameServerSchema,
   passwordSchema,
+  timezoneSchema,
 } from '@/app/api/user/validation';
 
 // ----------------------------------------
@@ -17,8 +18,8 @@ export const updateUserServerSchema = zod.object({
   first_name: firstNameSchema.optional(),
   last_name: lastNameSchema.optional(),
   email: newUserEmailServerSchema.optional(),
-  image: zod.string().optional(),
-  timezone: zod.string().optional(),
+  image: zod.url().optional(),
+  timezone: timezoneSchema.optional(),
 });
 
 export const updateUserPasswordServerSchema = zod.object({

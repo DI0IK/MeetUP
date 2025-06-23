@@ -1,6 +1,7 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import { prisma } from '@/prisma';
 import zod from 'zod/v4';
+import { allTimeZones } from '@/lib/timezones';
 
 extendZodWithOpenApi(zod);
 
@@ -109,6 +110,17 @@ export const passwordSchema = zod
 
 // ----------------------------------------
 //
+// Timezone Validation
+//
+// ----------------------------------------
+export const timezoneSchema = zod
+  .enum(allTimeZones)
+  .openapi('Timezone', {
+    description: 'Valid timezone from the list of supported timezones',
+  });
+
+// ----------------------------------------
+//
 // User Schema Validation (for API responses)
 //
 // ----------------------------------------
@@ -119,8 +131,8 @@ export const FullUserSchema = zod
     first_name: zod.string().nullish(),
     last_name: zod.string().nullish(),
     email: zod.email(),
-    image: zod.string().nullish(),
-    timezone: zod.string(),
+    image: zod.url().nullish(),
+    timezone: zod.string().refine((i) => (allTimeZones as string[]).includes(i)).nullish(),
     created_at: zod.date(),
     updated_at: zod.date(),
   })
