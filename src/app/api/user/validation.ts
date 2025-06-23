@@ -113,11 +113,9 @@ export const passwordSchema = zod
 // Timezone Validation
 //
 // ----------------------------------------
-export const timezoneSchema = zod
-  .enum(allTimeZones)
-  .openapi('Timezone', {
-    description: 'Valid timezone from the list of supported timezones',
-  });
+export const timezoneSchema = zod.enum(allTimeZones).openapi('Timezone', {
+  description: 'Valid timezone from the list of supported timezones',
+});
 
 // ----------------------------------------
 //
@@ -132,7 +130,10 @@ export const FullUserSchema = zod
     last_name: zod.string().nullish(),
     email: zod.email(),
     image: zod.url().nullish(),
-    timezone: zod.string().refine((i) => (allTimeZones as string[]).includes(i)).nullish(),
+    timezone: zod
+      .string()
+      .refine((i) => (allTimeZones as string[]).includes(i))
+      .nullish(),
     created_at: zod.date(),
     updated_at: zod.date(),
   })

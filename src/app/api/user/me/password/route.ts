@@ -65,7 +65,10 @@ export const PATCH = auth(async function PATCH(req) {
       { status: 400 },
     );
 
-  if (dbUser.accounts.length === 0 || dbUser.accounts[0].provider !== 'credentials')
+  if (
+    dbUser.accounts.length === 0 ||
+    dbUser.accounts[0].provider !== 'credentials'
+  )
     return returnZodTypeCheckedResponse(
       ErrorResponseSchema,
       {

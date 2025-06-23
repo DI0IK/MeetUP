@@ -22,10 +22,12 @@ export const updateUserServerSchema = zod.object({
   timezone: timezoneSchema.optional(),
 });
 
-export const updateUserPasswordServerSchema = zod.object({
-  current_password: zod.string().min(1, 'Current password is required'),
-  new_password: passwordSchema,
-  confirm_new_password: passwordSchema,
-}).refine((data) => data.new_password === data.confirm_new_password, {
-  message: 'New password and confirm new password must match',
-});
+export const updateUserPasswordServerSchema = zod
+  .object({
+    current_password: zod.string().min(1, 'Current password is required'),
+    new_password: passwordSchema,
+    confirm_new_password: passwordSchema,
+  })
+  .refine((data) => data.new_password === data.confirm_new_password, {
+    message: 'New password and confirm new password must match',
+  });

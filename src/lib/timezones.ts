@@ -3708,6 +3708,10 @@ type TimeZoneIds = (typeof timezoneData)['zones'][number]['id'];
 type TimeZoneAlias = (typeof timezoneData)['zones'][number]['aliases'][number];
 export type TimeZones = TimeZoneIds | TimeZoneAlias;
 
-export const timeZoneIds = timezoneData.zones.map((zone) => zone.id) as TimeZoneIds[];
-export const timeZoneAliases = timezoneData.zones.flatMap((zone) => zone.aliases) as TimeZoneAlias[];
+export const timeZoneIds = timezoneData.zones.map(
+  (zone) => zone.id,
+) as TimeZoneIds[];
+export const timeZoneAliases = timezoneData.zones.flatMap(
+  (zone) => zone.aliases,
+) as TimeZoneAlias[];
 export const allTimeZones = [...timeZoneIds, ...timeZoneAliases] as const;
