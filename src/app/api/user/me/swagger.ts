@@ -7,6 +7,7 @@ import {
   serverReturnedDataValidationErrorResponse,
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
+import { SuccessResponseSchema } from '../../validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({
@@ -54,6 +55,26 @@ export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
         },
       },
       ...invalidRequestDataResponse,
+      ...notAuthenticatedResponse,
+      ...userNotFoundResponse,
+      ...serverReturnedDataValidationErrorResponse,
+    },
+    tags: ['User'],
+  });
+
+  registry.registerPath({
+    method: 'delete',
+    path: '/api/user/me',
+    description: 'Delete the currently authenticated user',
+    responses: {
+      200: {
+        description: 'User deleted successfully',
+        content: {
+          'application/json': {
+            schema: SuccessResponseSchema,
+          },
+        },
+      },
       ...notAuthenticatedResponse,
       ...userNotFoundResponse,
       ...serverReturnedDataValidationErrorResponse,

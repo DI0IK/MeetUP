@@ -8,6 +8,7 @@ import {
 import { FullUserResponseSchema } from '../validation';
 import {
   ErrorResponseSchema,
+  SuccessResponseSchema,
   ZodErrorResponseSchema,
 } from '@/app/api/validation';
 
@@ -113,6 +114,46 @@ export const PATCH = auth(async function PATCH(req) {
     {
       success: true,
       user: updatedUser,
+    },
+    { status: 200 },
+  );
+});
+
+export const DELETE = auth(async function DELETE(req) {
+  const authCheck = userAuthenticated(req);
+  if (!authCheck.continue)
+    return returnZodTypeCheckedResponse(
+      ErrorResponseSchema,
+      authCheck.response,
+      authCheck.metadata,
+    );
+
+  const dbUser = await prisma.user.findUnique({
+    where: {
+      id: authCheck.user.id,
+    },
+  });
+  if (!dbUser)
+    return returnZodTypeCheckedResponse(
+      ErrorResponseSchema,
+      {
+        success: false,
+        message: 'User not found',
+      },
+      { status: 404 },
+    );
+
+  await prisma.user.delete({
+    where: {
+      id: authCheck.user.id,
+    },
+  });
+
+  return returnZodTypeCheckedResponse(
+    SuccessResponseSchema,
+    {
+      success: true,
+      message: 'User deleted successfully',
     },
     { status: 200 },
   );
