@@ -19,18 +19,22 @@ export const BlockedSlotSchema = zod
     description: 'Blocked time slot in the user calendar',
   });
 
-export const OwnedBlockedSlotSchema = BlockedSlotSchema.extend({
-  id: zod.string(),
-  reason: zod.string().nullish(),
-  is_recurring: zod.boolean().default(false),
-  recurrence_end_date: zod.date().nullish(),
-  rrule: zod.string().nullish(),
-  created_at: zod.date().nullish(),
-  updated_at: zod.date().nullish(),
-  type: zod.literal('blocked_owned'),
-}).openapi('OwnedBlockedSlotSchema', {
-  description: 'Blocked slot owned by the user',
-});
+export const OwnedBlockedSlotSchema = zod
+  .object({
+    start_time: eventStartTimeSchema,
+    end_time: eventEndTimeSchema,
+    id: zod.string(),
+    reason: zod.string().nullish(),
+    is_recurring: zod.boolean().default(false),
+    recurrence_end_date: zod.date().nullish(),
+    rrule: zod.string().nullish(),
+    created_at: zod.date().nullish(),
+    updated_at: zod.date().nullish(),
+    type: zod.literal('blocked_owned'),
+  })
+  .openapi('OwnedBlockedSlotSchema', {
+    description: 'Blocked slot owned by the user',
+  });
 
 export const VisibleSlotSchema = EventSchema.omit({
   organizer: true,

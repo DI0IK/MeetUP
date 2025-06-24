@@ -61,11 +61,13 @@
     "react-datepicker": "^8.4.0",
     "react-day-picker": "^9.7.0",
     "react-dom": "^19.0.0",
+    "react-error-boundary": "^6.0.0",
     "react-hook-form": "^7.56.4",
     "sonner": "^2.0.5",
     "swagger-ui-react": "^5.24.1",
     "tailwind-merge": "^3.2.0",
-    "zod": "^3.25.60"
+    "zod": "^3.25.60",
+    "zod-validation-error": "^3.5.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "3.3.1",

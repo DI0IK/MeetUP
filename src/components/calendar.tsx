@@ -11,6 +11,12 @@ import { useGetApiUserUserCalendar } from '@/generated/api/user/user';
 import { useRouter } from 'next/navigation';
 import { usePatchApiEventEventID } from '@/generated/api/event/event';
 import { useSession } from 'next-auth/react';
+import { UserCalendarSchemaItem } from '@/generated/api/meetup.schemas';
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
+import { ErrorBoundary } from 'react-error-boundary';
+import { Button } from '@/components/ui/button';
+import { fromZodIssue } from 'zod-validation-error/v4';
+import type { $ZodIssue } from 'zod/v4/core';
 
 moment.updateLocale('en', {
   week: {
@@ -24,16 +30,49 @@ const DaDRBCalendar = withDragAndDrop<
     id: string;
     start: Date;
     end: Date;
+    type: UserCalendarSchemaItem['type'];
   },
   {
     id: string;
     title: string;
+    type: UserCalendarSchemaItem['type'];
   }
 >(RBCalendar);
 
 const localizer = momentLocalizer(moment);
 
-export default function Calendar({ userId }: { userId: string }) {
+export default function Calendar({ userId }: { userId?: string }) {
+  return (
+    <QueryErrorResetBoundary>
+      {({ reset }) => (
+        <ErrorBoundary
+          onReset={reset}
+          fallbackRender={({ resetErrorBoundary, error }) => (
+            <div className='flex flex-col items-center justify-center h-full'>
+              There was an error!
+              <p className='text-red-500'>
+                {typeof error === 'string'
+                  ? error
+                  : error.errors
+                      .map((e: $ZodIssue) => fromZodIssue(e).toString())
+                      .join(', ')}
+              </p>
+              <Button onClick={() => resetErrorBoundary()}>Try again</Button>
+            </div>
+          )}
+        >
+          {userId ? (
+            <CalendarWithUserEvents userId={userId} />
+          ) : (
+            <CalendarWithoutUserEvents />
+          )}
+        </ErrorBoundary>
+      )}
+    </QueryErrorResetBoundary>
+  );
+}
+
+function CalendarWithUserEvents({ userId }: { userId: string }) {
   const sesstion = useSession();
   const [currentView, setCurrentView] = React.useState<
     'month' | 'week' | 'day' | 'agenda' | 'work_week'
@@ -41,33 +80,52 @@ export default function Calendar({ userId }: { userId: string }) {
   const [currentDate, setCurrentDate] = React.useState<Date>(new Date());
   const router = useRouter();
 
-  const { data, refetch } = useGetApiUserUserCalendar(userId, {
-    start: moment(currentDate)
-      .startOf(
-        currentView === 'agenda'
-          ? 'month'
-          : currentView === 'work_week'
-            ? 'week'
-            : currentView,
-      )
-      .toISOString(),
-    end: moment(currentDate)
-      .endOf(
-        currentView === 'agenda'
-          ? 'month'
-          : currentView === 'work_week'
-            ? 'week'
-            : currentView,
-      )
-      .toISOString(),
-  });
+  const { data, refetch, error, isError } = useGetApiUserUserCalendar(
+    userId,
+    {
+      start: moment(currentDate)
+        .startOf(
+          currentView === 'agenda'
+            ? 'month'
+            : currentView === 'work_week'
+              ? 'week'
+              : currentView,
+        )
+        .toISOString(),
+      end: moment(currentDate)
+        .endOf(
+          currentView === 'agenda'
+            ? 'month'
+            : currentView === 'work_week'
+              ? 'week'
+              : currentView,
+        )
+        .toISOString(),
+    },
+    {
+      query: {
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
+      },
+    },
+  );
 
-  const { mutate: patchEvent } = usePatchApiEventEventID();
+  if (isError) {
+    throw error.response?.data || 'Failed to fetch calendar data';
+  }
+
+  const { mutate: patchEvent } = usePatchApiEventEventID({
+    mutation: {
+      throwOnError(error) {
+        throw error.response?.data || 'Failed to update event';
+      },
+    },
+  });
 
   return (
     <DaDRBCalendar
       localizer={localizer}
-      style={{ height: 500 }}
       culture='de-DE'
       defaultView='week'
       components={{
@@ -85,6 +143,7 @@ export default function Calendar({ userId }: { userId: string }) {
           title: event.type === 'event' ? event.title : 'Blocker',
           start: new Date(event.start_time),
           end: new Date(event.end_time),
+          type: event.type,
         })) ?? []
       }
       onSelectEvent={(event) => {
@@ -102,6 +161,7 @@ export default function Calendar({ userId }: { userId: string }) {
       selectable={sesstion.data?.user?.id === userId}
       onEventDrop={(event) => {
         const { start, end, event: droppedEvent } = event;
+        if (droppedEvent.type === 'blocked_private') return;
         const startISO = new Date(start).toISOString();
         const endISO = new Date(end).toISOString();
         patchEvent(
@@ -124,8 +184,13 @@ export default function Calendar({ userId }: { userId: string }) {
       }}
       onEventResize={(event) => {
         const { start, end, event: resizedEvent } = event;
+        if (resizedEvent.type === 'blocked_private') return;
         const startISO = new Date(start).toISOString();
         const endISO = new Date(end).toISOString();
+        if (startISO === endISO) {
+          console.warn('Start and end times are the same, skipping resize.');
+          return;
+        }
         patchEvent(
           {
             eventID: resizedEvent.id,
@@ -143,6 +208,30 @@ export default function Calendar({ userId }: { userId: string }) {
             },
           },
         );
+      }}
+    />
+  );
+}
+
+function CalendarWithoutUserEvents() {
+  const [currentView, setCurrentView] = React.useState<
+    'month' | 'week' | 'day' | 'agenda' | 'work_week'
+  >('week');
+  const [currentDate, setCurrentDate] = React.useState<Date>(new Date());
+
+  return (
+    <DaDRBCalendar
+      localizer={localizer}
+      culture='de-DE'
+      defaultView='week'
+      components={{
+        toolbar: CustomToolbar,
+      }}
+      onView={setCurrentView}
+      view={currentView}
+      date={currentDate}
+      onNavigate={(date) => {
+        setCurrentDate(date);
       }}
     />
   );

@@ -156,7 +156,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/runtime@npm:^7.13.8, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.6.3, @babel/runtime@npm:^7.8.7":
+"@babel/runtime@npm:^7.12.5, @babel/runtime@npm:^7.13.8, @babel/runtime@npm:^7.20.7, @babel/runtime@npm:^7.3.1, @babel/runtime@npm:^7.6.3, @babel/runtime@npm:^7.8.7":
   version: 7.27.6
   resolution: "@babel/runtime@npm:7.27.6"
   checksum: 10c0/89726be83f356f511dcdb74d3ea4d873a5f0cf0017d4530cb53aa27380c01ca102d573eff8b8b77815e624b1f8c24e7f0311834ad4fb632c90a770fda00bd4c8
@@ -7730,6 +7730,7 @@ __metadata:
     react-datepicker: "npm:^8.4.0"
     react-day-picker: "npm:^9.7.0"
     react-dom: "npm:^19.0.0"
+    react-error-boundary: "npm:^6.0.0"
     react-hook-form: "npm:^7.56.4"
     sonner: "npm:^2.0.5"
     swagger-ui-react: "npm:^5.24.1"
@@ -7740,6 +7741,7 @@ __metadata:
     tw-animate-css: "npm:1.3.4"
     typescript: "npm:^5.8.3"
     zod: "npm:^3.25.60"
+    zod-validation-error: "npm:^3.5.2"
   languageName: unknown
   linkType: soft
 
@@ -9001,6 +9003,17 @@ __metadata:
   peerDependencies:
     react: ^19.1.0
   checksum: 10c0/3e26e89bb6c67c9a6aa86cb888c7a7f8258f2e347a6d2a15299c17eb16e04c19194e3452bc3255bd34000a61e45e2cb51e46292392340432f133e5a5d2dfb5fc
+  languageName: node
+  linkType: hard
+
+"react-error-boundary@npm:^6.0.0":
+  version: 6.0.0
+  resolution: "react-error-boundary@npm:6.0.0"
+  dependencies:
+    "@babel/runtime": "npm:^7.12.5"
+  peerDependencies:
+    react: ">=16.13.1"
+  checksum: 10c0/1914d600dee95a14f14af4afe9867b0d35c26c4f7826d23208800ba2a99728659029aad60a6ef95e13430b4d79c2c4c9b3585f50bf508450478760d2e4e732d8
   languageName: node
   linkType: hard
 
@@ -11271,6 +11284,15 @@ __metadata:
   version: 4.0.2
   resolution: "zenscroll@npm:4.0.2"
   checksum: 10c0/419e87ebe3a22a3b2ac22cd02aeccb900c9c330f539efdb1efc382090157d466373ee615812caef5bbe2da140e3c7df222236c8cfd8e697e97d4d91cf3f81c63
+  languageName: node
+  linkType: hard
+
+"zod-validation-error@npm:^3.5.2":
+  version: 3.5.2
+  resolution: "zod-validation-error@npm:3.5.2"
+  peerDependencies:
+    zod: ^3.25.0
+  checksum: 10c0/da50926ec91c7ad2880bacc5010a53c42de58f73f7c4629baad8132695c4daf74dd68620787198da81aca85134471182ed4c566b5fc9bc5349aefd8540946d57
   languageName: node
   linkType: hard
 
