@@ -23,10 +23,15 @@ import {
 } from '@/components/ui/select';
 import { SettingsDropdown } from '@/components/misc/settings-dropdown';
 import { useRouter } from 'next/navigation';
+import { useGetApiUserMe } from '@/generated/api/user/user';
+import { ThemePicker } from './theme-picker';
+import LabeledInput from '../custom-ui/labeled-input';
+import { GroupWrapper } from '../wrappers/group-wrapper';
 
 export default function SettingsPage() {
   const router = useRouter();
   const [currentSection, setCurrentSection] = useState('general');
+  const { data } = useGetApiUserMe();
 
   const renderSettingsContent = () => {
     switch (currentSection) {
@@ -36,28 +41,79 @@ export default function SettingsPage() {
             <ScrollableSettingsWrapper>
               <CardHeader>
                 <CardTitle>Account Settings</CardTitle>
-                <CardDescription>
-                  Manage your account details and preferences.
-                </CardDescription>
               </CardHeader>
-              <CardContent className='space-y-6'>
-                <div className='space-y-2'>
-                  <Label htmlFor='displayName'>Display Name</Label>
-                  <Input id='displayName' placeholder='Your Name' />
-                </div>
-                <div className='space-y-2'>
-                  <Label htmlFor='email'>Email Address</Label>
-                  <Input
-                    id='email'
-                    type='email'
-                    placeholder='your.email@example.com'
-                    readOnly
-                    value='user-email@example.com'
-                  />
-                  <p className='text-sm text-muted-foreground'>
-                    Email is managed by your SSO provider.
-                  </p>
-                </div>
+              <CardContent className='space-y-6 mt-2'>
+                <GroupWrapper legend='General Settings'>
+                  <div className='space-y-4'>
+                    <div className='flex items-center justify-evenly'>
+                      <div>
+                        <Label htmlFor='displayName'>First Name</Label>
+                        <Input
+                          id='displayName'
+                          placeholder='Your Name'
+                          defaultValue={data?.data.user.first_name ?? ''}
+                        />
+                      </div>
+                      <div>
+                        <Label htmlFor='displayName'>Last Name</Label>
+                        <Input
+                          id='displayName'
+                          placeholder='Your Name'
+                          defaultValue={data?.data.user.last_name ?? ''}
+                        />
+                      </div>
+                    </div>
+                    <div className='space-y-2'>
+                      <Label htmlFor='displayName'>Display Name</Label>
+                      <Input
+                        id='displayName'
+                        placeholder='Your Name'
+                        defaultValue={data?.data.user.name}
+                      />
+                    </div>
+                    <div className='space-y-2'>
+                      <Label htmlFor='email'>Email Address</Label>
+                      <Input
+                        id='email'
+                        type='email'
+                        placeholder='your.email@example.com'
+                        readOnly
+                        defaultValue={data?.data.user.email}
+                      />
+                      <p className='text-sm text-muted-foreground'>
+                        Email might be managed by your SSO provider.
+                      </p>
+                    </div>
+                  </div>
+                </GroupWrapper>
+                <GroupWrapper legend='Reset Password'>
+                  <div className='flex items-center justify-evenly'>
+                    <div>
+                      <LabeledInput
+                        type='password'
+                        label='Current Password'
+                        placeholder='Current Password'
+                        defaultValue={data?.data.user.first_name ?? ''}
+                      ></LabeledInput>
+                    </div>
+                    <div>
+                      <LabeledInput
+                        type='password'
+                        label='New Password'
+                        placeholder='New Password'
+                        defaultValue={data?.data.user.first_name ?? ''}
+                      ></LabeledInput>
+                    </div>
+                    <div>
+                      <LabeledInput
+                        type='password'
+                        label='Repeat Password'
+                        placeholder='Repeat Password'
+                        defaultValue={data?.data.user.first_name ?? ''}
+                      ></LabeledInput>
+                    </div>
+                  </div>
+                </GroupWrapper>
                 <div className='space-y-2'>
                   <Label htmlFor='profilePicture'>Profile Picture</Label>
                   <Input id='profilePicture' type='file' />
@@ -67,7 +123,11 @@ export default function SettingsPage() {
                 </div>
                 <div className='space-y-2'>
                   <Label htmlFor='timezone'>Timezone</Label>
-                  <Input id='displayName' placeholder='Europe/Berlin' />
+                  <Input
+                    id='displayName'
+                    placeholder='Europe/Berlin'
+                    defaultValue={data?.data.user.timezone}
+                  />
                 </div>
                 <div className='space-y-2'>
                   <Label htmlFor='language'>Language</Label>
@@ -98,9 +158,6 @@ export default function SettingsPage() {
             <ScrollableSettingsWrapper>
               <CardHeader>
                 <CardTitle>Notification Preferences</CardTitle>
-                <CardDescription>
-                  Choose how you want to be notified.
-                </CardDescription>
               </CardHeader>
               <CardContent className='space-y-6'>
                 <div className='flex items-center justify-between space-x-2 p-3 rounded-md border'>
@@ -175,10 +232,6 @@ export default function SettingsPage() {
             <ScrollableSettingsWrapper>
               <CardHeader>
                 <CardTitle>Calendar & Availability</CardTitle>
-                <CardDescription>
-                  Manage your calendar display, default availability, and iCal
-                  integrations.
-                </CardDescription>
               </CardHeader>
               <CardContent className='space-y-6'>
                 <fieldset className='space-y-4 p-4 border rounded-md'>
@@ -298,9 +351,6 @@ export default function SettingsPage() {
             <ScrollableSettingsWrapper>
               <CardHeader>
                 <CardTitle>Sharing & Privacy</CardTitle>
-                <CardDescription>
-                  Control who can see your calendar and book time with you.
-                </CardDescription>
               </CardHeader>
               <CardContent className='space-y-6'>
                 <div className='space-y-2'>
@@ -386,23 +436,11 @@ export default function SettingsPage() {
             <ScrollableSettingsWrapper>
               <CardHeader>
                 <CardTitle>Appearance</CardTitle>
-                <CardDescription>
-                  Customize the look and feel of the application.
-                </CardDescription>
               </CardHeader>
               <CardContent className='space-y-6'>
                 <div className='space-y-2'>
                   <Label htmlFor='theme'>Theme</Label>
-                  <Select>
-                    <SelectTrigger id='theme'>
-                      <SelectValue placeholder='Select theme' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='light'>Light</SelectItem>
-                      <SelectItem value='dark'>Dark</SelectItem>
-                      <SelectItem value='system'>System Default</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <ThemePicker />
                 </div>
                 <div className='space-y-2'>
                   <Label htmlFor='dateFormat'>Date Format</Label>

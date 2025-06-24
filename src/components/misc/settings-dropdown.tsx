@@ -57,19 +57,19 @@ const settingsSections: SettingsSection[] = [
   {
     label: 'Calendar',
     value: 'calendarAvailability',
-    description: 'Manage calendar display and availability',
+    description: 'Manage calendar display, availability and iCal integration',
     icon: Calendar,
   },
   {
     label: 'Privacy',
     value: 'sharingPrivacy',
-    description: 'Control who can see your calendar',
+    description: 'Control who can see your calendar and book time with you',
     icon: Shield,
   },
   {
     label: 'Appearance',
     value: 'appearance',
-    description: 'Customize the look and feel',
+    description: 'Customize the look and feel of the application',
     icon: Palette,
   },
 ];
@@ -99,7 +99,7 @@ export function SettingsDropdown({
             variant='outline_muted'
             role='combobox'
             aria-expanded={open}
-            className='w-full justify-between bg-white text-black h-auto py-3'
+            className='w-full justify-between bg-popover text-text h-auto py-3'
           >
             <div className='flex items-center gap-3'>
               <CurrentIcon className='h-4 w-4 text-muted-foreground' />

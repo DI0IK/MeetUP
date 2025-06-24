@@ -17,6 +17,7 @@ import UserCard from '@/components/misc/user-card';
 
 export default function UserDropdown() {
   const { data } = useGetApiUserMe();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
