@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "prettier --check . && next build",
-    "start": "next start",
+    "start": "node .next/standalone/server.js",
     "lint": "next lint",
     "format": "prettier --write .",
     "prisma:migrate": "dotenv -e .env.local -- prisma migrate dev",
@@ -15,7 +15,11 @@
     "prisma:migrate:reset": "dotenv -e .env.local -- prisma migrate reset",
     "dev_container": "docker compose -f docker-compose.dev.yml up --watch --build",
     "swagger:generate": "ts-node -r tsconfig-paths/register exportSwagger.ts",
-    "orval:generate": "orval"
+    "orval:generate": "orval",
+    "cypress:build": "rm -rf /tmp/dev.db && DATABASE_URL=\"file:/tmp/dev.db\" yarn prisma:generate && yarn swagger:generate && yarn orval:generate && DATABASE_URL=\"file:/tmp/dev.db\" yarn prisma:db:push && prettier --check . && NODE_ENV=test next build",
+    "cypress:start_server": "DATABASE_URL=\"file:/tmp/dev.db\" ts-node cypress/e2e/seed.ts && cp .env.test .next/standalone && cp public .next/standalone/ -r && cp .next/static/ .next/standalone/.next/ -r && NODE_ENV=test HOSTNAME=\"0.0.0.0\" dotenv -e .env.test -- node .next/standalone/server.js",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run"
   },
   "dependencies": {
     "@asteasolutions/zod-to-openapi": "^8.0.0-beta.4",
@@ -63,6 +67,7 @@
     "@types/react-dom": "19.1.6",
     "@types/swagger-ui-react": "5",
     "@types/webpack-env": "1.18.8",
+    "cypress": "14.5.0",
     "dotenv-cli": "8.0.0",
     "eslint": "9.29.0",
     "eslint-config-next": "15.3.4",

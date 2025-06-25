@@ -22,16 +22,15 @@ async function exportSwagger() {
   );
 
   await Promise.all(
-    filesToImport.map((file) => {
-      return import(file)
-        .then((module) => {
-          if (module.default) {
-            module.default(registry);
-          }
-        })
-        .catch((error) => {
-          console.error(`Error importing ${file}:`, error);
-        });
+    filesToImport.map(async (file) => {
+      try {
+        const moduleImp = await import(file);
+        if (moduleImp.default) {
+          moduleImp.default(registry);
+        }
+      } catch (error) {
+        console.error(`Error importing ${file}:`, error);
+      }
     }),
   );
 

@@ -1,0 +1,34 @@
+name: tests
+on:
+  push:
+    branches:
+      - main
+      - renovate/*
+  pull_request:
+jobs:
+  tests:
+    name: Tests
+    runs-on: docker
+    container:
+      image: cypress/browsers:latest
+      options: --user 1001
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+
+      - name: Enable corepack
+        run: corepack enable
+
+      - name: Cypress run (e2e)
+        uses: https://github.com/cypress-io/github-action@v6
+        with:
+          build: yarn cypress:build
+          start: yarn cypress:start_server
+          e2e: true
+          wait-on: 'http://127.0.0.1:3000'
+
+      - name: Cypress run (component)
+        uses: https://github.com/cypress-io/github-action@v6
+        with:
+          component: true
+          install: false
