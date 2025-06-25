@@ -105,9 +105,9 @@ export function SettingsDropdown({
               <CurrentIcon className='h-4 w-4 text-muted-foreground' />
               <div className='flex flex-col items-start text-left'>
                 <span className='font-medium'>{currentSectionData?.label}</span>
-                <span className='text-xs text-muted-foreground'>
+                <p className='text-xs text-muted-foreground text-wrap'>
                   {currentSectionData?.description}
-                </span>
+                </p>
               </div>
             </div>
             <ChevronDown className='ml-2 h-4 w-4 shrink-0 opacity-50' />
@@ -132,9 +132,9 @@ export function SettingsDropdown({
                         <Icon className='h-4 w-4 text-muted-foreground' />
                         <div className='flex flex-col'>
                           <span className='font-medium'>{section.label}</span>
-                          <span className='text-xs text-muted-foreground'>
+                          <p className='text-xs text-muted-foreground text-wrap'>
                             {section.description}
-                          </span>
+                          </p>
                         </div>
                       </div>
                       <Check
