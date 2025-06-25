@@ -9,6 +9,7 @@
   --font-heading: 'Comfortaa', sans-serif;
   --font-label: 'Varela Round', sans-serif;
   --font-button: 'Varela Round', sans-serif;
+  --font-sans: var(--font-label);
 
   --transparent: transparent;
 
@@ -28,7 +29,7 @@
 
   --background: var(--neutral-800);
   --background-reversed: var(--neutral-000);
-  --base: var(--neutral-800);
+  --basecl: var(--neutral-800);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
   --text-input: var(--text);
@@ -115,6 +116,62 @@
   --sidebar-ring: oklch(0.707 0.022 261.325);
 }
 
+h1 {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h4 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h5 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h6 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+p {
+  font-family: var(--font-label);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
 @font-face {
   font-family: 'Comfortaa';
   font-style: normal;
@@ -153,7 +210,7 @@
 
   --color-background: var(--neutral-750);
   --color-background-reversed: var(--background-reversed);
-  --color-base: var(--neutral-800);
+  --color-basecl: var(--neutral-800);
   --color-text: var(--text);
   --color-text-alt: var(--text-alt);
   --color-text-input: var(--text-input);
@@ -277,7 +334,7 @@
 
   --background: var(--neutral-750);
   --background-reversed: var(--neutral-000);
-  --base: var(--neutral-750);
+  --basecl: var(--neutral-750);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
   --text-input: var(--text);

@@ -63,9 +63,9 @@ export default function Logo({
     );
   }
 
-  if (width === undefined || height === undefined) {
+  if (width === undefined && height === undefined) {
     console.warn(
-      `Logo: 'width' and 'height' props are required by next/image for ${logoType} logo. Path: ${LOGO_BASE_PATH}logo_${colorType}_${logoType}_${theme}.${IMAGE_EXTENSION}`,
+      `Logo: 'width' or 'height' props are required by next/image for ${logoType} logo. Path: ${LOGO_BASE_PATH}logo_${colorType}_${logoType}_${theme}.${IMAGE_EXTENSION}`,
     );
   }
 

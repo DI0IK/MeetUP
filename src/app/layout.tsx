@@ -3,6 +3,8 @@ import { ThemeProvider } from '@/components/wrappers/theme-provider';
 import type { Metadata } from 'next';
 import './globals.css';
 import { QueryProvider } from '@/components/wrappers/query-provider';
+import { Toaster } from '@/components/ui/sonner';
+import { SessionProvider } from 'next-auth/react';
 
 export const metadata: Metadata = {
   title: 'MeetUp',
@@ -50,14 +52,17 @@ export default function RootLayout({
         <link rel='manifest' href='/site.webmanifest' />
       </head>
       <body>
-        <ThemeProvider
-          attribute='class'
-          defaultTheme='system'
-          enableSystem
-          disableTransitionOnChange
-        >
-          <QueryProvider>{children}</QueryProvider>
-        </ThemeProvider>
+        <SessionProvider>
+          <ThemeProvider
+            attribute='class'
+            defaultTheme='system'
+            enableSystem
+            disableTransitionOnChange
+          >
+            <QueryProvider>{children}</QueryProvider>
+          </ThemeProvider>
+        </SessionProvider>
+        <Toaster />
       </body>
     </html>
   );
