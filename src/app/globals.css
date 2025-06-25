@@ -33,6 +33,7 @@
   --text-alt: var(--neutral-900);
   --text-input: var(--text);
   --text-muted-input: var(--neutral-450);
+  --text-muted: var(--neutral-300);
   --muted-input: var(--neutral-600);
   --background-disabled: var(--neutral-500);
   --text-disabled: var(--neutral-700);
@@ -54,6 +55,8 @@
   --disabled-muted: var(--color-neutral-400);
 
   --card: var(--neutral-800);
+
+  --sidebar-width-icon: 32px;
 
   /* ------------------- */
 
@@ -95,17 +98,17 @@
 
   --chart-5: oklch(0.769 0.188 70.08);
 
-  --sidebar: oklch(0.985 0.002 247.839);
+  --sidebar: var(--background);
 
-  --sidebar-foreground: oklch(0.13 0.028 261.692);
+  --sidebar-foreground: var(--text);
 
   --sidebar-primary: oklch(0.21 0.034 264.665);
 
-  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-primary-foreground: var(--text);
 
   --sidebar-accent: oklch(0.967 0.003 264.542);
 
-  --sidebar-accent-foreground: oklch(0.21 0.034 264.665);
+  --sidebar-accent-foreground: var(--text);
 
   --sidebar-border: oklch(0.928 0.006 264.531);
 
@@ -155,6 +158,7 @@
   --color-text-alt: var(--text-alt);
   --color-text-input: var(--text-input);
   --color-text-muted-input: var(--text-muted-input);
+  --color-text-muted: var(--text-muted);
   --color-muted-input: var(--muted-input);
 
   --color-background-disabled: var(--neutral-500);
@@ -278,6 +282,7 @@
   --text-alt: var(--neutral-900);
   --text-input: var(--text);
   --text-muted-input: var(--neutral-450);
+  --text-muted: var(--neutral-300);
   --muted-input: var(--neutral-500);
   --background-disabled: var(--neutral-500);
   --text-disabled: var(--neutral-700);
@@ -339,17 +344,17 @@
 
   --chart-5: oklch(0.645 0.246 16.439);
 
-  --sidebar: oklch(0.21 0.034 264.665);
+  --sidebar: var(--background);
 
-  --sidebar-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-foreground: var(--text);
 
   --sidebar-primary: oklch(0.488 0.243 264.376);
 
-  --sidebar-primary-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-primary-foreground: var(--text);
 
   --sidebar-accent: oklch(0.278 0.033 256.848);
 
-  --sidebar-accent-foreground: oklch(0.985 0.002 247.839);
+  --sidebar-accent-foreground: var(--text);
 
   --sidebar-border: oklch(1 0 0 / 10%);
 

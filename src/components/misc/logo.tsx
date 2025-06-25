@@ -90,6 +90,7 @@ export default function Logo({
 
   return (
     <Image
+      unoptimized
       src={logoVar}
       alt={alt || defaultAltText}
       className={className}
