@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import { usePathname } from 'next/navigation';
 import Logo from '@/components/misc/logo';
 import { ThemePicker } from '@/components/misc/theme-picker';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
@@ -11,13 +10,12 @@ import { useGetApiUserMe } from '@/generated/api/user/user';
 import { RedirectButton } from '@/components/buttons/redirect-button';
 import { useSession } from 'next-auth/react';
 import ParticipantListEntry from '@/components/custom-ui/participant-list-entry';
+import { useParams } from 'next/navigation';
 
 export default function ShowEvent() {
   const session = useSession();
-  const pathname = usePathname();
 
-  // Extract eventId from URL like /events/[eventId]
-  const eventId = pathname.split('/').pop() || '';
+  const { eventId } = useParams<{ eventId: string }>();
 
   // Fetch event data
   const { data: eventData, isLoading, error } = useGetApiEventEventID(eventId);
@@ -145,11 +143,7 @@ export default function ShowEvent() {
                   </Label>{' '}
                   <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
                     {event.participants?.map((user) => (
-                      <ParticipantListEntry
-                        key={user.user.id}
-                        participant={user.user.name}
-                        imageSrc={user.user.image}
-                      ></ParticipantListEntry>
+                      <ParticipantListEntry key={user.user.id} {...user} />
                     ))}
                   </div>
                 </div>

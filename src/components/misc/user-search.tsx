@@ -19,11 +19,10 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { useGetApiSearchUser } from '@/generated/api/search/search';
+import zod from 'zod/v4';
+import { PublicUserSchema } from '@/app/api/user/validation';
 
-interface User {
-  id: string;
-  name: string;
-}
+type User = zod.output<typeof PublicUserSchema>;
 
 export function UserSearchInput({
   addUserAction,

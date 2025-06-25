@@ -2,14 +2,10 @@ import { Card } from '@/components/ui/card';
 import Logo from '@/components/misc/logo';
 import { Label } from '@/components/ui/label';
 import Link from 'next/link';
+import zod from 'zod/v4';
+import { EventSchema } from '@/app/api/event/validation';
 
-type EventListEntryProps = {
-  title: string;
-  id: string;
-  start_time: string;
-  end_time: string;
-  location: string | null | undefined;
-};
+type EventListEntryProps = zod.output<typeof EventSchema>;
 
 export default function EventListEntry({
   title,

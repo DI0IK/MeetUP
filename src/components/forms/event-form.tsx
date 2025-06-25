@@ -19,10 +19,10 @@ import ParticipantListEntry from '../custom-ui/participant-list-entry';
 
 import { useSearchParams } from 'next/navigation';
 
-interface User {
-  id: string;
-  name: string;
-}
+import zod from 'zod/v4';
+import { PublicUserSchema } from '@/app/api/user/validation';
+
+type User = zod.output<typeof PublicUserSchema>;
 
 interface EventFormProps {
   type: 'create' | 'edit';
@@ -85,12 +85,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
       }
       setLocation(event.location || '');
       setDescription(event.description || '');
-      setSelectedParticipants(
-        event.participants?.map((u) => ({
-          id: u.user.id,
-          name: u.user.name,
-        })) || [],
-      );
+      setSelectedParticipants(event.participants?.map((u) => u.user) || []);
     } else if (props.type === 'create' && startFromUrl && endFromUrl) {
       // If creating a new event with URL params, set title and dates
       setTitle('');
@@ -305,7 +300,11 @@ const EventForm: React.FC<EventFormProps> = (props) => {
             />
             <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
               {selectedParticipants.map((user) => (
-                <ParticipantListEntry key={user.id} participant={user.name} />
+                <ParticipantListEntry
+                  key={user.id}
+                  user={user}
+                  status='PENDING'
+                />
               ))}
             </div>
           </div>

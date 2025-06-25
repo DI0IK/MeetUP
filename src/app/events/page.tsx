@@ -35,11 +35,9 @@ export default function Events() {
             events.map((event) => (
               <EventListEntry
                 key={event.id}
-                title={event.title}
-                id={event.id}
-                start_time={event.start_time}
-                end_time={event.end_time}
-                location={event.location}
+                {...event}
+                created_at={new Date(event.created_at)}
+                updated_at={new Date(event.updated_at)}
               />
             ))
           ) : (
