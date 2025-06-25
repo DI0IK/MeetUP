@@ -48,13 +48,18 @@ function LoginFormElement({
   });
 
   return (
-    <form className='flex flex-col gap-5 w-full' onSubmit={onSubmit}>
+    <form
+      className='flex flex-col gap-5 w-full'
+      onSubmit={onSubmit}
+      data-cy='login-form'
+    >
       <LabeledInput
         type='text'
         label='E-Mail or Username'
         placeholder='What you are known as'
         error={formState.errors.email?.message}
         {...register('email')}
+        data-cy='email-input'
       />
       <LabeledInput
         type='password'
@@ -62,9 +67,10 @@ function LoginFormElement({
         placeholder="Let's hope you remember it"
         error={formState.errors.password?.message}
         {...register('password')}
+        data-cy='password-input'
       />
       <div className='grid grid-rows-2 gap-2'>
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' data-cy='login-button'>
           Login
         </Button>
         <Button
@@ -74,6 +80,7 @@ function LoginFormElement({
             formRef?.current?.reset();
             setIsSignUp((v) => !v);
           }}
+          data-cy='register-switch'
         >
           Sign Up
         </Button>
@@ -129,6 +136,7 @@ function RegisterFormElement({
       ref={formRef}
       className='flex flex-col gap-5 w-full'
       onSubmit={onSubmit}
+      data-cy='register-form'
     >
       <LabeledInput
         type='text'
@@ -137,6 +145,7 @@ function RegisterFormElement({
         autocomplete='given-name'
         error={formState.errors.firstName?.message}
         {...register('firstName')}
+        data-cy='first-name-input'
       />
       <LabeledInput
         type='text'
@@ -145,6 +154,7 @@ function RegisterFormElement({
         autocomplete='family-name'
         error={formState.errors.lastName?.message}
         {...register('lastName')}
+        data-cy='last-name-input'
       />
       <LabeledInput
         type='email'
@@ -153,6 +163,7 @@ function RegisterFormElement({
         autocomplete='email'
         error={formState.errors.email?.message}
         {...register('email')}
+        data-cy='email-input'
       />
       <LabeledInput
         type='text'
@@ -161,6 +172,7 @@ function RegisterFormElement({
         autocomplete='username'
         error={formState.errors.username?.message}
         {...register('username')}
+        data-cy='username-input'
       />
       <LabeledInput
         type='password'
@@ -169,6 +181,7 @@ function RegisterFormElement({
         autocomplete='new-password'
         error={formState.errors.password?.message}
         {...register('password')}
+        data-cy='password-input'
       />
       <LabeledInput
         type='password'
@@ -177,9 +190,10 @@ function RegisterFormElement({
         autocomplete='new-password'
         error={formState.errors.confirmPassword?.message}
         {...register('confirmPassword')}
+        data-cy='confirm-password-input'
       />
       <div className='grid grid-rows-2 gap-2'>
-        <Button type='submit' variant='primary'>
+        <Button type='submit' variant='primary' data-cy='register-button'>
           Sign Up
         </Button>
         <Button

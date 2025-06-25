@@ -33,7 +33,10 @@ export default async function LoginPage() {
         </div>
         <div className='mt-auto mb-auto'>
           <Card className='w-[350px] max-w-screen;'>
-            <CardHeader className='grid place-items-center'>
+            <CardHeader
+              className='grid place-items-center'
+              data-cy='login-header'
+            >
               <Logo colorType='colored' logoType='secondary'></Logo>
             </CardHeader>
             <CardContent className='gap-6 flex flex-col items-center'>
@@ -46,6 +49,7 @@ export default async function LoginPage() {
                   key={provider.id}
                   provider={provider.id}
                   providerDisplayName={provider.name}
+                  data-cy={'sso-login-button_' + provider.name.toLowerCase()}
                 />
               ))}
             </CardContent>
