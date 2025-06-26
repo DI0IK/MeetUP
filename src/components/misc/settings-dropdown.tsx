@@ -45,13 +45,13 @@ const settingsSections: SettingsSection[] = [
   {
     label: 'Account',
     value: 'general',
-    description: 'Manage your account details and preferences',
+    description: 'Manage account details',
     icon: User,
   },
   {
     label: 'Notifications',
     value: 'notifications',
-    description: 'Choose how you want to be notified',
+    description: 'Choose notification Preferences',
     icon: Bell,
   },
   {

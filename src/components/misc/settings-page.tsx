@@ -27,6 +27,9 @@ import { useGetApiUserMe } from '@/generated/api/user/user';
 import { ThemePicker } from './theme-picker';
 import LabeledInput from '../custom-ui/labeled-input';
 import { GroupWrapper } from '../wrappers/group-wrapper';
+import { Avatar } from '../ui/avatar';
+import Image from 'next/image';
+import { User } from 'lucide-react';
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -43,51 +46,50 @@ export default function SettingsPage() {
                 <CardTitle>Account Settings</CardTitle>
               </CardHeader>
               <CardContent className='space-y-6 mt-2'>
-                <GroupWrapper legend='General Settings'>
+                <GroupWrapper title='General Settings'>
                   <div className='space-y-4'>
                     <div className='flex items-center justify-evenly'>
                       <div>
-                        <Label htmlFor='displayName'>First Name</Label>
-                        <Input
-                          id='displayName'
-                          placeholder='Your Name'
+                        <LabeledInput
+                          label='First Name'
+                          type='text'
+                          placeholder='First Name'
                           defaultValue={data?.data.user.first_name ?? ''}
-                        />
+                        ></LabeledInput>
                       </div>
                       <div>
-                        <Label htmlFor='displayName'>Last Name</Label>
-                        <Input
-                          id='displayName'
-                          placeholder='Your Name'
+                        <LabeledInput
+                          label='Last Name'
+                          type='text'
+                          placeholder='Last Name'
                           defaultValue={data?.data.user.last_name ?? ''}
-                        />
+                        ></LabeledInput>
                       </div>
                     </div>
                     <div className='space-y-2'>
-                      <Label htmlFor='displayName'>Display Name</Label>
-                      <Input
-                        id='displayName'
-                        placeholder='Your Name'
+                      <LabeledInput
+                        label='Display Name'
+                        type='text'
+                        placeholder='Display Name'
                         defaultValue={data?.data.user.name}
-                      />
+                      ></LabeledInput>
                     </div>
-                    <div className='space-y-2'>
-                      <Label htmlFor='email'>Email Address</Label>
-                      <Input
-                        id='email'
+                    <div className='space-y-2 space-b-2'>
+                      <LabeledInput
                         type='email'
-                        placeholder='your.email@example.com'
-                        readOnly
-                        defaultValue={data?.data.user.email}
-                      />
-                      <p className='text-sm text-muted-foreground'>
+                        label='Email Address'
+                        placeholder='Your E-Mail'
+                        defaultValue={data?.data.user.email ?? ''}
+                      ></LabeledInput>
+
+                      <span className='text-sm text-muted-foreground'>
                         Email might be managed by your SSO provider.
-                      </p>
+                      </span>
                     </div>
                   </div>
                 </GroupWrapper>
-                <GroupWrapper legend='Reset Password'>
-                  <div className='flex items-center justify-evenly'>
+                <GroupWrapper title='Reset Password'>
+                  <div className='flex items-center justify-evenly sm:flex-row flex-col gap-6'>
                     <div>
                       <LabeledInput
                         type='password'
@@ -114,12 +116,25 @@ export default function SettingsPage() {
                     </div>
                   </div>
                 </GroupWrapper>
-                <div className='space-y-2'>
-                  <Label htmlFor='profilePicture'>Profile Picture</Label>
-                  <Input id='profilePicture' type='file' />
-                  <p className='text-sm text-muted-foreground'>
-                    Upload a new profile picture.
-                  </p>
+                <div className='space-y-2 grid grid-cols-[1fr_auto] gap-4'>
+                  <LabeledInput
+                    label='Profile Picture'
+                    type='file'
+                    placeholder='Upload Profile Picture'
+                    defaultValue={data?.data.user.image ?? ''}
+                  ></LabeledInput>
+                  <Avatar className='flex justify-center items-center'>
+                    {data?.data.user.image ? (
+                      <Image
+                        src={data?.data.user.image}
+                        alt='Avatar'
+                        width='20'
+                        height='20'
+                      />
+                    ) : (
+                      <User />
+                    )}
+                  </Avatar>
                 </div>
                 <div className='space-y-2'>
                   <Label htmlFor='timezone'>Timezone</Label>
@@ -143,9 +158,9 @@ export default function SettingsPage() {
                 </div>
                 <div className='pt-4'>
                   <Button variant='secondary'>Delete Account</Button>
-                  <p className='text-sm text-muted-foreground pt-1'>
+                  <span className='text-sm text-muted-foreground pt-1'>
                     Permanently delete your account and all associated data.
-                  </p>
+                  </span>
                 </div>
               </CardContent>
             </ScrollableSettingsWrapper>
@@ -277,10 +292,10 @@ export default function SettingsPage() {
                   </legend>
                   <div className='space-y-2'>
                     <Label>Working Hours</Label>
-                    <p className='text-sm text-muted-foreground'>
+                    <span className='text-sm text-muted-foreground'>
                       Define your typical available hours (e.g., Monday-Friday,
                       9 AM - 5 PM).
-                    </p>
+                    </span>
                     <Button variant='outline_muted' size='sm'>
                       Set Working Hours
                     </Button>
@@ -289,9 +304,9 @@ export default function SettingsPage() {
                     <Label htmlFor='minNoticeBooking'>
                       Minimum Notice for Bookings
                     </Label>
-                    <p className='text-sm text-muted-foreground'>
+                    <span className='text-sm text-muted-foreground'>
                       Min time before a booking can be made.
-                    </p>
+                    </span>
                     <div className='space-y-2'>
                       <Input
                         id='bookingWindow'
@@ -304,9 +319,9 @@ export default function SettingsPage() {
                     <Label htmlFor='bookingWindow'>
                       Booking Window (days in advance)
                     </Label>
-                    <p className='text-sm text-muted-foreground'>
+                    <span className='text-sm text-muted-foreground'>
                       Max time in advance a booking can be made.
-                    </p>
+                    </span>
                     <Input
                       id='bookingWindow'
                       type='number'
@@ -378,7 +393,7 @@ export default function SettingsPage() {
                   <Label htmlFor='whoCanSeeFull'>
                     Who Can See Your Full Calendar Details?
                   </Label>
-                  <p className='text-sm text-muted-foreground'>
+                  <span className='text-sm text-muted-foreground'>
                     (Override for Default Visibility)
                     <br />
                     <span className='text-sm text-muted-foreground'>
@@ -386,7 +401,7 @@ export default function SettingsPage() {
                       calendar. You can set specific friends or groups to see
                       your full calendar details.
                     </span>
-                  </p>
+                  </span>
                   <Select>
                     <SelectTrigger id='whoCanSeeFull'>
                       <SelectValue placeholder='Select audience' />
@@ -420,10 +435,10 @@ export default function SettingsPage() {
                 <div className='space-y-2'>
                   <Label>Blocked Users</Label>
                   <Button variant='outline_muted'>Manage Blocked Users</Button>
-                  <p className='text-sm text-muted-foreground'>
+                  <span className='text-sm text-muted-foreground'>
                     Prevent specific users from seeing your calendar or booking
                     time.
-                  </p>
+                  </span>
                 </div>
               </CardContent>
             </ScrollableSettingsWrapper>
