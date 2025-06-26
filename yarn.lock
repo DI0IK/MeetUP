@@ -3403,7 +3403,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/react-big-calendar@npm:^1":
+"@types/react-big-calendar@npm:1.16.2":
   version: 1.16.2
   resolution: "@types/react-big-calendar@npm:1.16.2"
   dependencies:
@@ -7702,7 +7702,7 @@ __metadata:
     "@tanstack/react-query": "npm:^5.80.7"
     "@types/node": "npm:22.15.33"
     "@types/react": "npm:19.1.8"
-    "@types/react-big-calendar": "npm:^1"
+    "@types/react-big-calendar": "npm:1.16.2"
     "@types/react-dom": "npm:19.1.6"
     "@types/swagger-ui-react": "npm:5.18.0"
     "@types/webpack-env": "npm:1.18.8"
