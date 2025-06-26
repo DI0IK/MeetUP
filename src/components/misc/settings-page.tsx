@@ -30,6 +30,7 @@ import { GroupWrapper } from '../wrappers/group-wrapper';
 import { Avatar } from '../ui/avatar';
 import Image from 'next/image';
 import { User } from 'lucide-react';
+import ProfilePictureUpload from './profile-picture-upload';
 
 export default function SettingsPage() {
   const router = useRouter();
@@ -48,24 +49,26 @@ export default function SettingsPage() {
               <CardContent className='space-y-6 mt-2'>
                 <GroupWrapper title='General Settings'>
                   <div className='space-y-4'>
-                    <div className='flex items-center justify-evenly'>
-                      <div>
-                        <LabeledInput
-                          label='First Name'
-                          type='text'
-                          placeholder='First Name'
-                          defaultValue={data?.data.user.first_name ?? ''}
-                        ></LabeledInput>
+                    <GroupWrapper>
+                      <div className='flex items-center justify-evenly sm:flex-row flex-col gap-6'>
+                        <div>
+                          <LabeledInput
+                            label='First Name'
+                            type='text'
+                            placeholder='First Name'
+                            defaultValue={data?.data.user.first_name ?? ''}
+                          ></LabeledInput>
+                        </div>
+                        <div>
+                          <LabeledInput
+                            label='Last Name'
+                            type='text'
+                            placeholder='Last Name'
+                            defaultValue={data?.data.user.last_name ?? ''}
+                          ></LabeledInput>
+                        </div>
                       </div>
-                      <div>
-                        <LabeledInput
-                          label='Last Name'
-                          type='text'
-                          placeholder='Last Name'
-                          defaultValue={data?.data.user.last_name ?? ''}
-                        ></LabeledInput>
-                      </div>
-                    </div>
+                    </GroupWrapper>
                     <div className='space-y-2'>
                       <LabeledInput
                         label='Display Name'
@@ -116,47 +119,38 @@ export default function SettingsPage() {
                     </div>
                   </div>
                 </GroupWrapper>
-                <div className='space-y-2 grid grid-cols-[1fr_auto] gap-4'>
-                  <LabeledInput
-                    label='Profile Picture'
-                    type='file'
-                    placeholder='Upload Profile Picture'
-                    defaultValue={data?.data.user.image ?? ''}
-                  ></LabeledInput>
-                  <Avatar className='flex justify-center items-center'>
-                    {data?.data.user.image ? (
-                      <Image
-                        src={data?.data.user.image}
-                        alt='Avatar'
-                        width='20'
-                        height='20'
-                      />
-                    ) : (
-                      <User />
-                    )}
-                  </Avatar>
-                </div>
-                <div className='space-y-2'>
-                  <Label htmlFor='timezone'>Timezone</Label>
-                  <Input
-                    id='displayName'
-                    placeholder='Europe/Berlin'
-                    defaultValue={data?.data.user.timezone}
-                  />
-                </div>
-                <div className='space-y-2'>
-                  <Label htmlFor='language'>Language</Label>
-                  <Select>
-                    <SelectTrigger id='language'>
-                      <SelectValue placeholder='Select language' />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value='en'>English</SelectItem>
-                      <SelectItem value='de'>German</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div className='pt-4'>
+                <GroupWrapper title='Profile Picture'>
+                  <div className='space-y-2 grid grid-cols-[1fr_auto]'>
+                    <ProfilePictureUpload />
+                  </div>
+                </GroupWrapper>
+                <GroupWrapper title='Regional Settings'>
+                  <div className='space-y-2 grid sm:grid-cols-[1fr_auto] sm:flex-row gap-4'>
+                    <div className='grid gap-1'>
+                      <LabeledInput
+                        type='text'
+                        label='Timezone'
+                        placeholder='Europe/Berlin'
+                        defaultValue={data?.data.user.timezone}
+                      ></LabeledInput>
+                    </div>
+                    <div>
+                      <div className='grid gap-1'>
+                        <Label htmlFor='language'>Language</Label>
+                        <Select>
+                          <SelectTrigger id='language'>
+                            <SelectValue placeholder='Select language' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value='en'>English</SelectItem>
+                            <SelectItem value='de'>German</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </div>
+                  </div>
+                </GroupWrapper>
+                <div className='flex items-center justify-evenly sm:flex-row flex-col gap-6'>
                   <Button variant='secondary'>Delete Account</Button>
                   <span className='text-sm text-muted-foreground pt-1'>
                     Permanently delete your account and all associated data.
