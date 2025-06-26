@@ -810,9 +810,6 @@ button.rbc-input::-moz-focus-inner {
   -ms-flex-direction: row;
   flex-direction: row;
 }
-.rbc-time-header.rbc-overflowing {
-  border-right: 1px solid #ddd;
-}
 .rbc-rtl .rbc-time-header.rbc-overflowing {
   border-right-width: 0;
   border-left: 1px solid #ddd;

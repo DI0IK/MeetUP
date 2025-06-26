@@ -41,7 +41,13 @@ const DaDRBCalendar = withDragAndDrop<
 
 const localizer = momentLocalizer(moment);
 
-export default function Calendar({ userId }: { userId?: string }) {
+export default function Calendar({
+  userId,
+  height,
+}: {
+  userId?: string;
+  height: string;
+}) {
   return (
     <QueryErrorResetBoundary>
       {({ reset }) => (
@@ -62,9 +68,9 @@ export default function Calendar({ userId }: { userId?: string }) {
           )}
         >
           {userId ? (
-            <CalendarWithUserEvents userId={userId} />
+            <CalendarWithUserEvents userId={userId} height={height} />
           ) : (
-            <CalendarWithoutUserEvents />
+            <CalendarWithoutUserEvents height={height} />
           )}
         </ErrorBoundary>
       )}
@@ -72,7 +78,13 @@ export default function Calendar({ userId }: { userId?: string }) {
   );
 }
 
-function CalendarWithUserEvents({ userId }: { userId: string }) {
+function CalendarWithUserEvents({
+  userId,
+  height,
+}: {
+  userId: string;
+  height: string;
+}) {
   const sesstion = useSession();
   const [currentView, setCurrentView] = React.useState<
     'month' | 'week' | 'day' | 'agenda' | 'work_week'
@@ -130,6 +142,9 @@ function CalendarWithUserEvents({ userId }: { userId: string }) {
       defaultView='week'
       components={{
         toolbar: CustomToolbar,
+      }}
+      style={{
+        height: height,
       }}
       onView={setCurrentView}
       view={currentView}
@@ -213,7 +228,7 @@ function CalendarWithUserEvents({ userId }: { userId: string }) {
   );
 }
 
-function CalendarWithoutUserEvents() {
+function CalendarWithoutUserEvents({ height }: { height: string }) {
   const [currentView, setCurrentView] = React.useState<
     'month' | 'week' | 'day' | 'agenda' | 'work_week'
   >('week');
@@ -224,6 +239,9 @@ function CalendarWithoutUserEvents() {
       localizer={localizer}
       culture='de-DE'
       defaultView='week'
+      style={{
+        height: height,
+      }}
       components={{
         toolbar: CustomToolbar,
       }}

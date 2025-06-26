@@ -217,6 +217,10 @@ export const GET = auth(async function GET(req, { params }) {
 
   return returnZodTypeCheckedResponse(UserCalendarResponseSchema, {
     success: true,
-    calendar,
+    calendar: calendar.filter(
+      (event, index, self) =>
+        self.findIndex((e) => e.id === event.id && e.type === event.type) ===
+        index,
+    ),
   });
 });
