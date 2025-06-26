@@ -129,6 +129,17 @@ export const DELETE = auth(async (req, { params }) => {
         { participants: { some: { user_id: dbUser.id } } },
       ],
     },
+    include: {
+      participants: {
+        select: {
+          user: {
+            select: {
+              id: true,
+            },
+          },
+        },
+      },
+    },
   });
 
   if (!event)
@@ -150,6 +161,18 @@ export const DELETE = auth(async (req, { params }) => {
       id: eventID,
     },
   });
+
+  for (const participant of event.participants) {
+    await prisma.notification.create({
+      data: {
+        user_id: participant.user.id,
+        type: 'MEETING_CANCEL',
+        related_entity_id: eventID,
+        related_entity_type: 'MEETING',
+        message: `The event "${event.title}" has been cancelled by the organizer.`,
+      },
+    });
+  }
 
   return returnZodTypeCheckedResponse(
     SuccessResponseSchema,
@@ -189,6 +212,17 @@ export const PATCH = auth(async (req, { params }) => {
         { organizer_id: dbUser.id },
         { participants: { some: { user_id: dbUser.id } } },
       ],
+    },
+    include: {
+      participants: {
+        select: {
+          user: {
+            select: {
+              id: true,
+            },
+          },
+        },
+      },
     },
   });
 
@@ -244,7 +278,32 @@ export const PATCH = auth(async (req, { params }) => {
         },
         update: {},
       });
+      if (event.participants.some((p) => p.user.id === participant)) {
+        await prisma.notification.create({
+          data: {
+            user_id: participant,
+            type: 'MEETING_UPDATE',
+            related_entity_id: eventID,
+            related_entity_type: 'MEETING',
+            message: `The event "${event.title}" has been updated.`,
+          },
+        });
+      }
     }
+
+  for (const participant of event.participants) {
+    if (participants && !participants.includes(participant.user.id)) {
+      await prisma.notification.create({
+        data: {
+          user_id: participant.user.id,
+          type: 'MEETING_CANCEL',
+          related_entity_id: eventID,
+          related_entity_type: 'MEETING',
+          message: `You have been removed from the event "${event.title}".`,
+        },
+      });
+    }
+  }
 
   const updatedEvent = await prisma.meeting.update({
     where: {

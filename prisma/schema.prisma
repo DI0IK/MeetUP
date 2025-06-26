@@ -45,6 +45,12 @@ enum notification_type {
     CALENDAR_SYNC_ERROR
 }
 
+enum entity_type {
+    USER
+    MEETING
+    GROUP
+}
+
 enum group_member_role {
     ADMIN
     MEMBER
@@ -253,8 +259,8 @@ model Notification {
     id                  String            @id @default(cuid())
     user_id             String
     type                notification_type
-    related_entity_type String?
-    related_entity_id   String?
+    related_entity_type entity_type
+    related_entity_id   String
     message             String
     is_read             Boolean           @default(false)
     created_at          DateTime          @default(now())

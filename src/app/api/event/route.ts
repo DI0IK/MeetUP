@@ -167,6 +167,18 @@ export const POST = auth(async (req) => {
     },
   });
 
+  for (const participant of newEvent.participants) {
+    await prisma.notification.create({
+      data: {
+        user_id: participant.user.id,
+        type: 'MEETING_INVITE',
+        related_entity_type: 'MEETING',
+        related_entity_id: newEvent.id,
+        message: `You have been invited to the meeting "${newEvent.title}" by ${newEvent.organizer.first_name} ${newEvent.organizer.last_name}.`,
+      },
+    });
+  }
+
   return returnZodTypeCheckedResponse(
     EventResponseSchema,
     {

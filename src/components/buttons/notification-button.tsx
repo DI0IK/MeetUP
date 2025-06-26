@@ -8,24 +8,28 @@ import { NDot, NotificationDot } from '@/components/misc/notification-dot';
 
 export function NotificationButton({
   dotVariant,
+  icon,
   children,
   ...props
 }: {
   dotVariant?: NDot;
-  children: React.ReactNode;
+  icon?: React.ReactNode;
+  children?: React.ReactNode;
 } & React.ComponentProps<typeof Button>) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button type='button' variant='outline_primary' {...props}>
-          {children}
+          {icon}
           <NotificationDot
             dotVariant={dotVariant}
             className='absolute ml-[30px] mt-[30px]'
           />
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align='end'></DropdownMenuContent>
+      <DropdownMenuContent align='end'>
+        {children}
+      </DropdownMenuContent>
     </DropdownMenu>
   );
 }

@@ -41,11 +41,13 @@ export default function UserDropdown() {
           <UserCard />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem>
-        <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href='/logout'>Logout</Link>
-        </DropdownMenuItem>
+        <Link href='/settings'>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+          <DropdownMenuSeparator />
+        </Link>
+        <Link href='/logout'>
+          <DropdownMenuItem>Logout</DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

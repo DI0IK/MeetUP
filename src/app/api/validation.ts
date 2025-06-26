@@ -85,3 +85,14 @@ export const EventIdParamSchema = registry.registerParameter(
     example: '67890',
   }),
 );
+
+export const NotificationIdSchema = registry.registerParameter(
+  'NotificationIdParam',
+  zod.string().openapi({
+    param: {
+      name: 'notification',
+      in: 'path',
+    },
+    example: '12345',
+  }),
+);
