@@ -5,16 +5,21 @@ import * as LabelPrimitive from '@radix-ui/react-label';
 
 import { cn } from '@/lib/utils';
 
-function Label({
-  className,
-  ...props
-}: React.ComponentProps<typeof LabelPrimitive.Root>) {
+type LabelProps = React.ComponentProps<typeof LabelPrimitive.Root> & {
+  size?: 'default' | 'small' | 'large';
+};
+
+function Label({ className, size = 'default', ...props }: LabelProps) {
   return (
     <LabelPrimitive.Root
       data-slot='label'
       className={cn(
         /* Text */
-        'text-sm',
+        size === 'small'
+          ? 'text-sm'
+          : size === 'large'
+            ? 'text-xl'
+            : 'text-base',
         /* Background */
         '',
         /* Border */

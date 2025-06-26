@@ -9,6 +9,7 @@
   --font-heading: 'Comfortaa', sans-serif;
   --font-label: 'Varela Round', sans-serif;
   --font-button: 'Varela Round', sans-serif;
+  --font-sans: var(--font-label);
 
   --transparent: transparent;
 
@@ -28,7 +29,7 @@
 
   --background: var(--neutral-800);
   --background-reversed: var(--neutral-000);
-  --base: var(--neutral-800);
+  --basecl: var(--neutral-800);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
   --text-input: var(--text);
@@ -49,10 +50,22 @@
   --active-secondary: oklch(0.4254 0.133 272.15);
   --disabled-secondary: oklch(0.4937 0.1697 271.26 / 0.5);
 
+  --destructive: oklch(60.699% 0.20755 25.945);
+  --hover-destructive: oklch(60.699% 0.20755 25.945 / 0.8);
+  --active-destructive: oklch(50.329% 0.17084 25.842);
+  --disabled-destructive: oklch(60.699% 0.20755 25.945 / 0.4);
+
   --muted: var(--color-neutral-700);
   --hover-muted: var(--color-neutral-600);
   --active-muted: var(--color-neutral-400);
   --disabled-muted: var(--color-neutral-400);
+
+  --toaster-default-bg: var(--color-neutral-150);
+  --toaster-success-bg: oklch(54.147% 0.09184 144.208);
+  --toaster-error-bg: oklch(52.841% 0.10236 27.274);
+  --toaster-info-bg: oklch(44.298% 0.05515 259.369);
+  --toaster-warning-bg: oklch(61.891% 0.07539 102.943);
+  --toaster-notification-bg: var(--color-neutral-150);
 
   --card: var(--neutral-800);
 
@@ -79,8 +92,6 @@
   --accent: oklch(0.967 0.003 264.542);
 
   --accent-foreground: oklch(0.21 0.034 264.665);
-
-  --destructive: oklch(0.577 0.245 27.325);
 
   --border: oklch(0.928 0.006 264.531);
 
@@ -113,6 +124,62 @@
   --sidebar-border: oklch(0.928 0.006 264.531);
 
   --sidebar-ring: oklch(0.707 0.022 261.325);
+}
+
+h1 {
+  font-family: var(--font-heading);
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+h2 {
+  font-family: var(--font-heading);
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h3 {
+  font-family: var(--font-heading);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h4 {
+  font-family: var(--font-heading);
+  font-size: 28px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h5 {
+  font-family: var(--font-heading);
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+h6 {
+  font-family: var(--font-heading);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+p {
+  font-family: var(--font-label);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 }
 
 @font-face {
@@ -153,7 +220,7 @@
 
   --color-background: var(--neutral-750);
   --color-background-reversed: var(--background-reversed);
-  --color-base: var(--neutral-800);
+  --color-basecl: var(--neutral-800);
   --color-text: var(--text);
   --color-text-alt: var(--text-alt);
   --color-text-input: var(--text-input);
@@ -175,10 +242,22 @@
   --color-active-secondary: var(--active-secondary);
   --color-disabled-secondary: var(--disabled-secondary);
 
+  --color-destructive: var(--destructive);
+  --color-hover-destructive: var(--hover-destructive);
+  --color-active-destructive: var(--active-destructive);
+  --color-disabled-destructive: var(--disabled-destructive);
+
   --color-muted: var(--muted);
   --color-hover-muted: var(--hover-muted);
   --color-active-muted: var(--active-muted);
   --color-disabled-muted: var(--disabled-muted);
+
+  --color-toaster-default-bg: var(--toaster-default-bg);
+  --color-toaster-success-bg: var(--toaster-success-bg);
+  --color-toaster-error-bg: var(--toaster-error-bg);
+  --color-toaster-info-bg: var(--toaster-info-bg);
+  --color-toaster-warning-bg: var(--toaster-warning-bg);
+  --color-toaster-notification-bg: var(--toaster-notification-bg);
 
   /* Custom values */
 
@@ -219,8 +298,6 @@
   --color-accent: var(--color-neutral-750);
 
   --color-accent-foreground: var(--accent-foreground);
-
-  --color-destructive: var(--destructive);
 
   --color-border: var(--border);
 
@@ -277,7 +354,7 @@
 
   --background: var(--neutral-750);
   --background-reversed: var(--neutral-000);
-  --base: var(--neutral-750);
+  --basecl: var(--neutral-750);
   --text: var(--neutral-000);
   --text-alt: var(--neutral-900);
   --text-input: var(--text);
@@ -297,10 +374,22 @@
   --active-secondary: oklch(0.4471 0.15 271.61);
   --disabled-secondary: oklch(0.6065 0.213 271.11 / 0.4);
 
+  --destructive: oklch(0.58 0.2149 27.13);
+  --hover-destructive: oklch(0.58 0.2149 27.13 / 0.8);
+  --active-destructive: oklch(45.872% 0.16648 26.855);
+  --disabled-destructive: oklch(0.58 0.2149 27.13 / 0.4);
+
   --muted: var(--color-neutral-650);
   --hover-muted: var(--color-neutral-500);
   --active-muted: var(--color-neutral-400);
   --disabled-muted: var(--color-neutral-400);
+
+  --toaster-default-bg: var(--color-neutral-150);
+  --toaster-success-bg: var(--color-green-200);
+  --toaster-error-bg: var(--color-red-200);
+  --toaster-info-bg: var(--color-blue-200);
+  --toaster-warning-bg: var(--color-yellow-200);
+  --toaster-notification-bg: var(--color-neutral-150);
 
   --card: var(--neutral-750);
 
@@ -325,8 +414,6 @@
   --accent: oklch(0.278 0.033 256.848);
 
   --accent-foreground: oklch(0.985 0.002 247.839);
-
-  --destructive: oklch(0.704 0.191 22.216);
 
   --border: oklch(1 0 0 / 10%);
 

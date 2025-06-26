@@ -22,7 +22,7 @@ function Card({ className, ...props }: React.ComponentProps<'div'>) {
         /* Outline */
         '',
         /* Shadow */
-        'shadow-sm',
+        'shadow-[4px_4px_9px_9px_rgba(0,0,0,0.25)]',
         /* Opacity */
         '',
         /* Scaling */

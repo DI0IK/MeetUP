@@ -9,7 +9,7 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
       data-slot='input'
       className={cn(
         /* Text */
-        'text-text-input selection:text-text md:text-sm file:text-destructive file:text-sm placeholder:text-text-muted-input',
+        'text-text-input selection:text-text file:text-destructive file:text-sm placeholder:text-text-muted-input',
         /* Background */
         'bg-transparent selection:bg-muted-input file:bg-transparent',
         /* Border */
@@ -41,4 +41,45 @@ function Input({ className, type, ...props }: React.ComponentProps<'input'>) {
   );
 }
 
-export { Input };
+function Textarea({
+  className,
+  rows,
+  ...props
+}: React.ComponentProps<'textarea'>) {
+  return (
+    <textarea
+      data-slot='input'
+      rows={rows}
+      className={cn(
+        /* Text */
+        'text-text-input selection:text-text placeholder:text-text-muted-input',
+        /* Background */
+        'bg-transparent selection:bg-muted-input',
+        /* Border */
+        'rounded-md border border-input focus-visible:border-ring aria-invalid:border-destructive',
+        /* Font */
+        '',
+        /* Cursor */
+        'disabled:pointer-events-none disabled:cursor-not-allowed',
+        /* Ring */
+        'focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40',
+        /* Outline */
+        'outline-none',
+        /* Shadow */
+        'shadow-md transition-[color,box-shadow]',
+        /* Opacity */
+        'disabled:opacity-50',
+        /* Scaling */
+        'h-32 w-full min-w-0', // Bigger height for textarea
+        /* Spacing */
+        'px-3 py-2',
+        /* Alignment */
+        '',
+        className,
+      )}
+      {...props}
+    />
+  );
+}
+
+export { Input, Textarea };

@@ -15,6 +15,7 @@ export default function Home() {
         </h1>
         <RedirectButton redirectUrl='/logout' buttonText='Logout' />
         <RedirectButton redirectUrl='/settings' buttonText='Settings' />
+        <RedirectButton redirectUrl='/events/new' buttonText='New Event' />
       </div>
     </div>
   );
