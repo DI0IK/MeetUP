@@ -1,22 +1,17 @@
 'use client';
 
-import { RedirectButton } from '@/components/buttons/redirect-button';
+import Calendar from '@/components/calendar';
 import { useGetApiUserMe } from '@/generated/api/user/user';
 
 export default function Home() {
-  const { data, isLoading } = useGetApiUserMe();
+  const { data } = useGetApiUserMe();
 
   return (
-    <div className='flex flex-col items-center justify-center h-full'>
-      <div>
-        <h1>
-          Hello{' '}
-          {isLoading ? 'Loading...' : data?.data.user?.name || 'Unknown User'}
-        </h1>
-        <RedirectButton redirectUrl='/logout' buttonText='Logout' />
-        <RedirectButton redirectUrl='/settings' buttonText='Settings' />
-        <RedirectButton redirectUrl='/events/new' buttonText='New Event' />
-      </div>
+    <div className='max-h-full'>
+      <Calendar
+        userId={data?.data.user?.id}
+        height='calc(100svh - 50px - (var(--spacing) * 2 * 5))'
+      />
     </div>
   );
 }

@@ -45,7 +45,7 @@ export default function Header({
           <UserDropdown />
         </span>
       </header>
-      <main>{children}</main>
+      <main className='max-h-full overflow-y-auto p-5'>{children}</main>
     </div>
   );
 }

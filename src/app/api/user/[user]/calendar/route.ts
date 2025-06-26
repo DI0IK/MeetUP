@@ -136,15 +136,15 @@ export const GET = auth(async function GET(req, { params }) {
           start_time: 'asc',
         },
         select: {
-          id: requestUserId === requestedUserId ? true : false,
-          reason: requestUserId === requestedUserId ? true : false,
+          id: true,
+          reason: true,
           start_time: true,
           end_time: true,
-          is_recurring: requestUserId === requestedUserId ? true : false,
-          recurrence_end_date: requestUserId === requestedUserId ? true : false,
-          rrule: requestUserId === requestedUserId ? true : false,
-          created_at: requestUserId === requestedUserId ? true : false,
-          updated_at: requestUserId === requestedUserId ? true : false,
+          is_recurring: true,
+          recurrence_end_date: true,
+          rrule: true,
+          created_at: true,
+          updated_at: true,
         },
       },
     },
@@ -167,6 +167,7 @@ export const GET = auth(async function GET(req, { params }) {
       calendar.push({ ...event.meeting, type: 'event' });
     } else {
       calendar.push({
+        id: event.meeting.id,
         start_time: event.meeting.start_time,
         end_time: event.meeting.end_time,
         type: 'blocked_private',
@@ -182,6 +183,7 @@ export const GET = auth(async function GET(req, { params }) {
       calendar.push({ ...event, type: 'event' });
     } else {
       calendar.push({
+        id: event.id,
         start_time: event.start_time,
         end_time: event.end_time,
         type: 'blocked_private',
@@ -190,23 +192,35 @@ export const GET = auth(async function GET(req, { params }) {
   }
 
   for (const slot of requestedUser.blockedSlots) {
-    calendar.push({
-      start_time: slot.start_time,
-      end_time: slot.end_time,
-      id: slot.id,
-      reason: slot.reason,
-      is_recurring: slot.is_recurring,
-      recurrence_end_date: slot.recurrence_end_date,
-      rrule: slot.rrule,
-      created_at: slot.created_at,
-      updated_at: slot.updated_at,
-      type:
-        requestUserId === requestedUserId ? 'blocked_owned' : 'blocked_private',
-    });
+    if (requestUserId === requestedUserId) {
+      calendar.push({
+        start_time: slot.start_time,
+        end_time: slot.end_time,
+        id: slot.id,
+        reason: slot.reason,
+        is_recurring: slot.is_recurring,
+        recurrence_end_date: slot.recurrence_end_date,
+        rrule: slot.rrule,
+        created_at: slot.created_at,
+        updated_at: slot.updated_at,
+        type: 'blocked_owned',
+      });
+    } else {
+      calendar.push({
+        start_time: slot.start_time,
+        end_time: slot.end_time,
+        id: slot.id,
+        type: 'blocked_private',
+      });
+    }
   }
 
   return returnZodTypeCheckedResponse(UserCalendarResponseSchema, {
     success: true,
-    calendar,
+    calendar: calendar.filter(
+      (event, index, self) =>
+        self.findIndex((e) => e.id === event.id && e.type === event.type) ===
+        index,
+    ),
   });
 });

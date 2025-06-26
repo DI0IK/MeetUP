@@ -1,0 +1,114 @@
+/* Container der Toolbar */
+.custom-toolbar {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: calc(var(--spacing) * 2);
+  padding-left: calc(50px + var(--spacing));
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Anzeige des aktuellen Datums (Monat und Jahr) */
+.custom-toolbar .current-date {
+  font-weight: bold;
+  font-size: 12px;
+  text-align: center;
+  color: #ffffff;
+  background-color: #717171;
+  height: 37px;
+  border-radius: 11px;
+}
+
+/* Navigationsbereich (Today, Prev, Next) */
+.custom-toolbar .navigation-controls {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.custom-toolbar .navigation-controls button {
+  padding: 8px 12px;
+  color: #ffffff;
+  border: none;
+  border-radius: 11px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.custom-toolbar .navigation-controls button:hover {
+  background-color: #1976d2;
+}
+
+.custom-toolbar .navigation-controls button:active {
+  background-color: #1565c0;
+}
+
+/* Dropdown-Bereich für Woche und Jahr */
+.custom-toolbar .dropdowns {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  height: 30px;
+  font-size: 10px;
+  margin-top: 3.5px;
+  border-radius: 11px;
+}
+
+.custom-toolbar .dropdowns select {
+  padding: 8px 12px;
+  border-radius: 11px;
+  font-size: 10px;
+  background-color: #555555;
+  color: #ffffff;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.custom-toolbar .dropdowns select:hover {
+  border-color: #999;
+}
+
+.right-section,
+.view-switcher {
+  background-color: #717171;
+  height: 48px;
+  border-radius: 11px;
+  justify-items: center;
+  align-items: center;
+}
+
+.custom-toolbar .navigation-controls .handleWeek button {
+  background-color: #717171;
+  height: 30px;
+  width: 30px;
+  margin-bottom: 3.5px;
+}
+
+.view-change,
+.right-section {
+  background-color: #717171;
+  height: 48px;
+  padding: 0 8px;
+  border-radius: 11px;
+  justify-items: center;
+}
+
+.right-section .datepicker-box {
+  color: #000000;
+  background-color: #c6c6c6;
+  height: 36px;
+  border-radius: 11px;
+  font-size: 12px;
+  align-self: center;
+}
+
+.datepicker {
+  text-align: center;
+  height: 30px;
+}
+
+.datepicker-box {
+  z-index: 5;
+}
