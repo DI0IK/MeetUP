@@ -2,7 +2,6 @@
 
 import { RedirectButton } from '@/components/buttons/redirect-button';
 import EventListEntry from '@/components/custom-ui/event-list-entry';
-import { ThemePicker } from '@/components/misc/theme-picker';
 import { Label } from '@/components/ui/label';
 import { useGetApiEvent } from '@/generated/api/event/event';
 
@@ -19,10 +18,6 @@ export default function Events() {
 
   return (
     <div className='relative h-screen flex flex-col items-center'>
-      <div className='absolute top-4 right-4'>
-        <ThemePicker />
-      </div>
-
       {/* Heading */}
       <h1 className='text-3xl font-bold mt-8 mb-4 text-center z-10'>
         My Events

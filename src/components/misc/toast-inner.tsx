@@ -65,27 +65,27 @@ interface ToastInnerProps {
 
 const variantConfig = {
   default: {
-    bgColor: 'bg-neutral-150',
+    bgColor: 'bg-toaster-default-bg',
     defaultIcon: 'Info',
   },
   success: {
-    bgColor: 'bg-green-200',
+    bgColor: 'bg-toaster-success-bg',
     defaultIcon: 'CheckCircle',
   },
   error: {
-    bgColor: 'bg-red-200',
+    bgColor: 'bg-toaster-error-bg',
     defaultIcon: 'XCircle',
   },
   info: {
-    bgColor: 'bg-blue-200',
+    bgColor: 'bg-toaster-info-bg',
     defaultIcon: 'Info',
   },
   warning: {
-    bgColor: 'bg-yellow-200',
+    bgColor: 'bg-toaster-warning-bg',
     defaultIcon: 'AlertTriangle',
   },
   notification: {
-    bgColor: 'bg-neutral-150',
+    bgColor: 'bg-toaster-notification-bg',
     defaultIcon: 'BellRing',
   },
 };
@@ -127,14 +127,16 @@ export const ToastInner: React.FC<ToastInnerProps> = ({
       >
         {variant !== 'default' && (
           <div className='flex items-center justify-center'>
-            <Icon size={40} />
+            <Icon className='text-text-alt' size={40} />
           </div>
         )}
 
         {/* Text Content */}
         <div className='grid gap-1'>
-          <h6>{title}</h6>
-          {description && <Label>{description}</Label>}
+          <h6 className='text-text-alt'>{title}</h6>
+          {description && (
+            <Label className='text-text-alt'>{description}</Label>
+          )}
         </div>
 
         {/* Action Button */}

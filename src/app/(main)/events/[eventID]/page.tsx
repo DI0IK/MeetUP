@@ -1,25 +1,42 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Logo from '@/components/misc/logo';
-import { ThemePicker } from '@/components/misc/theme-picker';
 import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import { Label } from '@/components/ui/label';
-import { useGetApiEventEventID } from '@/generated/api/event/event';
+import {
+  useDeleteApiEventEventID,
+  useGetApiEventEventID,
+} from '@/generated/api/event/event';
 import { useGetApiUserMe } from '@/generated/api/user/user';
 import { RedirectButton } from '@/components/buttons/redirect-button';
 import { useSession } from 'next-auth/react';
 import ParticipantListEntry from '@/components/custom-ui/participant-list-entry';
-import { useParams } from 'next/navigation';
+import { useParams, useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import { ToastInner } from '@/components/misc/toast-inner';
+import { toast } from 'sonner';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 
 export default function ShowEvent() {
   const session = useSession();
+  const router = useRouter();
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
 
-  const { eventId } = useParams<{ eventId: string }>();
+  const { eventID: eventID } = useParams<{ eventID: string }>();
 
   // Fetch event data
-  const { data: eventData, isLoading, error } = useGetApiEventEventID(eventId);
+  const { data: eventData, isLoading, error } = useGetApiEventEventID(eventID);
   const { data: userData, isLoading: userLoading } = useGetApiUserMe();
+  const deleteEvent = useDeleteApiEventEventID();
 
   if (isLoading || userLoading) {
     return (
@@ -54,9 +71,6 @@ export default function ShowEvent() {
 
   return (
     <div className='flex flex-col items-center justify-center h-screen'>
-      <div className='absolute top-4 right-4'>
-        <ThemePicker />
-      </div>
       <Card className='w-[80%] max-w-screen p-0 gap-0 max-xl:w-[95%] max-h-[90vh] overflow-auto'>
         <CardHeader className='p-0 m-0 gap-0' />
 
@@ -152,8 +166,63 @@ export default function ShowEvent() {
               <div className='flex flex-row gap-2 justify-end mt-4 mb-6'>
                 <div className='w-[20%] grid max-sm:w-full'>
                   {session.data?.user?.id === event.organizer.id ? (
+                    <Dialog
+                      open={deleteDialogOpen}
+                      onOpenChange={setDeleteDialogOpen}
+                    >
+                      <DialogTrigger asChild>
+                        <Button variant='destructive' className='w-full'>
+                          delete
+                        </Button>
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Delete Event</DialogTitle>
+                          <DialogDescription>
+                            Are you sure you want to delete the event &ldquo;
+                            {event.title}&rdquo;? This action cannot be undone.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                          <Button
+                            variant='secondary'
+                            onClick={() => setDeleteDialogOpen(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant='muted'
+                            onClick={() => {
+                              deleteEvent.mutate(
+                                { eventID: event.id },
+                                {
+                                  onSuccess: () => {
+                                    router.push('/home');
+                                    toast.custom((t) => (
+                                      <ToastInner
+                                        toastId={t}
+                                        title='Event deleted'
+                                        description={event?.title}
+                                        variant='success'
+                                      />
+                                    ));
+                                  },
+                                },
+                              );
+                              setDeleteDialogOpen(false);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  ) : null}
+                </div>
+                <div className='w-[20%] grid max-sm:w-full'>
+                  {session.data?.user?.id === event.organizer.id ? (
                     <RedirectButton
-                      redirectUrl={`/events/edit/${eventId}`}
+                      redirectUrl={`/events/edit/${eventID}`}
                       buttonText='edit'
                       className='w-full'
                     />
