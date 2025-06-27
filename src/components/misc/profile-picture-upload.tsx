@@ -15,12 +15,7 @@ export default function ProfilePictureUpload({
     <>
       <div className='grid grid-cols-1 gap-1'>
         <span className='relative flex space-6'>
-          <Input
-            className={className}
-            id='pic-upload'
-            type='file'
-            defaultValue={data?.data.user.image ?? undefined}
-          />
+          <Input className={className} id='pic-upload' type='file' />
           <Avatar className='flex justify-center items-center ml-6 shadow-md border h-[36px] w-[36px]'>
             {data?.data.user.image ? (
               <Image

@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
-  CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
@@ -27,9 +26,7 @@ import { useGetApiUserMe } from '@/generated/api/user/user';
 import { ThemePicker } from './theme-picker';
 import LabeledInput from '../custom-ui/labeled-input';
 import { GroupWrapper } from '../wrappers/group-wrapper';
-import { Avatar } from '../ui/avatar';
-import Image from 'next/image';
-import { User } from 'lucide-react';
+
 import ProfilePictureUpload from './profile-picture-upload';
 
 export default function SettingsPage() {
@@ -117,7 +114,7 @@ export default function SettingsPage() {
                 </GroupWrapper>
                 <GroupWrapper title='Profile Picture'>
                   <div className='space-y-2 grid grid-cols-[1fr_auto]'>
-                    <ProfilePictureUpload className='file:border file:rounded-xl' />
+                    <ProfilePictureUpload className='file:border file:rounded-md file:hover:bg-disabled-destructive' />
                   </div>
                 </GroupWrapper>
                 <GroupWrapper title='Regional Settings'>
@@ -127,7 +124,7 @@ export default function SettingsPage() {
                         type='text'
                         label='Timezone'
                         placeholder='Europe/Berlin'
-                        defaultValue={data?.data.user.timezone}
+                        defaultValue={data?.data.user.timezone ?? ''}
                       ></LabeledInput>
                     </div>
                     <div>
@@ -147,7 +144,12 @@ export default function SettingsPage() {
                   </div>
                 </GroupWrapper>
                 <div className='flex items-center justify-evenly sm:flex-row flex-col gap-6'>
-                  <Button variant='destructive'>Delete Account</Button>
+                  <Button
+                    // onClick={() => DeleteAccount }
+                    variant='destructive'
+                  >
+                    Delete Account
+                  </Button>
                   <span className='text-sm text-muted-foreground pt-1'>
                     Permanently delete your account and all associated data.
                   </span>
@@ -165,67 +167,85 @@ export default function SettingsPage() {
                 <CardTitle>Notification Preferences</CardTitle>
               </CardHeader>
               <CardContent className='space-y-6'>
-                <div className='flex items-center justify-between space-x-2 p-3 rounded-md border'>
-                  <Label
-                    htmlFor='masterEmailNotifications'
-                    className='font-normal'
-                  >
-                    Enable All Email Notifications
-                  </Label>
-                  <Switch id='masterEmailNotifications' />
-                </div>
-                <div className='space-y-4 pl-2 border-l-2 ml-2'>
-                  <div className='flex items-center justify-between space-x-2'>
-                    <Label htmlFor='newMeetingBookings' className='font-normal'>
-                      New Meeting Bookings
-                    </Label>
-                    <Switch id='newMeetingBookings' />
-                  </div>
-                  <div className='flex items-center justify-between space-x-2'>
+                <GroupWrapper>
+                  <div className='flex items-center justify-between'>
                     <Label
-                      htmlFor='meetingConfirmations'
+                      htmlFor='masterEmailNotifications'
                       className='font-normal'
                     >
-                      Meeting Confirmations/Cancellations
+                      Enable All Email Notifications
                     </Label>
-                    <Switch id='meetingConfirmations' />
+                    <Switch id='masterEmailNotifications' />
                   </div>
-                  <div className='flex items-center justify-between space-x-2'>
-                    <Label
-                      htmlFor='enableMeetingReminders'
-                      className='font-normal'
-                    >
-                      Meeting Reminders
-                    </Label>
-                    <Switch id='enableMeetingReminders' />
+                </GroupWrapper>
+
+                <GroupWrapper title='Meetings'>
+                  <div className='space-y-4'>
+                    <div className='flex items-center justify-between space-x-2'>
+                      <Label
+                        htmlFor='newMeetingBookings'
+                        className='font-normal'
+                      >
+                        New Meeting Bookings
+                      </Label>
+                      <Switch id='newMeetingBookings' />
+                    </div>
+                    <div className='flex items-center justify-between space-x-2'>
+                      <Label
+                        htmlFor='meetingConfirmations'
+                        className='font-normal'
+                      >
+                        Meeting Confirmations/Cancellations
+                      </Label>
+                      <Switch id='meetingConfirmations' />
+                    </div>
+                    <div className='space-y-4 grid grid-cols-[1fr_1fr_auto] items-center'>
+                      <div className='flex items-center justify-between space-x-2'>
+                        <Label
+                          htmlFor='enableMeetingReminders'
+                          className='font-normal'
+                        >
+                          Meeting Reminders
+                        </Label>
+                      </div>
+                      <div>
+                        <Label className='text-sm' htmlFor='remindBefore'>
+                          Remind me before
+                        </Label>
+                        <Select>
+                          <SelectTrigger id='remindBefore'>
+                            <SelectValue placeholder='Select reminder time' />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value='15m'>15 minutes</SelectItem>
+                            <SelectItem value='30m'>30 minutes</SelectItem>
+                            <SelectItem value='1h'>1 hour</SelectItem>
+                            <SelectItem value='1d'>1 day</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                      <div>
+                        <Switch id='enableMeetingReminders' />
+                      </div>
+                    </div>
                   </div>
-                  <div className='space-y-2 pl-6'>
-                    <Label htmlFor='remindBefore'>Remind me before</Label>
-                    <Select>
-                      <SelectTrigger id='remindBefore'>
-                        <SelectValue placeholder='Select reminder time' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value='15m'>15 minutes</SelectItem>
-                        <SelectItem value='30m'>30 minutes</SelectItem>
-                        <SelectItem value='1h'>1 hour</SelectItem>
-                        <SelectItem value='1d'>1 day</SelectItem>
-                      </SelectContent>
-                    </Select>
+                </GroupWrapper>
+                <GroupWrapper title='Social'>
+                  <div className='space-y-4'>
+                    <div className='flex items-center justify-between space-x-2'>
+                      <Label htmlFor='friendRequests' className='font-normal'>
+                        Friend Requests
+                      </Label>
+                      <Switch id='friendRequests' />
+                    </div>
+                    <div className='flex items-center justify-between space-x-2'>
+                      <Label htmlFor='groupUpdates' className='font-normal'>
+                        Group Invitations/Updates
+                      </Label>
+                      <Switch id='groupUpdates' />
+                    </div>
                   </div>
-                  <div className='flex items-center justify-between space-x-2'>
-                    <Label htmlFor='friendRequests' className='font-normal'>
-                      Friend Requests
-                    </Label>
-                    <Switch id='friendRequests' />
-                  </div>
-                  <div className='flex items-center justify-between space-x-2'>
-                    <Label htmlFor='groupUpdates' className='font-normal'>
-                      Group Invitations/Updates
-                    </Label>
-                    <Switch id='groupUpdates' />
-                  </div>
-                </div>
+                </GroupWrapper>
               </CardContent>
             </ScrollableSettingsWrapper>
           </Card>
