@@ -630,6 +630,7 @@ button.rbc-input::-moz-focus-inner {
 
 .rbc-label {
   padding: 0 5px;
+  width: 54.3542px;
 }
 
 .rbc-day-slot {
@@ -809,6 +810,10 @@ button.rbc-input::-moz-focus-inner {
   -webkit-box-direction: normal;
   -ms-flex-direction: row;
   flex-direction: row;
+  margin-right: 14px;
+  @media ((hover: none) and (pointer: coarse)) {
+    margin-right: 0px;
+  }
 }
 .rbc-rtl .rbc-time-header.rbc-overflowing {
   border-right-width: 0;
