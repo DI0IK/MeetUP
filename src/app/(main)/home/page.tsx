@@ -7,11 +7,13 @@ export default function Home() {
   const { data } = useGetApiUserMe();
 
   return (
-    <div className='max-h-full'>
-      <Calendar
-        userId={data?.data.user?.id}
-        height='calc(100svh - 50px - (var(--spacing) * 2 * 5))'
-      />
+    <div className='max-h-full flex justify-center items-center'>
+      <div className='w-full sm:w-[90%]'>
+        <Calendar
+          userId={data?.data.user?.id}
+          height='calc(100svh - 50px - (var(--spacing) * 2 * 5))'
+        />
+      </div>
     </div>
   );
 }

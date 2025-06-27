@@ -1,10 +1,14 @@
 /* Container der Toolbar */
 .custom-toolbar {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
+  gap: 8px;
   padding: calc(var(--spacing) * 2);
   padding-left: calc(50px + var(--spacing));
+
+  @media (max-width: 870px) {
+    padding-left: 0;
+    flex-direction: column;
+  }
   box-shadow: none;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -25,6 +29,7 @@
   display: flex;
   gap: 8px;
   justify-content: center;
+  align-items: center;
 }
 
 .custom-toolbar .navigation-controls button {
@@ -77,6 +82,8 @@
   border-radius: 11px;
   justify-items: center;
   align-items: center;
+  display: flex;
+  gap: 8px;
 }
 
 .custom-toolbar .navigation-controls .handleWeek button {
@@ -93,6 +100,9 @@
   padding: 0 8px;
   border-radius: 11px;
   justify-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .right-section .datepicker-box {
@@ -100,8 +110,12 @@
   background-color: #c6c6c6;
   height: 36px;
   border-radius: 11px;
-  font-size: 12px;
+  font-size: 14px;
   align-self: center;
+  font-family: 'Varela Round', sans-serif;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .datepicker {

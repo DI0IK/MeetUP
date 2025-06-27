@@ -171,12 +171,9 @@ const CustomToolbar: React.FC<CustomToolbarProps> = ({
   };
 
   return (
-    <div
-      className='custom-toolbar'
-      style={{ display: 'flex', flexDirection: 'initial', gap: '8px' }}
-    >
+    <div className='custom-toolbar'>
       <div className='view-change'>
-        <div className='view-switcher' style={{ display: 'flex', gap: '8px' }}>
+        <div className='view-switcher'>
           <Button
             //className='hover:bg-orange-600 hover:text-white'
             type='submit'
