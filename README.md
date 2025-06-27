@@ -66,7 +66,6 @@ This project is built with a modern tech stack:
     yarn install
     ```
 3.  **Set up environment variables:**
-
     - You will need to create an `AUTH_SECRET`. You can generate one using the following command:
       ```bash
       npx auth secret
@@ -97,7 +96,6 @@ This project is built with a modern tech stack:
       ```
 
 4.  **Apply database migrations (Prisma):**
-
     - Ensure your Prisma schema (`prisma/schema.prisma`) is defined.
     - Setup/update the database with these commands:
       ```bash
