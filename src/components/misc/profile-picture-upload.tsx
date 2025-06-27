@@ -5,13 +5,18 @@ import { User } from 'lucide-react';
 
 import { Input } from '../ui/input';
 
-export default function ProfilePictureUpload() {
+export default function ProfilePictureUpload({
+  className,
+}: {
+  className?: string;
+}) {
   const { data } = useGetApiUserMe();
   return (
     <>
       <div className='grid grid-cols-1 gap-1'>
         <span className='relative flex space-6'>
           <Input
+            className={className}
             id='pic-upload'
             type='file'
             defaultValue={data?.data.user.image ?? undefined}
