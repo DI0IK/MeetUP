@@ -74,7 +74,7 @@
     "@tailwindcss/postcss": "4.1.11",
     "@types/node": "22.15.33",
     "@types/react": "19.1.8",
-    "@types/react-big-calendar": "^1",
+    "@types/react-big-calendar": "1.16.2",
     "@types/react-dom": "19.1.6",
     "@types/swagger-ui-react": "5.18.0",
     "@types/webpack-env": "1.18.8",
