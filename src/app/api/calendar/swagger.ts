@@ -7,17 +7,12 @@ import {
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import zod from 'zod/v4';
-import { UserIdParamSchema } from '@/app/api/validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({
     method: 'get',
-    path: '/api/user/{user}/calendar',
+    path: '/api/calendar',
     request: {
-      params: zod.object({
-        user: UserIdParamSchema,
-      }),
       query: userCalendarQuerySchema,
     },
     responses: {
@@ -32,6 +27,6 @@ export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
       ...notAuthenticatedResponse,
       ...userNotFoundResponse,
     },
-    tags: ['User'],
+    tags: ['Calendar'],
   });
 }

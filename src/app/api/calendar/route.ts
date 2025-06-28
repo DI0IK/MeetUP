@@ -15,7 +15,7 @@ import {
 } from '@/app/api/validation';
 import { z } from 'zod/v4';
 
-export const GET = auth(async function GET(req, { params }) {
+export const GET = auth(async function GET(req) {
   const authCheck = userAuthenticated(req);
   if (!authCheck.continue)
     return returnZodTypeCheckedResponse(
@@ -24,7 +24,22 @@ export const GET = auth(async function GET(req, { params }) {
       authCheck.metadata,
     );
 
-  const dataRaw = Object.fromEntries(new URL(req.url).searchParams);
+  const dataRaw: Record<string, string | string[]> = {};
+  for (const [key, value] of req.nextUrl.searchParams.entries()) {
+    if (key.endsWith('[]')) {
+      const cleanKey = key.slice(0, -2);
+      if (!dataRaw[cleanKey]) {
+        dataRaw[cleanKey] = [];
+      }
+      if (Array.isArray(dataRaw[cleanKey])) {
+        (dataRaw[cleanKey] as string[]).push(value);
+      } else {
+        dataRaw[cleanKey] = [dataRaw[cleanKey] as string, value];
+      }
+    } else {
+      dataRaw[key] = value;
+    }
+  }
   const data = await userCalendarQuerySchema.safeParseAsync(dataRaw);
   if (!data.success)
     return returnZodTypeCheckedResponse(
@@ -36,15 +51,15 @@ export const GET = auth(async function GET(req, { params }) {
       },
       { status: 400 },
     );
-  const { end, start } = data.data;
+  const { end, start, userIds } = data.data;
 
   const requestUserId = authCheck.user.id;
 
-  const requestedUserId = (await params).user;
-
-  const requestedUser = await prisma.user.findFirst({
+  const requestedUser = await prisma.user.findMany({
     where: {
-      id: requestedUserId,
+      id: {
+        in: userIds,
+      },
     },
     select: {
       meetingParts: {
@@ -64,6 +79,7 @@ export const GET = auth(async function GET(req, { params }) {
           },
         },
         select: {
+          user_id: true,
           meeting: {
             select: {
               id: true,
@@ -136,6 +152,7 @@ export const GET = auth(async function GET(req, { params }) {
           start_time: 'asc',
         },
         select: {
+          user_id: true,
           id: true,
           reason: true,
           start_time: true,
@@ -153,46 +170,64 @@ export const GET = auth(async function GET(req, { params }) {
   if (!requestedUser)
     return returnZodTypeCheckedResponse(
       ErrorResponseSchema,
-      { success: false, message: 'User not found' },
+      { success: false, message: 'User/s not found' },
       { status: 404 },
     );
 
   const calendar: z.input<typeof UserCalendarSchema> = [];
 
-  for (const event of requestedUser.meetingParts) {
+  for (const event of requestedUser.map((r) => r.meetingParts).flat()) {
     if (
       event.meeting.participants.some((p) => p.user.id === requestUserId) ||
       event.meeting.organizer_id === requestUserId
     ) {
-      calendar.push({ ...event.meeting, type: 'event' });
+      calendar.push({
+        ...event.meeting,
+        type: 'event',
+        users: event.meeting.participants
+          .map((p) => p.user.id)
+          .filter((id) => userIds.includes(id)),
+      });
     } else {
       calendar.push({
         id: event.meeting.id,
         start_time: event.meeting.start_time,
         end_time: event.meeting.end_time,
         type: 'blocked_private',
+        users: event.meeting.participants
+          .map((p) => p.user.id)
+          .filter((id) => userIds.includes(id)),
       });
     }
   }
 
-  for (const event of requestedUser.meetingsOrg) {
+  for (const event of requestedUser.map((r) => r.meetingsOrg).flat()) {
     if (
       event.participants.some((p) => p.user.id === requestUserId) ||
       event.organizer_id === requestUserId
     ) {
-      calendar.push({ ...event, type: 'event' });
+      calendar.push({
+        ...event,
+        type: 'event',
+        users: event.participants
+          .map((p) => p.user.id)
+          .filter((id) => userIds.includes(id)),
+      });
     } else {
       calendar.push({
         id: event.id,
         start_time: event.start_time,
         end_time: event.end_time,
         type: 'blocked_private',
+        users: event.participants
+          .map((p) => p.user.id)
+          .filter((id) => userIds.includes(id)),
       });
     }
   }
 
-  for (const slot of requestedUser.blockedSlots) {
-    if (requestUserId === requestedUserId) {
+  for (const slot of requestedUser.map((r) => r.blockedSlots).flat()) {
+    if (requestUserId === userIds[0] && userIds.length === 1) {
       calendar.push({
         start_time: slot.start_time,
         end_time: slot.end_time,
@@ -204,6 +239,7 @@ export const GET = auth(async function GET(req, { params }) {
         created_at: slot.created_at,
         updated_at: slot.updated_at,
         type: 'blocked_owned',
+        users: [requestUserId],
       });
     } else {
       calendar.push({
@@ -211,6 +247,7 @@ export const GET = auth(async function GET(req, { params }) {
         end_time: slot.end_time,
         id: slot.id,
         type: 'blocked_private',
+        users: [slot.user_id],
       });
     }
   }

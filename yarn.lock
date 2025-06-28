@@ -1013,6 +1013,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@marko19907/string-to-color@npm:^1.0.0":
+  version: 1.0.0
+  resolution: "@marko19907/string-to-color@npm:1.0.0"
+  dependencies:
+    esm-seedrandom: "npm:^3.0.5"
+  checksum: 10c0/fd297937fb5a8a0c3372bc614f9a4e21842e3392ef54e0d323f0fe730ec5b5a441f921e63b3b151bd39ca64a120ddfe905d1a67ca62ed637ade69c96c55fe641
+  languageName: node
+  linkType: hard
+
 "@napi-rs/wasm-runtime@npm:^0.2.11":
   version: 0.2.11
   resolution: "@napi-rs/wasm-runtime@npm:0.2.11"
@@ -5717,6 +5726,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"esm-seedrandom@npm:^3.0.5":
+  version: 3.0.5
+  resolution: "esm-seedrandom@npm:3.0.5"
+  checksum: 10c0/6fe5a33f31bce0e733814df884cdfc27812e4b04ce973f7cf008b7b8500ecab6706f54591841bd12dd3bdd9bbb153abf04fb8efd4934a5b0ab273bff114cdb3b
+  languageName: node
+  linkType: hard
+
 "espree@npm:^10.0.1, espree@npm:^10.4.0":
   version: 10.4.0
   resolution: "espree@npm:10.4.0"
@@ -7683,6 +7699,7 @@ __metadata:
     "@fortawesome/free-solid-svg-icons": "npm:^6.7.2"
     "@fortawesome/react-fontawesome": "npm:^0.2.2"
     "@hookform/resolvers": "npm:^5.0.1"
+    "@marko19907/string-to-color": "npm:^1.0.0"
     "@prisma/client": "npm:^6.9.0"
     "@radix-ui/react-avatar": "npm:^1.1.10"
     "@radix-ui/react-collapsible": "npm:^1.1.11"

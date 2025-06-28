@@ -32,6 +32,11 @@
   align-items: center;
 }
 
+.custom-toolbar .navigation-controls .handleWeek {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
 .custom-toolbar .navigation-controls button {
   padding: 8px 12px;
   color: #ffffff;

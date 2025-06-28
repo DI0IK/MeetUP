@@ -19,7 +19,7 @@ export const GET = auth(async function GET(req) {
       authCheck.metadata,
     );
 
-  const dataRaw = Object.fromEntries(new URL(req.url).searchParams);
+  const dataRaw = Object.fromEntries(req.nextUrl.searchParams);
   const data = await searchUserSchema.safeParseAsync(dataRaw);
   if (!data.success)
     return returnZodTypeCheckedResponse(

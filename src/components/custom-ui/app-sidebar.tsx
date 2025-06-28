@@ -75,7 +75,7 @@ export function AppSidebar() {
             className='group-data-[collapsible=]:hidden group-data-[mobile=true]/mobile:hidden'
           ></Logo>
         </SidebarHeader>
-        <SidebarContent className='grid grid-rows-[auto_1fr_auto]'>
+        <SidebarContent className='grid grid-rows-[auto_1fr_auto] overflow-hidden'>
           <Collapsible defaultOpen className='group/collapsible'>
             <SidebarGroup>
               <SidebarGroupLabel asChild>

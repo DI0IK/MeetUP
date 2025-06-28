@@ -14,6 +14,8 @@ export const BlockedSlotSchema = zod
     end_time: eventEndTimeSchema,
     type: zod.literal('blocked_private'),
     id: zod.string(),
+    users: zod.string().array(),
+    user_id: zod.string().optional(),
   })
   .openapi('BlockedSlotSchema', {
     description: 'Blocked time slot in the user calendar',
@@ -31,17 +33,21 @@ export const OwnedBlockedSlotSchema = zod
     created_at: zod.date().nullish(),
     updated_at: zod.date().nullish(),
     type: zod.literal('blocked_owned'),
+    users: zod.string().array(),
+    user_id: zod.string().optional(),
   })
   .openapi('OwnedBlockedSlotSchema', {
     description: 'Blocked slot owned by the user',
   });
 
 export const VisibleSlotSchema = EventSchema.omit({
-  organizer: true,
   participants: true,
+  organizer: true,
 })
   .extend({
     type: zod.literal('event'),
+    users: zod.string().array(),
+    user_id: zod.string().optional(),
   })
   .openapi('VisibleSlotSchema', {
     description: 'Visible time slot in the user calendar',
@@ -86,6 +92,7 @@ export const userCalendarQuerySchema = zod
         );
         return endOfWeek;
       }),
+    userIds: zod.string().array(),
   })
   .openapi('UserCalendarQuerySchema', {
     description: 'Query parameters for filtering the user calendar',
