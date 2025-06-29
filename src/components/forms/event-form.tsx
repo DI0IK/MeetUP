@@ -21,6 +21,16 @@ import { useSearchParams } from 'next/navigation';
 
 import zod from 'zod/v4';
 import { PublicUserSchema } from '@/app/api/user/validation';
+import Calendar from '@/components/calendar';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '../ui/dialog';
 
 type User = zod.output<typeof PublicUserSchema>;
 
@@ -67,6 +77,8 @@ const EventForm: React.FC<EventFormProps> = (props) => {
   const [title, setTitle] = React.useState('');
   const [location, setLocation] = React.useState('');
   const [description, setDescription] = React.useState('');
+
+  const [calendarOpen, setCalendarOpen] = React.useState(false);
 
   // Update state when event data loads
   React.useEffect(() => {
@@ -194,149 +206,183 @@ const EventForm: React.FC<EventFormProps> = (props) => {
     return <div>Error loading event.</div>;
 
   return (
-    <form className='flex flex-col gap-5 w-full' onSubmit={handleSubmit}>
-      <div className='grid grid-row-start:auto gap-4 sm:gap-8 w-full'>
-        <div className='h-full w-full mt-0 ml-2 mb-16 flex items-center max-sm:grid max-sm:grid-row-start:auto max-sm:mb-6 max-sm:mt-10 max-sm:ml-0'>
-          <div className='w-[100px] max-sm:w-full max-sm:flex max-sm:justify-center'>
-            <Logo colorType='monochrome' logoType='submark' width={50} />
-          </div>
-          <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full'>
-            <LabeledInput
-              type='text'
-              label='Event Name'
-              placeholder={props.type === 'create' ? 'New Event' : 'Event Name'}
-              name='eventName'
-              variantSize='big'
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-            />
-          </div>
-          <div className='w-0 sm:w-[50px]'></div>
-        </div>
-        <div className='grid grid-cols-4 gap-4 h-full w-full max-lg:grid-cols-2 max-sm:grid-cols-1'>
-          <div>
-            <TimePicker
-              dateLabel='start Time'
-              timeLabel='&nbsp;'
-              date={startDate}
-              setDate={setStartDate}
-              time={startTime}
-              setTime={setStartTime}
-            />
-          </div>
-          <div>
-            <TimePicker
-              dateLabel='end Time'
-              timeLabel='&nbsp;'
-              date={endDate}
-              setDate={setEndDate}
-              time={endTime}
-              setTime={setEndTime}
-            />
-          </div>
-          <div className='w-54'>
-            <LabeledInput
-              type='text'
-              label='Location'
-              placeholder='where is the event?'
-              name='eventLocation'
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-            />
-          </div>
-          <div className='flex flex-col gap-4'>
-            <div className='flex flex-row gap-2'>
-              <Label className='w-[70px]'>created:</Label>
-              <Label className='text-[var(--color-neutral-300)]'>
-                {createdAtDisplay}
-              </Label>
+    <>
+      <Dialog open={calendarOpen} onOpenChange={setCalendarOpen}>
+        <form className='flex flex-col gap-5 w-full' onSubmit={handleSubmit}>
+          <div className='grid grid-row-start:auto gap-4 sm:gap-8 w-full'>
+            <div className='h-full w-full mt-0 ml-2 mb-16 flex items-center max-sm:grid max-sm:grid-row-start:auto max-sm:mb-6 max-sm:mt-10 max-sm:ml-0'>
+              <div className='w-[100px] max-sm:w-full max-sm:flex max-sm:justify-center'>
+                <Logo colorType='monochrome' logoType='submark' width={50} />
+              </div>
+              <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full'>
+                <LabeledInput
+                  type='text'
+                  label='Event Name'
+                  placeholder={
+                    props.type === 'create' ? 'New Event' : 'Event Name'
+                  }
+                  name='eventName'
+                  variantSize='big'
+                  value={title}
+                  onChange={(e) => setTitle(e.target.value)}
+                />
+              </div>
+              <div className='w-0 sm:w-[50px]'></div>
             </div>
-            <div className='flex flex-row gap-2'>
-              <Label className='w-[70px]'>updated:</Label>
-              <p className='text-[var(--color-neutral-300)]'>
-                {updatedAtDisplay}
-              </p>
-            </div>
-          </div>
-        </div>
-        <div className='h-full w-full grid grid-cols-2 gap-4 max-sm:grid-cols-1'>
-          <div className='h-full w-full grid grid-flow-row gap-4'>
-            <div className='h-full w-full'>
-              <div className='flex flex-row gap-2'>
-                <Label>Organiser:</Label>
-                <Label className='text-[var(--color-neutral-300)]'>
-                  {organiserValue}
-                </Label>
+            <div className='grid grid-cols-4 gap-4 h-full w-full max-lg:grid-cols-2 max-sm:grid-cols-1'>
+              <div>
+                <TimePicker
+                  dateLabel='start Time'
+                  timeLabel='&nbsp;'
+                  date={startDate}
+                  setDate={setStartDate}
+                  time={startTime}
+                  setTime={setStartTime}
+                />
+              </div>
+              <div>
+                <TimePicker
+                  dateLabel='end Time'
+                  timeLabel='&nbsp;'
+                  date={endDate}
+                  setDate={setEndDate}
+                  time={endTime}
+                  setTime={setEndTime}
+                />
+              </div>
+              <div className='w-54'>
+                <LabeledInput
+                  type='text'
+                  label='Location'
+                  placeholder='where is the event?'
+                  name='eventLocation'
+                  value={location}
+                  onChange={(e) => setLocation(e.target.value)}
+                />
+              </div>
+              <div className='flex flex-col gap-4'>
+                <div className='flex flex-row gap-2'>
+                  <Label className='w-[70px]'>created:</Label>
+                  <Label className='text-[var(--color-neutral-300)]'>
+                    {createdAtDisplay}
+                  </Label>
+                </div>
+                <div className='flex flex-row gap-2'>
+                  <Label className='w-[70px]'>updated:</Label>
+                  <p className='text-[var(--color-neutral-300)]'>
+                    {updatedAtDisplay}
+                  </p>
+                </div>
               </div>
             </div>
-            <div className='h-full w-full'>
-              <LabeledInput
-                type='text'
-                label='Event Description'
-                placeholder='What is the event about?'
-                name='eventDescription'
-                variantSize='textarea'
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-              ></LabeledInput>
-            </div>
-          </div>
-          <div className='h-full w-full'>
-            <Label>Participants</Label>
-            <UserSearchInput
-              selectedUsers={selectedParticipants}
-              addUserAction={(user) => {
-                setSelectedParticipants((current) =>
-                  current.find((u) => u.id === user.id)
-                    ? current
-                    : [...current, user],
-                );
-              }}
-              removeUserAction={(user) => {
-                setSelectedParticipants((current) =>
-                  current.filter((u) => u.id !== user.id),
-                );
-              }}
-            />
-            <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
-              {selectedParticipants.map((user) => (
-                <ParticipantListEntry
-                  key={user.id}
-                  user={user}
-                  status='PENDING'
+            <div className='h-full w-full grid grid-cols-2 gap-4 max-sm:grid-cols-1'>
+              <div className='h-full w-full grid grid-flow-row gap-4'>
+                <div className='h-full w-full'>
+                  <div className='flex flex-row gap-2'>
+                    <Label>Organiser:</Label>
+                    <Label className='text-[var(--color-neutral-300)]'>
+                      {organiserValue}
+                    </Label>
+                  </div>
+                </div>
+                <div className='h-full w-full'>
+                  <LabeledInput
+                    type='text'
+                    label='Event Description'
+                    placeholder='What is the event about?'
+                    name='eventDescription'
+                    variantSize='textarea'
+                    value={description}
+                    onChange={(e) => setDescription(e.target.value)}
+                  ></LabeledInput>
+                </div>
+              </div>
+              <div className='h-full w-full'>
+                <Label>Participants</Label>
+                <UserSearchInput
+                  selectedUsers={selectedParticipants}
+                  addUserAction={(user) => {
+                    setSelectedParticipants((current) =>
+                      current.find((u) => u.id === user.id)
+                        ? current
+                        : [...current, user],
+                    );
+                  }}
+                  removeUserAction={(user) => {
+                    setSelectedParticipants((current) =>
+                      current.filter((u) => u.id !== user.id),
+                    );
+                  }}
                 />
-              ))}
+                <DialogTrigger asChild>
+                  <Button variant='primary'>Calendar</Button>
+                </DialogTrigger>
+                <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
+                  {selectedParticipants.map((user) => (
+                    <ParticipantListEntry
+                      key={user.id}
+                      user={user}
+                      status='PENDING'
+                    />
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-        </div>
 
-        <div className='flex flex-row gap-2 justify-end mt-4 mb-6'>
-          <div className='w-[20%] grid max-sm:w-[40%]'>
-            <Button
-              type='button'
-              variant='secondary'
-              onClick={() => {
-                router.back();
-                console.log('user aborted - no change in database');
-              }}
-            >
-              cancel
-            </Button>
+            <div className='flex flex-row gap-2 justify-end mt-4 mb-6'>
+              <div className='w-[20%] grid max-sm:w-[40%]'>
+                <Button
+                  type='button'
+                  variant='secondary'
+                  onClick={() => {
+                    router.back();
+                    console.log('user aborted - no change in database');
+                  }}
+                >
+                  cancel
+                </Button>
+              </div>
+              <div className='w-[20%] grid max-sm:w-[40%]'>
+                <Button
+                  type='submit'
+                  variant='primary'
+                  disabled={status === 'pending'}
+                >
+                  {status === 'pending' ? 'Saving...' : 'save event'}
+                </Button>
+              </div>
+            </div>
+            {isSuccess && <p>Event created!</p>}
+            {error && <p className='text-red-500'>Error: {error.message}</p>}
           </div>
-          <div className='w-[20%] grid max-sm:w-[40%]'>
-            <Button
-              type='submit'
-              variant='primary'
-              disabled={status === 'pending'}
-            >
-              {status === 'pending' ? 'Saving...' : 'save event'}
-            </Button>
-          </div>
-        </div>
-        {isSuccess && <p>Event created!</p>}
-        {error && <p className='text-red-500'>Error: {error.message}</p>}
-      </div>
-    </form>
+        </form>
+        <DialogContent className='sm:max-w-[750px]'>
+          <DialogHeader>
+            <DialogTitle>Calendar</DialogTitle>
+            <DialogDescription>
+              Calendar for selected participants
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className='max-w-[calc(100svw-70px)]'>
+            <Calendar
+              userId={selectedParticipants.map((u) => u.id)}
+              additionalEvents={[
+                {
+                  id: 'temp-event',
+                  title: title || 'New Event',
+                  start: startDate ? new Date(startDate) : new Date(),
+                  end: endDate ? new Date(endDate) : new Date(),
+                  type: 'event',
+                  userId: 'create-event',
+                  colorOverride: '#ff9800',
+                },
+              ]}
+              height='600px'
+            />
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+    </>
   );
 };
 

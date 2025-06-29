@@ -10,6 +10,7 @@ type ParticipantListEntryProps = zod.output<typeof ParticipantSchema>;
 
 export default function ParticipantListEntry({
   user,
+  status,
 }: ParticipantListEntryProps) {
   const { resolvedTheme } = useTheme();
   const defaultImage =
@@ -21,6 +22,7 @@ export default function ParticipantListEntry({
     <div className='flex items-center gap-2 py-1 ml-5'>
       <Image src={finalImageSrc} alt='Avatar' width={30} height={30} />
       <span>{user.name}</span>
+      <span className='text-sm text-gray-500'>{status}</span>
     </div>
   );
 }

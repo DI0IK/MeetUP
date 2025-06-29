@@ -7,7 +7,6 @@ import '@/components/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
 import CustomToolbar from '@/components/custom-toolbar';
 import React from 'react';
-import { useGetApiUserUserCalendar } from '@/generated/api/user/user';
 import { useRouter } from 'next/navigation';
 import { usePatchApiEventEventID } from '@/generated/api/event/event';
 import { useSession } from 'next-auth/react';
@@ -17,6 +16,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { Button } from '@/components/ui/button';
 import { fromZodIssue } from 'zod-validation-error/v4';
 import type { $ZodIssue } from 'zod/v4/core';
+import { useGetApiCalendar } from '@/generated/api/calendar/calendar';
 
 moment.updateLocale('en', {
   week: {
@@ -25,12 +25,28 @@ moment.updateLocale('en', {
   },
 });
 
+function eventPropGetter(event: {
+  id: string;
+  start: Date;
+  end: Date;
+  type: UserCalendarSchemaItem['type'];
+  userId?: string;
+  colorOverride?: string;
+}) {
+  return {
+    style: event.colorOverride
+      ? { backgroundColor: event.colorOverride }
+      : undefined,
+  };
+}
+
 const DaDRBCalendar = withDragAndDrop<
   {
     id: string;
     start: Date;
     end: Date;
     type: UserCalendarSchemaItem['type'];
+    userId?: string;
   },
   {
     id: string;
@@ -44,9 +60,21 @@ const localizer = momentLocalizer(moment);
 export default function Calendar({
   userId,
   height,
+  additionalEvents = [],
+  className,
 }: {
-  userId?: string;
+  userId?: string | string[];
   height: string;
+  additionalEvents?: {
+    id: string;
+    title: string;
+    start: Date;
+    end: Date;
+    type: UserCalendarSchemaItem['type'];
+    userId?: string;
+    colorOverride?: string;
+  }[];
+  className?: string;
 }) {
   return (
     <QueryErrorResetBoundary>
@@ -67,10 +95,26 @@ export default function Calendar({
             </div>
           )}
         >
-          {userId ? (
-            <CalendarWithUserEvents userId={userId} height={height} />
+          {typeof userId === 'string' ? (
+            <CalendarWithUserEvents
+              userId={userId}
+              height={height}
+              additionalEvents={additionalEvents}
+              className={className}
+            />
+          ) : Array.isArray(userId) && userId.length > 0 ? (
+            <CalendarWithMultiUserEvents
+              userIds={userId}
+              height={height}
+              additionalEvents={additionalEvents}
+              className={className}
+            />
           ) : (
-            <CalendarWithoutUserEvents height={height} />
+            <CalendarWithoutUserEvents
+              height={height}
+              additionalEvents={additionalEvents}
+              className={className}
+            />
           )}
         </ErrorBoundary>
       )}
@@ -81,9 +125,21 @@ export default function Calendar({
 function CalendarWithUserEvents({
   userId,
   height,
+  additionalEvents,
+  className,
 }: {
   userId: string;
   height: string;
+  additionalEvents?: {
+    id: string;
+    title: string;
+    start: Date;
+    end: Date;
+    type: UserCalendarSchemaItem['type'];
+    userId?: string;
+    colorOverride?: string;
+  }[];
+  className?: string;
 }) {
   const sesstion = useSession();
   const [currentView, setCurrentView] = React.useState<
@@ -92,9 +148,9 @@ function CalendarWithUserEvents({
   const [currentDate, setCurrentDate] = React.useState<Date>(new Date());
   const router = useRouter();
 
-  const { data, refetch, error, isError } = useGetApiUserUserCalendar(
-    userId,
+  const { data, refetch, error, isError } = useGetApiCalendar(
     {
+      userIds: [userId, userId + '_blocked'],
       start: moment(currentDate)
         .startOf(
           currentView === 'agenda'
@@ -137,6 +193,8 @@ function CalendarWithUserEvents({
 
   return (
     <DaDRBCalendar
+      className={className}
+      eventPropGetter={eventPropGetter}
       localizer={localizer}
       culture='de-DE'
       defaultView='week'
@@ -152,15 +210,17 @@ function CalendarWithUserEvents({
       onNavigate={(date) => {
         setCurrentDate(date);
       }}
-      events={
-        data?.data.calendar.map((event) => ({
+      events={[
+        ...(data?.data.calendar.map((event) => ({
           id: event.id,
           title: event.type === 'event' ? event.title : 'Blocker',
           start: new Date(event.start_time),
           end: new Date(event.end_time),
           type: event.type,
-        })) ?? []
-      }
+          userId: event.users[0],
+        })) ?? []),
+        ...(additionalEvents ?? []),
+      ]}
       onSelectEvent={(event) => {
         router.push(`/events/${event.id}`);
       }}
@@ -173,7 +233,7 @@ function CalendarWithUserEvents({
       resourceTitleAccessor={(event) => event.title}
       startAccessor={(event) => event.start}
       endAccessor={(event) => event.end}
-      selectable={sesstion.data?.user?.id === userId}
+      selectable={sesstion.data?.user?.id === userId && !additionalEvents}
       onEventDrop={(event) => {
         const { start, end, event: droppedEvent } = event;
         if (droppedEvent.type === 'blocked_private') return;
@@ -228,7 +288,116 @@ function CalendarWithUserEvents({
   );
 }
 
-function CalendarWithoutUserEvents({ height }: { height: string }) {
+function CalendarWithMultiUserEvents({
+  userIds,
+  height,
+  additionalEvents,
+  className,
+}: {
+  userIds: string[];
+  height: string;
+  additionalEvents?: {
+    id: string;
+    title: string;
+    start: Date;
+    end: Date;
+    type: UserCalendarSchemaItem['type'];
+    userId?: string;
+    colorOverride?: string;
+  }[];
+  className?: string;
+}) {
+  const [currentView, setCurrentView] = React.useState<
+    'month' | 'week' | 'day' | 'agenda' | 'work_week'
+  >('week');
+  const [currentDate, setCurrentDate] = React.useState<Date>(new Date());
+
+  const { data, error, isError } = useGetApiCalendar(
+    {
+      userIds: userIds,
+      start: moment(currentDate)
+        .startOf(
+          currentView === 'agenda'
+            ? 'month'
+            : currentView === 'work_week'
+              ? 'week'
+              : currentView,
+        )
+        .toISOString(),
+      end: moment(currentDate)
+        .endOf(
+          currentView === 'agenda'
+            ? 'month'
+            : currentView === 'work_week'
+              ? 'week'
+              : currentView,
+        )
+        .toISOString(),
+    },
+    {
+      query: {
+        refetchOnWindowFocus: true,
+        refetchOnReconnect: true,
+        refetchOnMount: true,
+      },
+    },
+  );
+
+  if (isError) {
+    throw error.response?.data || 'Failed to fetch calendar data';
+  }
+
+  return (
+    <DaDRBCalendar
+      className={className}
+      eventPropGetter={eventPropGetter}
+      localizer={localizer}
+      culture='de-DE'
+      defaultView='week'
+      components={{
+        toolbar: CustomToolbar,
+      }}
+      style={{
+        height: height,
+      }}
+      onView={setCurrentView}
+      view={currentView}
+      date={currentDate}
+      onNavigate={(date) => {
+        setCurrentDate(date);
+      }}
+      events={[
+        ...(data?.data.calendar.map((event) => ({
+          id: event.id,
+          title: event.type === 'event' ? event.title : 'Blocker',
+          start: new Date(event.start_time),
+          end: new Date(event.end_time),
+          type: event.type,
+          userId: event.users[0],
+        })) ?? []),
+        ...(additionalEvents ?? []),
+      ]}
+    />
+  );
+}
+
+function CalendarWithoutUserEvents({
+  height,
+  additionalEvents,
+  className,
+}: {
+  height: string;
+  additionalEvents?: {
+    id: string;
+    title: string;
+    start: Date;
+    end: Date;
+    type: UserCalendarSchemaItem['type'];
+    userId?: string;
+    colorOverride?: string;
+  }[];
+  className?: string;
+}) {
   const [currentView, setCurrentView] = React.useState<
     'month' | 'week' | 'day' | 'agenda' | 'work_week'
   >('week');
@@ -236,6 +405,8 @@ function CalendarWithoutUserEvents({ height }: { height: string }) {
 
   return (
     <DaDRBCalendar
+      className={className}
+      eventPropGetter={eventPropGetter}
       localizer={localizer}
       culture='de-DE'
       defaultView='week'
@@ -251,6 +422,7 @@ function CalendarWithoutUserEvents({ height }: { height: string }) {
       onNavigate={(date) => {
         setCurrentDate(date);
       }}
+      events={additionalEvents}
     />
   );
 }

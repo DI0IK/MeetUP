@@ -37,7 +37,7 @@ import {
 const items = [
   {
     title: 'Calendar',
-    url: '#',
+    url: '/home',
     icon: CalendarDays,
   },
   {
@@ -52,7 +52,7 @@ const items = [
   },
   {
     title: 'Events',
-    url: '#',
+    url: '/events',
     icon: CalendarClock,
   },
 ];
@@ -75,7 +75,7 @@ export function AppSidebar() {
             className='group-data-[collapsible=]:hidden group-data-[mobile=true]/mobile:hidden'
           ></Logo>
         </SidebarHeader>
-        <SidebarContent className='grid grid-rows-[auto_1fr_auto]'>
+        <SidebarContent className='grid grid-rows-[auto_1fr_auto] overflow-hidden'>
           <Collapsible defaultOpen className='group/collapsible'>
             <SidebarGroup>
               <SidebarGroupLabel asChild>
@@ -114,7 +114,7 @@ export function AppSidebar() {
           <SidebarFooter>
             <SidebarMenuItem className='pl-[8px]'>
               <Link
-                href='/event/new'
+                href='/events/new'
                 className='flex items-center gap-2 text-xl font-label'
               >
                 <CalendarPlus className='size-8' />
