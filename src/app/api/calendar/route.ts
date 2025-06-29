@@ -72,6 +72,9 @@ export const GET = auth(async function GET(req) {
               gte: start,
             },
           },
+          status: {
+            not: 'DECLINED',
+          },
         },
         orderBy: {
           meeting: {
