@@ -22,17 +22,20 @@ import {
 } from '@/components/ui/select';
 import { SettingsDropdown } from '@/components/misc/settings-dropdown';
 import { useRouter } from 'next/navigation';
-import { useGetApiUserMe } from '@/generated/api/user/user';
+import { useDeleteApiUserMe, useGetApiUserMe } from '@/generated/api/user/user';
 import { ThemePicker } from './theme-picker';
 import LabeledInput from '../custom-ui/labeled-input';
 import { GroupWrapper } from '../wrappers/group-wrapper';
 
 import ProfilePictureUpload from './profile-picture-upload';
+import { LogOut } from 'lucide-react';
+import { signOut } from '@/auth';
 
 export default function SettingsPage() {
   const router = useRouter();
   const [currentSection, setCurrentSection] = useState('general');
   const { data } = useGetApiUserMe();
+  const deleteUser = useDeleteApiUserMe();
 
   const renderSettingsContent = () => {
     switch (currentSection) {
@@ -145,7 +148,13 @@ export default function SettingsPage() {
                 </GroupWrapper>
                 <div className='flex items-center justify-evenly sm:flex-row flex-col gap-6'>
                   <Button
-                    // onClick={() => DeleteAccount }
+                    onClick={() => {
+                      deleteUser.mutate(undefined, {
+                        onSuccess: () => {
+                          router.push('/api/logout');
+                        },
+                      });
+                    }}
                     variant='destructive'
                   >
                     Delete Account
@@ -259,98 +268,94 @@ export default function SettingsPage() {
                 <CardTitle>Calendar & Availability</CardTitle>
               </CardHeader>
               <CardContent className='space-y-6'>
-                <fieldset className='space-y-4 p-4 border rounded-md'>
-                  <legend className='text-sm font-medium px-1'>Display</legend>
-                  <div className='space-y-2'>
-                    <Label htmlFor='defaultCalendarView'>
-                      Default Calendar View
-                    </Label>
-                    <Select>
-                      <SelectTrigger id='defaultCalendarView'>
-                        <SelectValue placeholder='Select view' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value='day'>Day</SelectItem>
-                        <SelectItem value='week'>Week</SelectItem>
-                        <SelectItem value='month'>Month</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className='space-y-2'>
-                    <Label htmlFor='weekStartsOn'>Week Starts On</Label>
-                    <Select>
-                      <SelectTrigger id='weekStartsOn'>
-                        <SelectValue placeholder='Select day' />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value='sunday'>Sunday</SelectItem>
-                        <SelectItem value='monday'>Monday</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div className='flex items-center justify-between space-x-2'>
-                    <Label htmlFor='showWeekends' className='font-normal'>
-                      Show Weekends
-                    </Label>
-                    <Switch id='showWeekends' defaultChecked />
-                  </div>
-                </fieldset>
-
-                <fieldset className='space-y-4 p-4 border rounded-md'>
-                  <legend className='text-sm font-medium px-1'>
-                    Availability
-                  </legend>
-                  <div className='space-y-2'>
-                    <Label>Working Hours</Label>
-                    <span className='text-sm text-muted-foreground'>
-                      Define your typical available hours (e.g., Monday-Friday,
-                      9 AM - 5 PM).
-                    </span>
-                    <Button variant='outline_muted' size='sm'>
-                      Set Working Hours
-                    </Button>
-                  </div>
-                  <div className='space-y-2'>
-                    <Label htmlFor='minNoticeBooking'>
-                      Minimum Notice for Bookings
-                    </Label>
-                    <span className='text-sm text-muted-foreground'>
-                      Min time before a booking can be made.
-                    </span>
-                    <div className='space-y-2'>
-                      <Input
-                        id='bookingWindow'
-                        type='text'
-                        placeholder='e.g., 1h'
-                      />
+                {/*--------------------* Calendar --------------------*/}
+                <GroupWrapper title='Calendar'>
+                  <div className='space-y-4'>
+                    <div className='grid grid-cols-1 gap-1'>
+                      <Label htmlFor='defaultCalendarView'>
+                        Default Calendar View
+                      </Label>
+                      <Select>
+                        <SelectTrigger id='defaultCalendarView'>
+                          <SelectValue placeholder='Select view' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value='day'>Day</SelectItem>
+                          <SelectItem value='week'>Week</SelectItem>
+                          <SelectItem value='month'>Month</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className='grid grid-cols-1 gap-1'>
+                      <Label htmlFor='weekStartsOn'>Week Starts On</Label>
+                      <Select>
+                        <SelectTrigger id='weekStartsOn'>
+                          <SelectValue placeholder='Select day' />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value='sunday'>Sunday</SelectItem>
+                          <SelectItem value='monday'>Monday</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className='flex items-center justify-between space-x-2'>
+                      <Label htmlFor='showWeekends' className='font-normal'>
+                        Show Weekends
+                      </Label>
+                      <Switch id='showWeekends' defaultChecked />
                     </div>
                   </div>
-                  <div className='space-y-2'>
-                    <Label htmlFor='bookingWindow'>
-                      Booking Window (days in advance)
-                    </Label>
-                    <span className='text-sm text-muted-foreground'>
-                      Max time in advance a booking can be made.
-                    </span>
-                    <Input
-                      id='bookingWindow'
-                      type='number'
-                      placeholder='e.g., 30d'
-                    />
-                  </div>
-                </fieldset>
+                </GroupWrapper>
+                {/*--------------------* Calendar --------------------*/}
 
+                {/*--------------------* Availability --------------------*/}
+                <GroupWrapper title='Availability'>
+                  <div className='space-y-4'>
+                    <div className='space-y-2'>
+                      <Label>Working Hours</Label>
+                      <span className='text-sm text-muted-foreground'>
+                        Define your typical available hours (e.g.,
+                        Monday-Friday, 9 AM - 5 PM).
+                      </span>
+                      <Button variant='outline_muted' size='sm'>
+                        Set Working Hours
+                      </Button>
+                    </div>
+                    <div className='space-y-2'>
+                      <LabeledInput
+                        type='text'
+                        label='Minimum Notice for Bookings'
+                        subtext='Min time before a booking can be made.'
+                        placeholder='e.g., 1h'
+                        defaultValue={''}
+                      ></LabeledInput>
+                    </div>
+                    <div className='space-y-2'>
+                      <LabeledInput
+                        type='text'
+                        label='Booking Window (days in advance)'
+                        subtext='Max time in advance a booking can be made.'
+                        placeholder='e.g., 30d'
+                        defaultValue={''}
+                      ></LabeledInput>
+                    </div>
+                  </div>
+                </GroupWrapper>
+                {/*--------------------* Availability --------------------*/}
+
+                {/*--------------------* iCalendar Integration --------------------*/}
                 <fieldset className='space-y-4 p-4 border rounded-md'>
                   <legend className='text-sm font-medium px-1'>
                     iCalendar Integration
                   </legend>
                   <div className='space-y-2'>
-                    <Label htmlFor='icalImport'>Import iCal Feed URL</Label>
-                    <Input
-                      id='icalImport'
+                    <LabeledInput
                       type='url'
+                      label='Import iCal Feed URL'
+                      subtext='Max time in advance a booking can be made.'
                       placeholder='https://calendar.example.com/feed.ics'
-                    />
+                      defaultValue={''}
+                    ></LabeledInput>
                     <Button size='sm' className='mt-1'>
                       Add Feed
                     </Button>
@@ -365,6 +370,7 @@ export default function SettingsPage() {
                     </Button>
                   </div>
                 </fieldset>
+                {/*--------------------* iCalendar Integration --------------------*/}
               </CardContent>
             </ScrollableSettingsWrapper>
           </Card>

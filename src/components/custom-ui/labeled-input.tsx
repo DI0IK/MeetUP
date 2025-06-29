@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 export default function LabeledInput({
   type,
   label,
+  subtext,
   placeholder,
   value,
   name,
@@ -16,8 +17,8 @@ export default function LabeledInput({
   error,
   ...rest
 }: {
-  type: 'text' | 'email' | 'password' | 'file';
   label: string;
+  subtext?: string;
   placeholder?: string;
   value?: string;
   name?: string;
@@ -30,6 +31,11 @@ export default function LabeledInput({
   return (
     <div className='grid grid-cols-1 gap-1'>
       <Label htmlFor={name}>{label}</Label>
+      {subtext && (
+        <Label className='text-sm text-muted-foreground' htmlFor={name}>
+          {subtext}
+        </Label>
+      )}
       {variantSize === 'textarea' ? (
         <Textarea
           placeholder={placeholder}
