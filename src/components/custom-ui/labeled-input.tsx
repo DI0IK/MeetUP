@@ -1,8 +1,8 @@
 import { Input, Textarea } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import React from 'react';
+import React, { ForwardRefExoticComponent, RefAttributes } from 'react';
 import { Button } from '../ui/button';
-import { Eye, EyeOff } from 'lucide-react';
+import { Eye, EyeOff, LucideProps } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
 export default function LabeledInput({
@@ -12,6 +12,7 @@ export default function LabeledInput({
   placeholder,
   value,
   name,
+  icon,
   variantSize = 'default',
   autocomplete,
   error,
@@ -22,11 +23,22 @@ export default function LabeledInput({
   placeholder?: string;
   value?: string;
   name?: string;
+  icon?: ForwardRefExoticComponent<
+    Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
+  >;
   variantSize?: 'default' | 'big' | 'textarea';
   autocomplete?: string;
   error?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
   const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [inputValue, setInputValue] = React.useState(value || '');
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+    if (rest.onChange) {
+      rest.onChange(e);
+    }
+  };
 
   return (
     <div className='grid grid-cols-1 gap-1'>
@@ -50,18 +62,32 @@ export default function LabeledInput({
             className={cn(
               type === 'password' ? 'pr-[50px]' : '',
               variantSize === 'big'
-                ? 'h-12 file:h-10 text-lg gplaceholder:text-lg sm:text-2xl sm:placeholder:text-2xl'
+                ? 'h-12 file:h-10 text-lg placeholder:text-lg sm:text-2xl sm:placeholder:text-2xl'
                 : '',
+              icon && inputValue === '' ? 'pl-10' : '',
+              'transition-all duration-300 ease-in-out',
             )}
             type={passwordVisible ? 'text' : type}
             placeholder={placeholder}
-            defaultValue={value}
+            value={inputValue}
             id={name}
             name={name}
             autoComplete={autocomplete}
             {...rest}
+            onChange={handleInputChange}
           />
-
+          {icon && (
+            <span
+              className={cn(
+                'absolute left-3 top-1/2 -translate-y-1/2 text-muted-input transition-all duration-300 ease-in-out',
+                inputValue === ''
+                  ? 'opacity-100 scale-100'
+                  : 'opacity-0 scale-75 pointer-events-none',
+              )}
+            >
+              {React.createElement(icon)}
+            </span>
+          )}
           {type === 'password' && (
             <Button
               className='absolute right-0 top-0 w-[36px] h-[36px]'
@@ -74,7 +100,6 @@ export default function LabeledInput({
           )}
         </span>
       )}
-
       {error && <p className='text-red-500 text-sm mt-1'>{error}</p>}
     </div>
   );
