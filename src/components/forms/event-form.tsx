@@ -374,6 +374,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
                   end: endDate ? new Date(endDate) : new Date(),
                   type: 'event',
                   userId: 'create-event',
+                  colorOverride: '#ff9800',
                 },
               ]}
               height='600px'

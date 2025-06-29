@@ -17,10 +17,6 @@ import { Button } from '@/components/ui/button';
 import { fromZodIssue } from 'zod-validation-error/v4';
 import type { $ZodIssue } from 'zod/v4/core';
 import { useGetApiCalendar } from '@/generated/api/calendar/calendar';
-//import {
-//  generateColor,
-//  generateSecondaryColor,
-//} from '@marko19907/string-to-color';
 
 moment.updateLocale('en', {
   week: {
@@ -29,21 +25,18 @@ moment.updateLocale('en', {
   },
 });
 
-function eventPropGetter() {
-  //  event: {
-  //  id: string;
-  //  start: Date;
-  //  end: Date;
-  //  type: UserCalendarSchemaItem['type'];
-  //  userId?: string;
-  // }
+function eventPropGetter(event: {
+  id: string;
+  start: Date;
+  end: Date;
+  type: UserCalendarSchemaItem['type'];
+  userId?: string;
+  colorOverride?: string;
+}) {
   return {
-    //  style: {
-    //    backgroundColor: generateColor(event.userId || 'defaultColor', {
-    //      saturation: 0.7,
-    //      lightness: 0.5,
-    //    }),
-    //  },
+    style: event.colorOverride
+      ? { backgroundColor: event.colorOverride }
+      : undefined,
   };
 }
 
@@ -79,6 +72,7 @@ export default function Calendar({
     end: Date;
     type: UserCalendarSchemaItem['type'];
     userId?: string;
+    colorOverride?: string;
   }[];
   className?: string;
 }) {
@@ -143,6 +137,7 @@ function CalendarWithUserEvents({
     end: Date;
     type: UserCalendarSchemaItem['type'];
     userId?: string;
+    colorOverride?: string;
   }[];
   className?: string;
 }) {
@@ -238,7 +233,7 @@ function CalendarWithUserEvents({
       resourceTitleAccessor={(event) => event.title}
       startAccessor={(event) => event.start}
       endAccessor={(event) => event.end}
-      selectable={sesstion.data?.user?.id === userId}
+      selectable={sesstion.data?.user?.id === userId && !additionalEvents}
       onEventDrop={(event) => {
         const { start, end, event: droppedEvent } = event;
         if (droppedEvent.type === 'blocked_private') return;
@@ -308,6 +303,7 @@ function CalendarWithMultiUserEvents({
     end: Date;
     type: UserCalendarSchemaItem['type'];
     userId?: string;
+    colorOverride?: string;
   }[];
   className?: string;
 }) {
@@ -398,6 +394,7 @@ function CalendarWithoutUserEvents({
     end: Date;
     type: UserCalendarSchemaItem['type'];
     userId?: string;
+    colorOverride?: string;
   }[];
   className?: string;
 }) {

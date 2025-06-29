@@ -22,7 +22,7 @@ export default function Home() {
       <div className='w-full sm:w-[90%]'>
         <Calendar
           userId={data?.data.user?.id}
-          height='calc(100svh - 50px - (var(--spacing) * 2 * 5))'
+          height='calc(100svh - 115px - (var(--spacing) * 2 * 5))'
         />
       </div>
     </div>

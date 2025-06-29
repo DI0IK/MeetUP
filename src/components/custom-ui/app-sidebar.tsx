@@ -37,7 +37,7 @@ import {
 const items = [
   {
     title: 'Calendar',
-    url: '#',
+    url: '/home',
     icon: CalendarDays,
   },
   {
@@ -52,7 +52,7 @@ const items = [
   },
   {
     title: 'Events',
-    url: '#',
+    url: '/events',
     icon: CalendarClock,
   },
 ];
@@ -114,7 +114,7 @@ export function AppSidebar() {
           <SidebarFooter>
             <SidebarMenuItem className='pl-[8px]'>
               <Link
-                href='/event/new'
+                href='/events/new'
                 className='flex items-center gap-2 text-xl font-label'
               >
                 <CalendarPlus className='size-8' />
