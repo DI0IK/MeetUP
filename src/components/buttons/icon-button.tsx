@@ -1,19 +1,20 @@
 import { Button } from '@/components/ui/button';
-
-import { IconProp } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { LucideProps } from 'lucide-react';
+import React, { ForwardRefExoticComponent, RefAttributes } from 'react';
 
 export function IconButton({
   icon,
   children,
   ...props
 }: {
-  icon: IconProp;
-  children: React.ReactNode;
+  icon?: ForwardRefExoticComponent<
+    Omit<LucideProps, 'ref'> & RefAttributes<SVGSVGElement>
+  >;
+  children?: React.ReactNode;
 } & React.ComponentProps<typeof Button>) {
   return (
     <Button type='button' variant='secondary' {...props}>
-      <FontAwesomeIcon icon={icon} className='mr-2' />
+      {icon && React.createElement(icon, { className: 'mr-2' })}
       {children}
     </Button>
   );

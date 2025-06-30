@@ -62,18 +62,20 @@ export function AppSidebar() {
     <>
       <Sidebar collapsible='icon' variant='sidebar'>
         <SidebarHeader className='overflow-hidden'>
-          <Logo
-            colorType='colored'
-            logoType='combo'
-            height={50}
-            className='group-data-[collapsible=icon]:hidden min-w-[203px]'
-          ></Logo>
-          <Logo
-            colorType='colored'
-            logoType='submark'
-            height={50}
-            className='group-data-[collapsible=]:hidden group-data-[mobile=true]/mobile:hidden'
-          ></Logo>
+          <Link href='/home'>
+            <Logo
+              colorType='colored'
+              logoType='combo'
+              height={50}
+              className='group-data-[collapsible=icon]:hidden min-w-[203px]'
+            ></Logo>
+            <Logo
+              colorType='colored'
+              logoType='submark'
+              height={50}
+              className='group-data-[collapsible=]:hidden group-data-[mobile=true]/mobile:hidden'
+            ></Logo>
+          </Link>
         </SidebarHeader>
         <SidebarContent className='grid grid-rows-[auto_1fr_auto] overflow-hidden'>
           <Collapsible defaultOpen className='group/collapsible'>

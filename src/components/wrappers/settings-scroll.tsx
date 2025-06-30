@@ -1,16 +1,16 @@
-import React from 'react';
+import { cn } from '@/lib/utils';
+import type * as React from 'react';
 
-interface ScrollableContentWrapperProps {
-  children: React.ReactNode;
+interface ScrollableSettingsWrapperProps {
   className?: string;
+  children: React.ReactNode;
 }
 
-export const ScrollableSettingsWrapper: React.FC<
-  ScrollableContentWrapperProps
-> = ({ children, className = '' }) => {
+export function ScrollableSettingsWrapper({
+  className,
+  children,
+}: ScrollableSettingsWrapperProps) {
   return (
-    <div className={`h-[500px] overflow-y-auto space-y-2 ${className}`}>
-      {children}
-    </div>
+    <div className={cn('overflow-y-auto h-full', className)}>{children}</div>
   );
-};
+}
