@@ -48,6 +48,7 @@ export const VisibleSlotSchema = EventSchema.omit({
     type: zod.literal('event'),
     users: zod.string().array(),
     user_id: zod.string().optional(),
+    organizer_id: zod.string().optional(),
   })
   .openapi('VisibleSlotSchema', {
     description: 'Visible time slot in the user calendar',

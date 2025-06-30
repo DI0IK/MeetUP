@@ -85,3 +85,14 @@ export const EventIdParamSchema = registry.registerParameter(
     example: '67890',
   }),
 );
+
+export const SlotIdParamSchema = registry.registerParameter(
+  'SlotIdParam',
+  zod.string().openapi({
+    param: {
+      name: 'slotID',
+      in: 'path',
+    },
+    example: 'abcde12345',
+  }),
+);
