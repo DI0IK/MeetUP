@@ -2,7 +2,7 @@
 
 import React from 'react';
 
-import { SidebarProvider } from '../custom-ui/sidebar';
+import { SidebarProvider } from '@/components/custom-ui/sidebar';
 
 export default function SidebarProviderWrapper({
   defaultOpen,

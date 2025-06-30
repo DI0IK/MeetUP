@@ -7,8 +7,8 @@ import {
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
 
-import { SuccessResponseSchema } from '../../validation';
-import { FullUserResponseSchema } from '../validation';
+import { SuccessResponseSchema } from '@/app/api/validation';
+import { FullUserResponseSchema } from '@/app/api/user/validation';
 import { updateUserServerSchema } from './validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {

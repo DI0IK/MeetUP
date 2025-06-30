@@ -6,8 +6,8 @@ import {
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
 
-import { UserIdParamSchema } from '../../validation';
-import { PublicUserResponseSchema } from '../validation';
+import { UserIdParamSchema } from '@/app/api/validation';
+import { PublicUserResponseSchema } from '@/app/api/user/validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({

@@ -85,6 +85,7 @@
     "eslint": "9.30.0",
     "eslint-config-next": "15.3.4",
     "eslint-config-prettier": "10.1.5",
+    "eslint-plugin-no-relative-import-paths": "^1.6.1",
     "orval": "7.10.0",
     "postcss": "8.5.6",
     "prettier": "3.6.2",

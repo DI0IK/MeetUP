@@ -6,7 +6,7 @@ import {
 import { auth } from '@/auth';
 import { prisma } from '@/prisma';
 
-import { ErrorResponseSchema, ZodErrorResponseSchema } from '../validation';
+import { ErrorResponseSchema, ZodErrorResponseSchema } from '@/app/api/validation';
 import {
   EventResponseSchema,
   EventsResponseSchema,

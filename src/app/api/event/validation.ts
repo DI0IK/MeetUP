@@ -4,7 +4,7 @@ import zod from 'zod/v4';
 import {
   PublicUserSchema,
   existingUserIdServerSchema,
-} from '../user/validation';
+} from '@/app/api/user/validation';
 import { ParticipantSchema } from './[eventID]/participant/validation';
 
 extendZodWithOpenApi(zod);

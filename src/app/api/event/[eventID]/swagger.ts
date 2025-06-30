@@ -13,7 +13,7 @@ import {
   SuccessResponseSchema,
 } from '@/app/api/validation';
 
-import { EventResponseSchema, updateEventSchema } from '../validation';
+import { EventResponseSchema, updateEventSchema } from '@/app/api/event/validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({

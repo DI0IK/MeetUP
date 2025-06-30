@@ -24,7 +24,7 @@ import {
 } from '@/generated/api/event/event';
 import { useGetApiUserMe } from '@/generated/api/user/user';
 
-import ParticipantListEntry from '../custom-ui/participant-list-entry';
+import ParticipantListEntry from '@/components/custom-ui/participant-list-entry';
 import {
   Dialog,
   DialogContent,
@@ -33,7 +33,7 @@ import {
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from '../ui/dialog';
+} from '@/components/ui/dialog';
 
 type User = zod.output<typeof PublicUserSchema>;
 

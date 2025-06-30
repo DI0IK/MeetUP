@@ -3,16 +3,18 @@ import {
   userAuthenticated,
 } from '@/lib/apiHelpers';
 
-import { auth } from '@/auth';
-import { prisma } from '@/prisma';
-
+import {
+  EventResponseSchema,
+  updateEventSchema,
+} from '@/app/api/event/validation';
 import {
   ErrorResponseSchema,
   SuccessResponseSchema,
   ZodErrorResponseSchema,
-} from '../../validation';
-import { EventResponseSchema } from '../validation';
-import { updateEventSchema } from '../validation';
+} from '@/app/api/validation';
+
+import { auth } from '@/auth';
+import { prisma } from '@/prisma';
 
 export const GET = auth(async (req, { params }) => {
   const authCheck = userAuthenticated(req);

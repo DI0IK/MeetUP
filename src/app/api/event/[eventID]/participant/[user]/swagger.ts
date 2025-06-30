@@ -17,7 +17,7 @@ import {
 import {
   ParticipantResponseSchema,
   updateParticipantSchema,
-} from '../validation';
+} from '@/app/api/event/[eventID]/participant/validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({

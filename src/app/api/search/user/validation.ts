@@ -1,6 +1,6 @@
 import zod from 'zod/v4';
 
-import { PublicUserSchema } from '../../user/validation';
+import { PublicUserSchema } from '@/app/api/user/validation';
 
 export const searchUserSchema = zod.object({
   query: zod.string().optional().default(''),

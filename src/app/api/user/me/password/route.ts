@@ -13,8 +13,8 @@ import {
 import { auth } from '@/auth';
 import { prisma } from '@/prisma';
 
-import { FullUserResponseSchema } from '../../validation';
-import { updateUserPasswordServerSchema } from '../validation';
+import { FullUserResponseSchema } from '@/app/api/user/validation';
+import { updateUserPasswordServerSchema } from '@/app/api/user/me/validation';
 
 export const PATCH = auth(async function PATCH(req) {
   const authCheck = userAuthenticated(req);

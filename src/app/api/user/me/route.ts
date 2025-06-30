@@ -12,7 +12,7 @@ import {
 import { auth } from '@/auth';
 import { prisma } from '@/prisma';
 
-import { FullUserResponseSchema } from '../validation';
+import { FullUserResponseSchema } from '@/app/api/user/validation';
 import { updateUserServerSchema } from './validation';
 
 export const GET = auth(async function GET(req) {

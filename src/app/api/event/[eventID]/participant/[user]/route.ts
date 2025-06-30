@@ -15,7 +15,7 @@ import { prisma } from '@/prisma';
 import {
   ParticipantResponseSchema,
   updateParticipantSchema,
-} from '../validation';
+} from '@/app/api/event/[eventID]/participant/validation';
 
 export const GET = auth(async (req, { params }) => {
   const authCheck = userAuthenticated(req);
