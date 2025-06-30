@@ -17,7 +17,7 @@ export default function Events() {
   const events = eventsData?.data?.events || [];
 
   return (
-    <div className='relative h-screen flex flex-col items-center'>
+    <div className='relative h-full flex flex-col items-center'>
       {/* Heading */}
       <h1 className='text-3xl font-bold mt-8 mb-4 text-center z-10'>
         My Events
