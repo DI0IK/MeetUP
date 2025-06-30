@@ -175,7 +175,6 @@ const EventForm: React.FC<EventFormProps> = (props) => {
       console.log('Creating event');
       const mutationResult = await createEvent({ data });
       eventID = mutationResult.data.event.id;
-      createEvent({ data });
     }
 
     toast.custom((t) => (

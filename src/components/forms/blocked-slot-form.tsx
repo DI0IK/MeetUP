@@ -71,7 +71,7 @@ export default function BlockedSlotForm({
   const { mutateAsync: deleteBlockedSlot } = useDeleteApiBlockedSlotsSlotID({
     mutation: {
       onSuccess: () => {
-        router.push('/blocked_slots');
+        router.push('/blocker');
       },
     },
   });
@@ -80,7 +80,7 @@ export default function BlockedSlotForm({
     mutation: {
       onSuccess: () => {
         resetCreate();
-        router.push('/blocked_slots');
+        router.push('/blocker');
       },
     },
   });
@@ -155,9 +155,7 @@ export default function BlockedSlotForm({
             </div>
             <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full max-sm:flex max-sm:justify-center'>
               <h1 className='text-center'>
-                {existingBlockedSlotId
-                  ? 'Update Blocked Slot'
-                  : 'Create Blocked Slot'}
+                {existingBlockedSlotId ? 'Update Blocker' : 'Create Blocker'}
               </h1>
             </div>
             <div className='w-0 sm:w-[100px]'></div>
@@ -216,9 +214,7 @@ export default function BlockedSlotForm({
                   formStateCreate.isSubmitting || formStateUpdate.isSubmitting
                 }
               >
-                {existingBlockedSlotId
-                  ? 'Update Blocked Slot'
-                  : 'Create Blocked Slot'}
+                {existingBlockedSlotId ? 'Update Blocker' : 'Create Blocker'}
               </Button>
               {existingBlockedSlotId && (
                 <Button
@@ -226,7 +222,7 @@ export default function BlockedSlotForm({
                   variant='destructive'
                   onClick={onDeleteSubmit}
                 >
-                  Delete Blocked Slot
+                  Delete Blocker
                 </Button>
               )}
             </div>

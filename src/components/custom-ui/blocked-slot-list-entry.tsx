@@ -22,7 +22,7 @@ export default function BlockedSlotListEntry(slot: BlockedSlotListEntryProps) {
     });
   };
   return (
-    <Link href={`/blocked_slots/${slot.id}`} className='block'>
+    <Link href={`/blocker/${slot.id}`} className='block'>
       <Card className='w-full'>
         <div className='grid grid-cols-1 gap-2 mx-auto md:mx-4 md:grid-cols-[80px_1fr_250px]'>
           <div className='w-full items-center justify-center grid'>

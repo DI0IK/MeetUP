@@ -22,7 +22,7 @@ export default function BlockedSlots() {
     <div className='relative h-full flex flex-col items-center'>
       {/* Heading */}
       <h1 className='text-3xl font-bold mt-8 mb-4 text-center z-10'>
-        My Blocked Slots
+        My Blockers
       </h1>
 
       {/* Scrollable blocked slot list */}
@@ -40,11 +40,11 @@ export default function BlockedSlots() {
           ) : (
             <div className='flex flex-1 flex-col items-center justify-center min-h-[300px]'>
               <Label size='large' className='justify-center text-center'>
-                You don&#39;t have any blocked slots right now
+                You don&#39;t have any blockers right now
               </Label>
               <RedirectButton
-                redirectUrl='/blocked_slots/new'
-                buttonText='create Blocked Slot'
+                redirectUrl='/blocker/new'
+                buttonText='Create New Blocker'
                 className='mt-4'
               />
             </div>

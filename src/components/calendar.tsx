@@ -234,7 +234,7 @@ function CalendarWithUserEvents({
       onSelectEvent={(event) => {
         if (event.type === 'blocked_private') return;
         if (event.type === 'blocked_owned') {
-          router.push(`/blocked_slots/${event.id}`);
+          router.push(`/blocker/${event.id}`);
           return;
         }
         if (event.type === 'event') {
