@@ -81,8 +81,8 @@ export function AppSidebar() {
           <Collapsible defaultOpen className='group/collapsible'>
             <SidebarGroup>
               <SidebarGroupLabel asChild>
-                <CollapsibleTrigger>
-                  <span className='flex items-center gap-2 text-xl font-label text-neutral-100'>
+                <CollapsibleTrigger disabled>
+                  <span className='flex items-center gap-2 text-xl font-label text-disabled'>
                     <Star className='size-8' />{' '}
                     <span className='group-data-[collapsible=icon]:hidden'>
                       Favorites
