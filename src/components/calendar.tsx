@@ -233,7 +233,7 @@ function CalendarWithUserEvents({
       resourceTitleAccessor={(event) => event.title}
       startAccessor={(event) => event.start}
       endAccessor={(event) => event.end}
-      selectable={sesstion.data?.user?.id === userId && !additionalEvents}
+      selectable={sesstion.data?.user?.id === userId}
       onEventDrop={(event) => {
         const { start, end, event: droppedEvent } = event;
         if (droppedEvent.type === 'blocked_private') return;
