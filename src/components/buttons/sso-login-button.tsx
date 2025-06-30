@@ -1,6 +1,6 @@
 import { signIn } from '@/auth';
 import { IconButton } from '@/components/buttons/icon-button';
-import { Fingerprint, ScanEye } from 'lucide-react';
+import { Fingerprint } from 'lucide-react';
 
 export default function SSOLogin({
   provider,
