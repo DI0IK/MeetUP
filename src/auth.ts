@@ -2,8 +2,15 @@ import NextAuth, { CredentialsSignin } from 'next-auth';
 
 import { Prisma } from '@/generated/prisma';
 import type { Provider } from 'next-auth/providers';
+
 import Credentials from 'next-auth/providers/credentials';
-import Authentik from 'next-auth/providers/authentik';
+import AuthentikProvider from 'next-auth/providers/authentik';
+import DiscordProvider from 'next-auth/providers/discord';
+import FacebookProvider from 'next-auth/providers/facebook';
+import GithubProvider from 'next-auth/providers/github';
+import GitlabProvider from 'next-auth/providers/gitlab';
+import GoogleProvider from 'next-auth/providers/google';
+import KeycloakProvider from 'next-auth/providers/keycloak';
 
 import { PrismaAdapter } from '@auth/prisma-adapter';
 import { prisma } from '@/prisma';
@@ -88,7 +95,13 @@ const providers: Provider[] = [
         }
       },
     }),
-  process.env.AUTH_AUTHENTIK_ID && Authentik,
+  process.env.AUTH_AUTHENTIK_ID && AuthentikProvider,
+  process.env.AUTH_DISCORD_ID && DiscordProvider,
+  process.env.AUTH_FACEBOOK_ID && FacebookProvider,
+  process.env.AUTH_GITHUB_ID && GithubProvider,
+  process.env.AUTH_GITLAB_ID && GitlabProvider,
+  process.env.AUTH_GOOGLE_ID && GoogleProvider,
+  process.env.AUTH_KEYCLOAK_ID && KeycloakProvider,
 ].filter(Boolean) as Provider[];
 
 export const providerMap = providers
