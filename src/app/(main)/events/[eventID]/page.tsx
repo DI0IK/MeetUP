@@ -40,14 +40,12 @@ export default function ShowEvent() {
 
   if (isLoading || userLoading) {
     return (
-      <div className='flex justify-center items-center h-screen'>
-        Loading...
-      </div>
+      <div className='flex justify-center items-center h-full'>Loading...</div>
     );
   }
   if (error || !eventData?.data?.event) {
     return (
-      <div className='flex justify-center items-center h-screen'>
+      <div className='flex justify-center items-center h-full'>
         Error loading event.
       </div>
     );
@@ -70,7 +68,7 @@ export default function ShowEvent() {
   };
 
   return (
-    <div className='flex items-center justify-center h-screen'>
+    <div className='flex items-center justify-center h-full'>
       <Card className='w-[80%] max-w-screen p-0 gap-0 max-xl:w-[95%] mx-auto'>
         <CardHeader className='p-0 m-0 gap-0' />
 
