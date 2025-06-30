@@ -1,4 +1,21 @@
 {
   "singleQuote": true,
-  "jsxSingleQuote": true
+  "jsxSingleQuote": true,
+  "semi": true,
+  "trailingComma": "all",
+  "printWidth": 80,
+  "tabWidth": 2,
+  "useTabs": false,
+  "endOfLine": "lf",
+  "importOrder": [
+    "^@/components/(.*)$",
+    "^@/lib/(.*)$",
+    "^@/app/(.*)$",
+    "^@/generated/(.*)$",
+    "^@/(auth|prisma)$",
+    "^[./]"
+  ],
+  "importOrderSeparation": true,
+  "importOrderSortSpecifiers": true,
+  "plugins": ["@trivago/prettier-plugin-sort-imports"]
 }

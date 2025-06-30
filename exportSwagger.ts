@@ -1,7 +1,8 @@
-import { registry } from '@/lib/swagger';
 import { OpenApiGeneratorV3 } from '@asteasolutions/zod-to-openapi';
 import fs from 'fs';
 import path from 'path';
+
+import { registry } from '@/lib/swagger';
 
 function recursiveFileSearch(dir: string, fileList: string[] = []): string[] {
   const files = fs.readdirSync(dir);
