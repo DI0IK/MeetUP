@@ -1,5 +1,10 @@
 'use client';
 
+import { ChevronDown, User } from 'lucide-react';
+import Image from 'next/image';
+import Link from 'next/link';
+
+import UserCard from '@/components/misc/user-card';
 import { Avatar } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import {
@@ -9,11 +14,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+
 import { useGetApiUserMe } from '@/generated/api/user/user';
-import { ChevronDown, User } from 'lucide-react';
-import Image from 'next/image';
-import Link from 'next/link';
-import UserCard from '@/components/misc/user-card';
 
 export default function UserDropdown() {
   const { data } = useGetApiUserMe();

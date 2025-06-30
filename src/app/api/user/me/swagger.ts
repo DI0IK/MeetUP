@@ -1,13 +1,15 @@
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import { FullUserResponseSchema } from '../validation';
-import { updateUserServerSchema } from './validation';
+
 import {
   invalidRequestDataResponse,
   notAuthenticatedResponse,
   serverReturnedDataValidationErrorResponse,
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
+
 import { SuccessResponseSchema } from '../../validation';
+import { FullUserResponseSchema } from '../validation';
+import { updateUserServerSchema } from './validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({

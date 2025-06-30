@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+
 import { SidebarProvider } from '../custom-ui/sidebar';
 
 export default function SidebarProviderWrapper({

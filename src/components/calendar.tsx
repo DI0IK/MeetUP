@@ -1,22 +1,24 @@
 'use client';
 
+import { QueryErrorResetBoundary } from '@tanstack/react-query';
+import moment from 'moment';
+import { useSession } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+import React from 'react';
 import { Calendar as RBCalendar, momentLocalizer } from 'react-big-calendar';
 import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop';
-import moment from 'moment';
-import '@/components/react-big-calendar.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css';
-import CustomToolbar from '@/components/custom-toolbar';
-import React from 'react';
-import { useRouter } from 'next/navigation';
-import { usePatchApiEventEventID } from '@/generated/api/event/event';
-import { useSession } from 'next-auth/react';
-import { UserCalendarSchemaItem } from '@/generated/api/meetup.schemas';
-import { QueryErrorResetBoundary } from '@tanstack/react-query';
 import { ErrorBoundary } from 'react-error-boundary';
-import { Button } from '@/components/ui/button';
 import { fromZodIssue } from 'zod-validation-error/v4';
 import type { $ZodIssue } from 'zod/v4/core';
+
+import CustomToolbar from '@/components/custom-toolbar';
+import '@/components/react-big-calendar.css';
+import { Button } from '@/components/ui/button';
+
 import { useGetApiCalendar } from '@/generated/api/calendar/calendar';
+import { usePatchApiEventEventID } from '@/generated/api/event/event';
+import { UserCalendarSchemaItem } from '@/generated/api/meetup.schemas';
 
 moment.updateLocale('en', {
   week: {

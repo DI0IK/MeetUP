@@ -1,10 +1,11 @@
+import type { Metadata } from 'next';
+import { SessionProvider } from 'next-auth/react';
+
+import { Toaster } from '@/components/ui/sonner';
+import { QueryProvider } from '@/components/wrappers/query-provider';
 import { ThemeProvider } from '@/components/wrappers/theme-provider';
 
-import type { Metadata } from 'next';
 import './globals.css';
-import { QueryProvider } from '@/components/wrappers/query-provider';
-import { Toaster } from '@/components/ui/sonner';
-import { SessionProvider } from 'next-auth/react';
 
 export const metadata: Metadata = {
   title: 'MeetUp',

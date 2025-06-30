@@ -1,12 +1,14 @@
-import {
-  userCalendarQuerySchema,
-  UserCalendarResponseSchema,
-} from './validation';
+import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+
 import {
   notAuthenticatedResponse,
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
-import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+
+import {
+  UserCalendarResponseSchema,
+  userCalendarQuerySchema,
+} from './validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({

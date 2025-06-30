@@ -1,4 +1,5 @@
 import zod from 'zod/v4';
+
 import { PublicUserSchema } from '../../user/validation';
 
 export const searchUserSchema = zod.object({

@@ -1,16 +1,20 @@
-import { auth } from '@/auth';
-import { prisma } from '@/prisma';
-import { updateUserPasswordServerSchema } from '../validation';
+import bcrypt from 'bcryptjs';
+
 import {
   returnZodTypeCheckedResponse,
   userAuthenticated,
 } from '@/lib/apiHelpers';
-import { FullUserResponseSchema } from '../../validation';
+
 import {
   ErrorResponseSchema,
   ZodErrorResponseSchema,
 } from '@/app/api/validation';
-import bcrypt from 'bcryptjs';
+
+import { auth } from '@/auth';
+import { prisma } from '@/prisma';
+
+import { FullUserResponseSchema } from '../../validation';
+import { updateUserPasswordServerSchema } from '../validation';
 
 export const PATCH = auth(async function PATCH(req) {
   const authCheck = userAuthenticated(req);

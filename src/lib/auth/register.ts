@@ -1,9 +1,11 @@
 'use server';
 
-import type { z } from 'zod/v4';
 import bcrypt from 'bcryptjs';
-import { registerServerSchema } from './validation';
+import type { z } from 'zod/v4';
+
 import { prisma } from '@/prisma';
+
+import { registerServerSchema } from './validation';
 
 export async function registerAction(
   data: z.infer<typeof registerServerSchema>,

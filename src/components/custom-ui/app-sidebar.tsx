@@ -1,6 +1,17 @@
 'use client';
 
+import { ChevronDown } from 'lucide-react';
+import {
+  CalendarClock,
+  CalendarDays,
+  CalendarPlus,
+  Star,
+  User,
+  Users,
+} from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
+
 import {
   Sidebar,
   SidebarContent,
@@ -13,26 +24,12 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/custom-ui/sidebar';
-
-import { ChevronDown } from 'lucide-react';
+import Logo from '@/components/misc/logo';
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
 } from '@/components/ui/collapsible';
-
-import Logo from '@/components/misc/logo';
-
-import Link from 'next/link';
-
-import {
-  Star,
-  CalendarDays,
-  User,
-  Users,
-  CalendarClock,
-  CalendarPlus,
-} from 'lucide-react';
 
 const items = [
   {

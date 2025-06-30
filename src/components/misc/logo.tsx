@@ -1,10 +1,9 @@
 'use client';
 
-import React, { useEffect, useState } from 'react';
-import Image, { ImageProps } from 'next/image';
-
 import * as logoAssets from '@/assets/logo/logo-export';
 import { useTheme } from 'next-themes';
+import Image, { ImageProps } from 'next/image';
+import React, { useEffect, useState } from 'react';
 
 type ColorType = 'colored' | 'monochrome';
 type LogoType = 'combo' | 'primary' | 'secondary' | 'submark';

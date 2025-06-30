@@ -1,11 +1,13 @@
-import { PublicUserResponseSchema } from '../validation';
+import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
+import zod from 'zod/v4';
+
 import {
   notAuthenticatedResponse,
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
-import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
-import zod from 'zod/v4';
+
 import { UserIdParamSchema } from '../../validation';
+import { PublicUserResponseSchema } from '../validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({

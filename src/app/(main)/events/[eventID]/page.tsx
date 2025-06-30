@@ -1,21 +1,16 @@
 'use client';
 
-import React, { useState } from 'react';
-import Logo from '@/components/misc/logo';
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import { Label } from '@/components/ui/label';
-import {
-  useDeleteApiEventEventID,
-  useGetApiEventEventID,
-} from '@/generated/api/event/event';
-import { useGetApiUserMe } from '@/generated/api/user/user';
-import { RedirectButton } from '@/components/buttons/redirect-button';
 import { useSession } from 'next-auth/react';
-import ParticipantListEntry from '@/components/custom-ui/participant-list-entry';
 import { useParams, useRouter } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import { ToastInner } from '@/components/misc/toast-inner';
+import React, { useState } from 'react';
 import { toast } from 'sonner';
+
+import { RedirectButton } from '@/components/buttons/redirect-button';
+import ParticipantListEntry from '@/components/custom-ui/participant-list-entry';
+import Logo from '@/components/misc/logo';
+import { ToastInner } from '@/components/misc/toast-inner';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 import {
   Dialog,
   DialogContent,
@@ -25,6 +20,13 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import { Label } from '@/components/ui/label';
+
+import {
+  useDeleteApiEventEventID,
+  useGetApiEventEventID,
+} from '@/generated/api/event/event';
+import { useGetApiUserMe } from '@/generated/api/user/user';
 
 export default function ShowEvent() {
   const session = useSession();

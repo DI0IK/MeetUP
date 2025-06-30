@@ -1,12 +1,17 @@
 'use client';
 
-import { Card } from '@/components/ui/card';
-import Logo from '@/components/misc/logo';
-import { Label } from '@/components/ui/label';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import zod from 'zod/v4';
+
+import Logo from '@/components/misc/logo';
+import { Card } from '@/components/ui/card';
+import { Label } from '@/components/ui/label';
+
 import { EventSchema } from '@/app/api/event/validation';
-import { useSession } from 'next-auth/react';
+
+import { usePatchApiEventEventIDParticipantUser } from '@/generated/api/event-participant/event-participant';
+
 import {
   Select,
   SelectContent,
@@ -14,7 +19,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../ui/select';
-import { usePatchApiEventEventIDParticipantUser } from '@/generated/api/event-participant/event-participant';
 
 type EventListEntryProps = zod.output<typeof EventSchema>;
 

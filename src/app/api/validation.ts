@@ -1,6 +1,7 @@
-import { registry } from '@/lib/swagger';
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import zod from 'zod/v4';
+
+import { registry } from '@/lib/swagger';
 
 extendZodWithOpenApi(zod);
 

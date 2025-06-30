@@ -3,6 +3,7 @@
 import { RedirectButton } from '@/components/buttons/redirect-button';
 import EventListEntry from '@/components/custom-ui/event-list-entry';
 import { Label } from '@/components/ui/label';
+
 import { useGetApiEvent } from '@/generated/api/event/event';
 
 export default function Events() {

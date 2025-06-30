@@ -1,14 +1,15 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
+import React, { useRef, useState } from 'react';
 
 import LabeledInput from '@/components/custom-ui/labeled-input';
 import { Button } from '@/components/ui/button';
-import useZodForm from '@/lib/hooks/useZodForm';
-import { loginSchema, registerSchema } from '@/lib/auth/validation';
+
 import { loginAction } from '@/lib/auth/login';
 import { registerAction } from '@/lib/auth/register';
+import { loginSchema, registerSchema } from '@/lib/auth/validation';
+import useZodForm from '@/lib/hooks/useZodForm';
 
 function LoginFormElement({
   setIsSignUp,

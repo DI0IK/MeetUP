@@ -1,17 +1,20 @@
 import { OpenAPIRegistry } from '@asteasolutions/zod-to-openapi';
 import zod from 'zod/v4';
-import {
-  ParticipantsResponseSchema,
-  ParticipantResponseSchema,
-  inviteParticipantSchema,
-} from './validation';
+
 import {
   invalidRequestDataResponse,
   notAuthenticatedResponse,
   serverReturnedDataValidationErrorResponse,
   userNotFoundResponse,
 } from '@/lib/defaultApiResponses';
+
 import { EventIdParamSchema } from '@/app/api/validation';
+
+import {
+  ParticipantResponseSchema,
+  ParticipantsResponseSchema,
+  inviteParticipantSchema,
+} from './validation';
 
 export default function registerSwaggerPaths(registry: OpenAPIRegistry) {
   registry.registerPath({

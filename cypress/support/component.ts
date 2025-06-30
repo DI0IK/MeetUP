@@ -12,13 +12,12 @@
 // You can read more here:
 // https://on.cypress.io/configuration
 // ***********************************************************
+import { mount } from 'cypress/react';
 
 import '@/app/globals.css';
 
 // Import commands.js using ES2015 syntax:
 import './commands';
-
-import { mount } from 'cypress/react';
 
 // Augment the Cypress namespace to include type definitions for
 // your custom command.

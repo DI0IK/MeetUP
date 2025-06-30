@@ -1,22 +1,21 @@
+import { PrismaAdapter } from '@auth/prisma-adapter';
 import NextAuth, { CredentialsSignin } from 'next-auth';
-
-import { Prisma } from '@/generated/prisma';
 import type { Provider } from 'next-auth/providers';
-
-import Credentials from 'next-auth/providers/credentials';
 import AuthentikProvider from 'next-auth/providers/authentik';
+import Credentials from 'next-auth/providers/credentials';
 import DiscordProvider from 'next-auth/providers/discord';
 import FacebookProvider from 'next-auth/providers/facebook';
 import GithubProvider from 'next-auth/providers/github';
 import GitlabProvider from 'next-auth/providers/gitlab';
 import GoogleProvider from 'next-auth/providers/google';
 import KeycloakProvider from 'next-auth/providers/keycloak';
-
-import { PrismaAdapter } from '@auth/prisma-adapter';
-import { prisma } from '@/prisma';
+import { ZodError } from 'zod/v4';
 
 import { loginSchema } from '@/lib/auth/validation';
-import { ZodError } from 'zod/v4';
+
+import { Prisma } from '@/generated/prisma';
+
+import { prisma } from '@/prisma';
 
 class InvalidLoginError extends CredentialsSignin {
   constructor(code: string) {

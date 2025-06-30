@@ -1,6 +1,7 @@
-import { Card, CardContent, CardHeader } from '@/components/ui/card';
-import EventForm from '@/components/forms/event-form';
 import { Suspense } from 'react';
+
+import EventForm from '@/components/forms/event-form';
+import { Card, CardContent, CardHeader } from '@/components/ui/card';
 
 export default function NewEvent() {
   return (

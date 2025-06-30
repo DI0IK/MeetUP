@@ -1,14 +1,17 @@
-import { auth } from '@/auth';
-import { prisma } from '@/prisma';
-import { searchUserSchema, searchUserResponseSchema } from './validation';
 import {
   returnZodTypeCheckedResponse,
   userAuthenticated,
 } from '@/lib/apiHelpers';
+
 import {
   ErrorResponseSchema,
   ZodErrorResponseSchema,
 } from '@/app/api/validation';
+
+import { auth } from '@/auth';
+import { prisma } from '@/prisma';
+
+import { searchUserResponseSchema, searchUserSchema } from './validation';
 
 export const GET = auth(async function GET(req) {
   const authCheck = userAuthenticated(req);

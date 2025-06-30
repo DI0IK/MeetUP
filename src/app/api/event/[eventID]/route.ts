@@ -1,9 +1,11 @@
-import { prisma } from '@/prisma';
-import { auth } from '@/auth';
 import {
   returnZodTypeCheckedResponse,
   userAuthenticated,
 } from '@/lib/apiHelpers';
+
+import { auth } from '@/auth';
+import { prisma } from '@/prisma';
+
 import {
   ErrorResponseSchema,
   SuccessResponseSchema,

@@ -1,7 +1,9 @@
-import { useGetApiUserMe } from '@/generated/api/user/user';
-import { Avatar } from '@/components/ui/avatar';
-import Image from 'next/image';
 import { User } from 'lucide-react';
+import Image from 'next/image';
+
+import { Avatar } from '@/components/ui/avatar';
+
+import { useGetApiUserMe } from '@/generated/api/user/user';
 
 export default function UserCard() {
   const { data } = useGetApiUserMe();

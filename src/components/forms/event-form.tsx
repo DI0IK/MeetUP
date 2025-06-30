@@ -1,27 +1,30 @@
 'use client';
-import React from 'react';
-import LabeledInput from '@/components/custom-ui/labeled-input';
-import { Button } from '@/components/ui/button';
-import Logo from '@/components/misc/logo';
-import TimePicker from '@/components/time-picker';
-import { Label } from '@/components/ui/label';
-import { useGetApiUserMe } from '@/generated/api/user/user';
-import {
-  usePostApiEvent,
-  useGetApiEventEventID,
-  usePatchApiEventEventID,
-} from '@/generated/api/event/event';
+
 import { useRouter } from 'next/navigation';
+import { useSearchParams } from 'next/navigation';
+import React from 'react';
 import { toast } from 'sonner';
+import zod from 'zod/v4';
+
+import Calendar from '@/components/calendar';
+import LabeledInput from '@/components/custom-ui/labeled-input';
+import Logo from '@/components/misc/logo';
 import { ToastInner } from '@/components/misc/toast-inner';
 import { UserSearchInput } from '@/components/misc/user-search';
-import ParticipantListEntry from '../custom-ui/participant-list-entry';
+import TimePicker from '@/components/time-picker';
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
 
-import { useSearchParams } from 'next/navigation';
-
-import zod from 'zod/v4';
 import { PublicUserSchema } from '@/app/api/user/validation';
-import Calendar from '@/components/calendar';
+
+import {
+  useGetApiEventEventID,
+  usePatchApiEventEventID,
+  usePostApiEvent,
+} from '@/generated/api/event/event';
+import { useGetApiUserMe } from '@/generated/api/user/user';
+
+import ParticipantListEntry from '../custom-ui/participant-list-entry';
 import {
   Dialog,
   DialogContent,

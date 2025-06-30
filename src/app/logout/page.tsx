@@ -1,4 +1,3 @@
-import { signOut } from '@/auth';
 import { Button } from '@/components/ui/button';
 import {
   Card,
@@ -7,6 +6,8 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
+
+import { signOut } from '@/auth';
 
 export default function SignOutPage() {
   return (

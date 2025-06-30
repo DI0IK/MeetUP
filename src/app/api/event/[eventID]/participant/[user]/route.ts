@@ -1,14 +1,17 @@
-import { prisma } from '@/prisma';
-import { auth } from '@/auth';
 import {
   returnZodTypeCheckedResponse,
   userAuthenticated,
 } from '@/lib/apiHelpers';
+
 import {
   ErrorResponseSchema,
   SuccessResponseSchema,
   ZodErrorResponseSchema,
 } from '@/app/api/validation';
+
+import { auth } from '@/auth';
+import { prisma } from '@/prisma';
+
 import {
   ParticipantResponseSchema,
   updateParticipantSchema,

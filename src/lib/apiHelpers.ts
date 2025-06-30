@@ -1,7 +1,7 @@
-import { NextAuthRequest } from 'next-auth';
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
-import zod from 'zod/v4';
+import { NextAuthRequest } from 'next-auth';
 import { NextResponse } from 'next/server';
+import zod from 'zod/v4';
 
 extendZodWithOpenApi(zod);
 

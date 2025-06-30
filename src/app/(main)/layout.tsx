@@ -1,9 +1,9 @@
-import React from 'react';
 import { cookies } from 'next/headers';
+import React from 'react';
 
 import { AppSidebar } from '@/components/custom-ui/app-sidebar';
-import SidebarProviderWrapper from '@/components/wrappers/sidebar-provider';
 import Header from '@/components/misc/header';
+import SidebarProviderWrapper from '@/components/wrappers/sidebar-provider';
 
 export default async function Layout({
   children,

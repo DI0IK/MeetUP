@@ -1,11 +1,14 @@
-import { auth } from '@/auth';
-import { prisma } from '@/prisma';
 import {
   returnZodTypeCheckedResponse,
   userAuthenticated,
 } from '@/lib/apiHelpers';
-import { PublicUserResponseSchema } from '../validation';
+
 import { ErrorResponseSchema } from '@/app/api/validation';
+
+import { auth } from '@/auth';
+import { prisma } from '@/prisma';
+
+import { PublicUserResponseSchema } from '../validation';
 
 export const GET = auth(async function GET(req, { params }) {
   const authCheck = userAuthenticated(req);

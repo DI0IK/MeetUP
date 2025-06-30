@@ -1,8 +1,8 @@
+import { BellRing, Inbox } from 'lucide-react';
+
+import { NotificationButton } from '@/components/buttons/notification-button';
 import { SidebarTrigger } from '@/components/custom-ui/sidebar';
 import { ThemePicker } from '@/components/misc/theme-picker';
-import { NotificationButton } from '@/components/buttons/notification-button';
-
-import { BellRing, Inbox } from 'lucide-react';
 import UserDropdown from '@/components/misc/user-dropdown';
 
 const items = [

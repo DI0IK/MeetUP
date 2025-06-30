@@ -1,10 +1,10 @@
+import { NDot, NotificationDot } from '@/components/misc/notification-dot';
 import { Button } from '@/components/ui/button';
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { NDot, NotificationDot } from '@/components/misc/notification-dot';
 
 export function NotificationButton({
   dotVariant,

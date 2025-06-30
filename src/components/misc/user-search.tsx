@@ -1,9 +1,9 @@
 'use client';
 
-import * as React from 'react';
 import { CheckIcon, ChevronsUpDownIcon } from 'lucide-react';
+import * as React from 'react';
+import zod from 'zod/v4';
 
-import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import {
   Command,
@@ -18,9 +18,12 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from '@/components/ui/popover';
-import { useGetApiSearchUser } from '@/generated/api/search/search';
-import zod from 'zod/v4';
+
+import { cn } from '@/lib/utils';
+
 import { PublicUserSchema } from '@/app/api/user/validation';
+
+import { useGetApiSearchUser } from '@/generated/api/search/search';
 
 type User = zod.output<typeof PublicUserSchema>;
 

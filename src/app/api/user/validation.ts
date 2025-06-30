@@ -1,7 +1,9 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
-import { prisma } from '@/prisma';
 import zod from 'zod/v4';
+
 import { allTimeZones } from '@/lib/timezones';
+
+import { prisma } from '@/prisma';
 
 extendZodWithOpenApi(zod);
 

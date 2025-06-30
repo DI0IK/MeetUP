@@ -1,9 +1,10 @@
-import React from 'react';
-import Image from 'next/image';
 import { user_default_dark } from '@/assets/usericon/default/defaultusericon-export';
 import { user_default_light } from '@/assets/usericon/default/defaultusericon-export';
 import { useTheme } from 'next-themes';
+import Image from 'next/image';
+import React from 'react';
 import zod from 'zod/v4';
+
 import { ParticipantSchema } from '@/app/api/event/[eventID]/participant/validation';
 
 type ParticipantListEntryProps = zod.output<typeof ParticipantSchema>;

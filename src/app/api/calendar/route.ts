@@ -1,19 +1,23 @@
-import { auth } from '@/auth';
-import { prisma } from '@/prisma';
+import { z } from 'zod/v4';
+
 import {
   returnZodTypeCheckedResponse,
   userAuthenticated,
 } from '@/lib/apiHelpers';
-import {
-  userCalendarQuerySchema,
-  UserCalendarResponseSchema,
-  UserCalendarSchema,
-} from './validation';
+
 import {
   ErrorResponseSchema,
   ZodErrorResponseSchema,
 } from '@/app/api/validation';
-import { z } from 'zod/v4';
+
+import { auth } from '@/auth';
+import { prisma } from '@/prisma';
+
+import {
+  UserCalendarResponseSchema,
+  UserCalendarSchema,
+  userCalendarQuerySchema,
+} from './validation';
 
 export const GET = auth(async function GET(req) {
   const authCheck = userAuthenticated(req);

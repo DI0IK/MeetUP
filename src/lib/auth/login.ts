@@ -1,8 +1,10 @@
 'use server';
 
 import { z } from 'zod/v4';
-import { loginSchema } from './validation';
+
 import { signIn } from '@/auth';
+
+import { loginSchema } from './validation';
 
 export async function loginAction(data: z.infer<typeof loginSchema>) {
   try {

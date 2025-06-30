@@ -1,6 +1,7 @@
 'use client';
 
 import Calendar from '@/components/calendar';
+
 import { useGetApiUserMe } from '@/generated/api/user/user';
 
 export default function Home() {

@@ -1,8 +1,9 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import zod from 'zod/v4';
+
 import {
-  existingUserIdServerSchema,
   PublicUserSchema,
+  existingUserIdServerSchema,
 } from '../user/validation';
 import { ParticipantSchema } from './[eventID]/participant/validation';
 

@@ -1,6 +1,8 @@
-import { signIn } from '@/auth';
-import { IconButton } from '@/components/buttons/icon-button';
 import { faOpenid } from '@fortawesome/free-brands-svg-icons';
+
+import { IconButton } from '@/components/buttons/icon-button';
+
+import { signIn } from '@/auth';
 
 export default function SSOLogin({
   provider,

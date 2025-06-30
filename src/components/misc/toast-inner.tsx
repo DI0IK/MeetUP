@@ -39,12 +39,54 @@ import { Button } from '@/components/ui/button';
 
 'use client';
 
-import { toast } from 'sonner';
 import { X } from 'lucide-react';
-import React from 'react';
-import { Label } from '@/components/ui/label';
-import { Button } from '@/components/ui/button';
 import * as Icons from 'lucide-react';
+import React from 'react';
+import { toast } from 'sonner';
+
+import { Button } from '@/components/ui/button';
+import { Label } from '@/components/ui/label';
+
+/*
+USAGE:
+
+import { ToastInner } from '@/components/misc/toast-inner';
+
+
+ <Button
+          variant='outline_primary'
+          onClick={() =>
+
+
+            toast.custom(
+              (t) => (
+                <ToastInner
+                  toastId={t}
+                  title=''
+                  description=''
+                  onAction={() => console.log('on Action')} //No Button shown if this is null
+                  variant=''default' | 'success' | 'error' | 'info' | 'warning' | 'notification''
+                  buttonText=[No Button shown if this is null]
+                  iconName=[Any Icon Name from Lucide in UpperCamelCase or default if null]
+                />
+              ),
+
+
+              {
+                duration: 5000,
+              },
+            )
+          }
+        >
+          Show Toast
+        </Button>
+
+
+*/
+
+import { toast } from 'sonner';
+
+import { Button } from '@/components/ui/button';
 
 interface ToastInnerProps {
   title: string;

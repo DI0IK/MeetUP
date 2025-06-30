@@ -1,22 +1,24 @@
-import { auth, providerMap } from '@/auth';
-import SSOLogin from '@/components/buttons/sso-login-button';
-import LoginForm from '@/components/forms/login-form';
-import { redirect } from 'next/navigation';
-import { Button } from '@/components/ui/button';
 import Image from 'next/image';
-import { Separator } from '@/components/ui/separator';
-import Logo from '@/components/misc/logo';
+import { redirect } from 'next/navigation';
+
+import SSOLogin from '@/components/buttons/sso-login-button';
 import {
   Card,
   CardContent,
   CardHeader,
 } from '@/components/custom-ui/login-card';
+import LoginForm from '@/components/forms/login-form';
+import Logo from '@/components/misc/logo';
 import { ThemePicker } from '@/components/misc/theme-picker';
+import { Button } from '@/components/ui/button';
 import {
   HoverCard,
-  HoverCardTrigger,
   HoverCardContent,
+  HoverCardTrigger,
 } from '@/components/ui/hover-card';
+import { Separator } from '@/components/ui/separator';
+
+import { auth, providerMap } from '@/auth';
 
 export default async function LoginPage() {
   const session = await auth();

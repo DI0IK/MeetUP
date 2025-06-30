@@ -1,7 +1,7 @@
-import { Button } from '@/components/ui/button';
-
 import { IconProp } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { Button } from '@/components/ui/button';
 
 export function IconButton({
   icon,

@@ -1,8 +1,9 @@
 import { extendZodWithOpenApi } from '@asteasolutions/zod-to-openapi';
 import zod from 'zod/v4';
+
 import {
-  eventEndTimeSchema,
   EventSchema,
+  eventEndTimeSchema,
   eventStartTimeSchema,
 } from '@/app/api/event/validation';
 
