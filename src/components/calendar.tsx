@@ -150,7 +150,7 @@ function CalendarWithUserEvents({
 
   const { data, refetch, error, isError } = useGetApiCalendar(
     {
-      userIds: [userId, userId + '_blocked'],
+      userIds: [userId],
       start: moment(currentDate)
         .startOf(
           currentView === 'agenda'
