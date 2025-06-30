@@ -1,11 +1,13 @@
 import zod from 'zod/v4';
 import {
+  emailSchema,
   firstNameSchema,
   lastNameSchema,
   newUserEmailServerSchema,
   newUserNameServerSchema,
   passwordSchema,
   timezoneSchema,
+  userNameSchema,
 } from '@/app/api/user/validation';
 
 // ----------------------------------------
@@ -18,6 +20,15 @@ export const updateUserServerSchema = zod.object({
   first_name: firstNameSchema.optional(),
   last_name: lastNameSchema.optional(),
   email: newUserEmailServerSchema.optional(),
+  image: zod.url().optional(),
+  timezone: timezoneSchema.optional(),
+});
+
+export const updateUserClientSchema = zod.object({
+  name: userNameSchema.optional(),
+  first_name: firstNameSchema.optional(),
+  last_name: lastNameSchema.optional(),
+  email: emailSchema.optional(),
   image: zod.url().optional(),
   timezone: timezoneSchema.optional(),
 });

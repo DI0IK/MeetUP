@@ -17,6 +17,7 @@ import UserCard from '@/components/misc/user-card';
 
 export default function UserDropdown() {
   const { data } = useGetApiUserMe();
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,11 +42,13 @@ export default function UserDropdown() {
           <UserCard />
         </DropdownMenuItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>Settings</DropdownMenuItem>
+        <Link href='/settings'>
+          <DropdownMenuItem>Settings</DropdownMenuItem>
+        </Link>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          <Link href='/logout'>Logout</Link>
-        </DropdownMenuItem>
+        <Link href='/logout'>
+          <DropdownMenuItem>Logout</DropdownMenuItem>
+        </Link>
       </DropdownMenuContent>
     </DropdownMenu>
   );

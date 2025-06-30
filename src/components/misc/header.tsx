@@ -7,12 +7,12 @@ import UserDropdown from '@/components/misc/user-dropdown';
 
 const items = [
   {
-    title: 'Calendar',
+    title: 'Inbox',
     url: '#',
     icon: Inbox,
   },
   {
-    title: 'Friends',
+    title: 'Notifications',
     url: '#',
     icon: BellRing,
   },
@@ -34,8 +34,9 @@ export default function Header({
           <ThemePicker />
           {items.map((item) => (
             <NotificationButton
+              disabled
               key={item.title}
-              variant='outline_primary'
+              variant='outline_muted'
               dotVariant='hidden'
               size='icon'
             >

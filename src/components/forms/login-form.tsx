@@ -4,11 +4,21 @@ import React, { useState, useRef } from 'react';
 import { useRouter } from 'next/navigation';
 
 import LabeledInput from '@/components/custom-ui/labeled-input';
-import { Button } from '@/components/ui/button';
 import useZodForm from '@/lib/hooks/useZodForm';
 import { loginSchema, registerSchema } from '@/lib/auth/validation';
 import { loginAction } from '@/lib/auth/login';
 import { registerAction } from '@/lib/auth/register';
+import { IconButton } from '../buttons/icon-button';
+import {
+  FileKey,
+  FileKey2,
+  LogIn,
+  MailOpen,
+  RotateCcwKey,
+  UserCheck,
+  UserPen,
+  UserPlus,
+} from 'lucide-react';
 
 function LoginFormElement({
   setIsSignUp,
@@ -56,6 +66,7 @@ function LoginFormElement({
       <LabeledInput
         type='text'
         label='E-Mail or Username'
+        icon={UserCheck}
         placeholder='What you are known as'
         error={formState.errors.email?.message}
         {...register('email')}
@@ -64,16 +75,22 @@ function LoginFormElement({
       <LabeledInput
         type='password'
         label='Password'
+        icon={FileKey}
         placeholder="Let's hope you remember it"
         error={formState.errors.password?.message}
         {...register('password')}
         data-cy='password-input'
       />
       <div className='grid grid-rows-2 gap-2'>
-        <Button type='submit' variant='primary' data-cy='login-button'>
+        <IconButton
+          type='submit'
+          variant='primary'
+          data-cy='login-button'
+          icon={LogIn}
+        >
           Login
-        </Button>
-        <Button
+        </IconButton>
+        <IconButton
           type='button'
           variant='outline_primary'
           onClick={() => {
@@ -81,9 +98,10 @@ function LoginFormElement({
             setIsSignUp((v) => !v);
           }}
           data-cy='register-switch'
+          icon={UserPlus}
         >
           Sign Up
-        </Button>
+        </IconButton>
       </div>
       <div>
         {formState.errors.root?.message && (
@@ -157,17 +175,9 @@ function RegisterFormElement({
         data-cy='last-name-input'
       />
       <LabeledInput
-        type='email'
-        label='E-Mail'
-        placeholder='Your email address'
-        autocomplete='email'
-        error={formState.errors.email?.message}
-        {...register('email')}
-        data-cy='email-input'
-      />
-      <LabeledInput
         type='text'
         label='Username'
+        icon={UserPen}
         placeholder='Your username'
         autocomplete='username'
         error={formState.errors.username?.message}
@@ -175,8 +185,19 @@ function RegisterFormElement({
         data-cy='username-input'
       />
       <LabeledInput
+        type='email'
+        label='E-Mail'
+        icon={MailOpen}
+        placeholder='Your email address'
+        autocomplete='email'
+        error={formState.errors.email?.message}
+        {...register('email')}
+        data-cy='email-input'
+      />
+      <LabeledInput
         type='password'
         label='Password'
+        icon={FileKey2}
         placeholder='Create a password'
         autocomplete='new-password'
         error={formState.errors.password?.message}
@@ -186,6 +207,7 @@ function RegisterFormElement({
       <LabeledInput
         type='password'
         label='Confirm Password'
+        icon={RotateCcwKey}
         placeholder='Repeat your password'
         autocomplete='new-password'
         error={formState.errors.confirmPassword?.message}
@@ -193,19 +215,25 @@ function RegisterFormElement({
         data-cy='confirm-password-input'
       />
       <div className='grid grid-rows-2 gap-2'>
-        <Button type='submit' variant='primary' data-cy='register-button'>
+        <IconButton
+          type='submit'
+          variant='primary'
+          data-cy='register-button'
+          icon={UserPlus}
+        >
           Sign Up
-        </Button>
-        <Button
+        </IconButton>
+        <IconButton
           type='button'
           variant='outline_primary'
           onClick={() => {
             formRef?.current?.reset();
             setIsSignUp((v) => !v);
           }}
+          icon={LogIn}
         >
           Back to Login
-        </Button>
+        </IconButton>
       </div>
       <div>
         {formState.errors.root?.message && (

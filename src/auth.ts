@@ -95,13 +95,27 @@ const providers: Provider[] = [
         }
       },
     }),
-  process.env.AUTH_AUTHENTIK_ID && AuthentikProvider,
+
   process.env.AUTH_DISCORD_ID && DiscordProvider,
   process.env.AUTH_FACEBOOK_ID && FacebookProvider,
   process.env.AUTH_GITHUB_ID && GithubProvider,
   process.env.AUTH_GITLAB_ID && GitlabProvider,
   process.env.AUTH_GOOGLE_ID && GoogleProvider,
   process.env.AUTH_KEYCLOAK_ID && KeycloakProvider,
+
+  process.env.AUTH_AUTHENTIK_ID &&
+    AuthentikProvider({
+      profile(profile) {
+        return {
+          id: profile.sub,
+          name: profile.preferred_username,
+          first_name: profile.given_name.split(' ')[0] || '',
+          last_name: profile.given_name.split(' ')[1] || '',
+          email: profile.email,
+          image: profile.picture,
+        };
+      },
+    }),
 ].filter(Boolean) as Provider[];
 
 export const providerMap = providers

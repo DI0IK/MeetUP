@@ -21,7 +21,7 @@ export default function UserCard() {
         )}
       </Avatar>
       <div className='flex justify-center'>{data?.data.user.name}</div>
-      <div className='flex justify-center text-text-muted'>
+      <div className='flex justify-center text-text-muted text-[12px]'>
         {data?.data.user.email}
       </div>
     </div>

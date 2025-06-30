@@ -1,6 +1,6 @@
 import { signIn } from '@/auth';
 import { IconButton } from '@/components/buttons/icon-button';
-import { faOpenid } from '@fortawesome/free-brands-svg-icons';
+import { Fingerprint } from 'lucide-react';
 
 export default function SSOLogin({
   provider,
@@ -22,7 +22,7 @@ export default function SSOLogin({
         className='w-full'
         type='submit'
         variant='secondary'
-        icon={faOpenid}
+        icon={Fingerprint}
         {...props}
       >
         Login with {providerDisplayName}
