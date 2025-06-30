@@ -51,7 +51,12 @@ const EventForm: React.FC<EventFormProps> = (props) => {
   const startFromUrl = searchParams.get('start');
   const endFromUrl = searchParams.get('end');
 
-  const { mutate: createEvent, status, isSuccess, error } = usePostApiEvent();
+  const {
+    mutateAsync: createEvent,
+    status,
+    isSuccess,
+    error,
+  } = usePostApiEvent();
   const { data, isLoading, error: fetchError } = useGetApiUserMe();
   const { data: eventData } = useGetApiEventEventID(props.eventId!, {
     query: { enabled: props.type === 'edit' },
@@ -150,8 +155,10 @@ const EventForm: React.FC<EventFormProps> = (props) => {
       participants: selectedParticipants.map((u) => u.id),
     };
 
+    let eventID: string | undefined;
+
     if (props.type === 'edit' && props.eventId) {
-      await patchEvent.mutateAsync({
+      const mutationResult = await patchEvent.mutateAsync({
         eventID: props.eventId,
         data: {
           title: data.title,
@@ -162,9 +169,12 @@ const EventForm: React.FC<EventFormProps> = (props) => {
           participants: data.participants,
         },
       });
+      eventID = mutationResult.data.event.id;
       console.log('Updating event');
     } else {
       console.log('Creating event');
+      const mutationResult = await createEvent({ data });
+      eventID = mutationResult.data.event.id;
       createEvent({ data });
     }
 
@@ -173,7 +183,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
         toastId={t}
         title='Event saved'
         description={event?.title}
-        onAction={() => router.push(`/events/${event?.id}`)}
+        onAction={() => router.push(`/events/${eventID}`)}
         variant='success'
         buttonText='show'
       />
