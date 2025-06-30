@@ -70,167 +70,169 @@ export default function ShowEvent() {
   };
 
   return (
-    <Card className='w-[80%] max-w-screen p-0 gap-0 max-xl:w-[95%] mx-auto'>
-      <CardHeader className='p-0 m-0 gap-0' />
+    <div className='flex items-center justify-center h-screen'>
+      <Card className='w-[80%] max-w-screen p-0 gap-0 max-xl:w-[95%] mx-auto'>
+        <CardHeader className='p-0 m-0 gap-0' />
 
-      <CardContent>
-        <div className='flex flex-col gap-5 w-full'>
-          <div className='grid grid-row-start:auto gap-4 sm:gap-8'>
-            <div className='h-full mt-0 ml-2 mb-16 flex items-center justify-between max-sm:grid max-sm:grid-row-start:auto max-sm:mb-6 max-sm:mt-10 max-sm:ml-0'>
-              <div className='w-[100px] max-sm:w-full max-sm:flex max-sm:justify-center'>
-                <Logo colorType='monochrome' logoType='submark' width={50} />
+        <CardContent>
+          <div className='flex flex-col gap-5 w-full'>
+            <div className='grid grid-row-start:auto gap-4 sm:gap-8'>
+              <div className='h-full mt-0 ml-2 mb-16 flex items-center justify-between max-sm:grid max-sm:grid-row-start:auto max-sm:mb-6 max-sm:mt-10 max-sm:ml-0'>
+                <div className='w-[100px] max-sm:w-full max-sm:flex max-sm:justify-center'>
+                  <Logo colorType='monochrome' logoType='submark' width={50} />
+                </div>
+                <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full max-sm:flex max-sm:justify-center'>
+                  <h1 className='text-center'>
+                    {event.title || 'Untitled Event'}
+                  </h1>
+                </div>
+                <div className='w-0 sm:w-[100px]'></div>
               </div>
-              <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full max-sm:flex max-sm:justify-center'>
-                <h1 className='text-center'>
-                  {event.title || 'Untitled Event'}
-                </h1>
-              </div>
-              <div className='w-0 sm:w-[100px]'></div>
-            </div>
-            <div className='grid grid-cols-4 gap-4 h-full w-full max-lg:grid-cols-2 max-sm:grid-cols-1'>
-              <div>
-                <Label className='text-[var(--color-neutral-300)] mb-2'>
-                  start Time
-                </Label>
-                <Label size='large'>
-                  {event.start_time
-                    ? `${formatDate(event.start_time)} ${formatTime(event.start_time)}`
-                    : '-'}
-                </Label>
-              </div>
-              <div>
-                <Label className='text-[var(--color-neutral-300)] mb-2'>
-                  end Time
-                </Label>
-                <Label size='large'>
-                  {event.end_time
-                    ? `${formatDate(event.end_time)} ${formatTime(event.end_time)}`
-                    : '-'}
-                </Label>
-              </div>
-              <div className='w-54'>
-                <Label className='text-[var(--color-neutral-300)] mb-2'>
-                  Location
-                </Label>
-                <Label size='large'>{event.location || '-'}</Label>
-              </div>
-              <div className='flex flex-col gap-4'>
-                <div className='flex flex-row gap-2'>
-                  <Label className='w-[70px] text-[var(--color-neutral-300)]'>
-                    created:
+              <div className='grid grid-cols-4 gap-4 h-full w-full max-lg:grid-cols-2 max-sm:grid-cols-1'>
+                <div>
+                  <Label className='text-[var(--color-neutral-300)] mb-2'>
+                    start Time
                   </Label>
-                  <Label>
-                    {event.created_at ? formatDate(event.created_at) : '-'}
+                  <Label size='large'>
+                    {event.start_time
+                      ? `${formatDate(event.start_time)} ${formatTime(event.start_time)}`
+                      : '-'}
                   </Label>
                 </div>
-                <div className='flex flex-row gap-2'>
-                  <Label className='w-[70px] text-[var(--color-neutral-300)]'>
-                    updated:
+                <div>
+                  <Label className='text-[var(--color-neutral-300)] mb-2'>
+                    end Time
                   </Label>
-                  <Label>
-                    {event.updated_at ? formatDate(event.updated_at) : '-'}
+                  <Label size='large'>
+                    {event.end_time
+                      ? `${formatDate(event.end_time)} ${formatTime(event.end_time)}`
+                      : '-'}
                   </Label>
                 </div>
-              </div>
-            </div>
-            <div className='h-full w-full grid grid-cols-2 gap-4 max-sm:grid-cols-1'>
-              <div className='h-full w-full grid grid-flow-row gap-4 sm:gap-8'>
-                <div className='h-full w-full'>
+                <div className='w-54'>
+                  <Label className='text-[var(--color-neutral-300)] mb-2'>
+                    Location
+                  </Label>
+                  <Label size='large'>{event.location || '-'}</Label>
+                </div>
+                <div className='flex flex-col gap-4'>
                   <div className='flex flex-row gap-2'>
-                    <Label className='text-[var(--color-neutral-300)]'>
-                      Organiser:
+                    <Label className='w-[70px] text-[var(--color-neutral-300)]'>
+                      created:
                     </Label>
-                    <Label size='large'>{organiserName}</Label>
+                    <Label>
+                      {event.created_at ? formatDate(event.created_at) : '-'}
+                    </Label>
+                  </div>
+                  <div className='flex flex-row gap-2'>
+                    <Label className='w-[70px] text-[var(--color-neutral-300)]'>
+                      updated:
+                    </Label>
+                    <Label>
+                      {event.updated_at ? formatDate(event.updated_at) : '-'}
+                    </Label>
                   </div>
                 </div>
-                <div className='h-full w-full'>
+              </div>
+              <div className='h-full w-full grid grid-cols-2 gap-4 max-sm:grid-cols-1'>
+                <div className='h-full w-full grid grid-flow-row gap-4 sm:gap-8'>
+                  <div className='h-full w-full'>
+                    <div className='flex flex-row gap-2'>
+                      <Label className='text-[var(--color-neutral-300)]'>
+                        Organiser:
+                      </Label>
+                      <Label size='large'>{organiserName}</Label>
+                    </div>
+                  </div>
+                  <div className='h-full w-full'>
+                    <Label className='text-[var(--color-neutral-300)] mb-2'>
+                      Description
+                    </Label>
+                    <Label size='large'>{event.description || '-'}</Label>
+                  </div>
+                </div>
+                <div className='h-full w-full mt-2'>
                   <Label className='text-[var(--color-neutral-300)] mb-2'>
-                    Description
-                  </Label>
-                  <Label size='large'>{event.description || '-'}</Label>
+                    Participants
+                  </Label>{' '}
+                  <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
+                    {event.participants?.map((user) => (
+                      <ParticipantListEntry key={user.user.id} {...user} />
+                    ))}
+                  </div>
                 </div>
               </div>
-              <div className='h-full w-full mt-2'>
-                <Label className='text-[var(--color-neutral-300)] mb-2'>
-                  Participants
-                </Label>{' '}
-                <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
-                  {event.participants?.map((user) => (
-                    <ParticipantListEntry key={user.user.id} {...user} />
-                  ))}
-                </div>
-              </div>
-            </div>
 
-            <div className='flex flex-row gap-2 justify-end mt-4 mb-6'>
-              <div className='w-[20%] grid max-sm:w-full'>
-                {session.data?.user?.id === event.organizer.id ? (
-                  <Dialog
-                    open={deleteDialogOpen}
-                    onOpenChange={setDeleteDialogOpen}
-                  >
-                    <DialogTrigger asChild>
-                      <Button variant='destructive' className='w-full'>
-                        delete
-                      </Button>
-                    </DialogTrigger>
-                    <DialogContent>
-                      <DialogHeader>
-                        <DialogTitle>Delete Event</DialogTitle>
-                        <DialogDescription>
-                          Are you sure you want to delete the event &ldquo;
-                          {event.title}&rdquo;? This action cannot be undone.
-                        </DialogDescription>
-                      </DialogHeader>
-                      <DialogFooter>
-                        <Button
-                          variant='secondary'
-                          onClick={() => setDeleteDialogOpen(false)}
-                        >
-                          Cancel
+              <div className='flex flex-row gap-2 justify-end mt-4 mb-6'>
+                <div className='w-[20%] grid max-sm:w-full'>
+                  {session.data?.user?.id === event.organizer.id ? (
+                    <Dialog
+                      open={deleteDialogOpen}
+                      onOpenChange={setDeleteDialogOpen}
+                    >
+                      <DialogTrigger asChild>
+                        <Button variant='destructive' className='w-full'>
+                          delete
                         </Button>
-                        <Button
-                          variant='muted'
-                          onClick={() => {
-                            deleteEvent.mutate(
-                              { eventID: event.id },
-                              {
-                                onSuccess: () => {
-                                  router.push('/home');
-                                  toast.custom((t) => (
-                                    <ToastInner
-                                      toastId={t}
-                                      title='Event deleted'
-                                      description={event?.title}
-                                      variant='success'
-                                    />
-                                  ));
+                      </DialogTrigger>
+                      <DialogContent>
+                        <DialogHeader>
+                          <DialogTitle>Delete Event</DialogTitle>
+                          <DialogDescription>
+                            Are you sure you want to delete the event &ldquo;
+                            {event.title}&rdquo;? This action cannot be undone.
+                          </DialogDescription>
+                        </DialogHeader>
+                        <DialogFooter>
+                          <Button
+                            variant='secondary'
+                            onClick={() => setDeleteDialogOpen(false)}
+                          >
+                            Cancel
+                          </Button>
+                          <Button
+                            variant='muted'
+                            onClick={() => {
+                              deleteEvent.mutate(
+                                { eventID: event.id },
+                                {
+                                  onSuccess: () => {
+                                    router.push('/home');
+                                    toast.custom((t) => (
+                                      <ToastInner
+                                        toastId={t}
+                                        title='Event deleted'
+                                        description={event?.title}
+                                        variant='success'
+                                      />
+                                    ));
+                                  },
                                 },
-                              },
-                            );
-                            setDeleteDialogOpen(false);
-                          }}
-                        >
-                          Delete
-                        </Button>
-                      </DialogFooter>
-                    </DialogContent>
-                  </Dialog>
-                ) : null}
-              </div>
-              <div className='w-[20%] grid max-sm:w-full'>
-                {session.data?.user?.id === event.organizer.id ? (
-                  <RedirectButton
-                    redirectUrl={`/events/edit/${eventID}`}
-                    buttonText='edit'
-                    className='w-full'
-                  />
-                ) : null}
+                              );
+                              setDeleteDialogOpen(false);
+                            }}
+                          >
+                            Delete
+                          </Button>
+                        </DialogFooter>
+                      </DialogContent>
+                    </Dialog>
+                  ) : null}
+                </div>
+                <div className='w-[20%] grid max-sm:w-full'>
+                  {session.data?.user?.id === event.organizer.id ? (
+                    <RedirectButton
+                      redirectUrl={`/events/edit/${eventID}`}
+                      buttonText='edit'
+                      className='w-full'
+                    />
+                  ) : null}
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </div>
   );
 }
