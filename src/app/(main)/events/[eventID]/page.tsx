@@ -155,7 +155,11 @@ export default function ShowEvent() {
                   </Label>{' '}
                   <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
                     {event.participants?.map((user) => (
-                      <ParticipantListEntry key={user.user.id} {...user} />
+                      <ParticipantListEntry
+                        key={user.user.id}
+                        {...user}
+                        eventID={event.id}
+                      />
                     ))}
                   </div>
                 </div>

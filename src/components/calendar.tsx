@@ -17,6 +17,7 @@ import { Button } from '@/components/ui/button';
 import { fromZodIssue } from 'zod-validation-error/v4';
 import type { $ZodIssue } from 'zod/v4/core';
 import { useGetApiCalendar } from '@/generated/api/calendar/calendar';
+import { usePatchApiBlockedSlotsSlotID } from '@/generated/api/blocked-slots/blocked-slots';
 
 moment.updateLocale('en', {
   week: {
@@ -47,6 +48,7 @@ const DaDRBCalendar = withDragAndDrop<
     end: Date;
     type: UserCalendarSchemaItem['type'];
     userId?: string;
+    organizer?: string;
   },
   {
     id: string;
@@ -190,6 +192,13 @@ function CalendarWithUserEvents({
       },
     },
   });
+  const { mutate: patchBlockedSlot } = usePatchApiBlockedSlotsSlotID({
+    mutation: {
+      throwOnError(error) {
+        throw error.response?.data || 'Failed to update blocked slot';
+      },
+    },
+  });
 
   return (
     <DaDRBCalendar
@@ -218,11 +227,19 @@ function CalendarWithUserEvents({
           end: new Date(event.end_time),
           type: event.type,
           userId: event.users[0],
+          organizer: event.type === 'event' ? event.organizer_id : undefined,
         })) ?? []),
         ...(additionalEvents ?? []),
       ]}
       onSelectEvent={(event) => {
-        router.push(`/events/${event.id}`);
+        if (event.type === 'blocked_private') return;
+        if (event.type === 'blocked_owned') {
+          router.push(`/blocker/${event.id}`);
+          return;
+        }
+        if (event.type === 'event') {
+          router.push(`/events/${event.id}`);
+        }
       }}
       onSelectSlot={(slotInfo) => {
         router.push(
@@ -236,53 +253,105 @@ function CalendarWithUserEvents({
       selectable={sesstion.data?.user?.id === userId}
       onEventDrop={(event) => {
         const { start, end, event: droppedEvent } = event;
-        if (droppedEvent.type === 'blocked_private') return;
+        if (
+          droppedEvent.type === 'blocked_private' ||
+          (droppedEvent.organizer &&
+            droppedEvent.organizer !== sesstion.data?.user?.id)
+        )
+          return;
         const startISO = new Date(start).toISOString();
         const endISO = new Date(end).toISOString();
-        patchEvent(
-          {
-            eventID: droppedEvent.id,
-            data: {
-              start_time: startISO,
-              end_time: endISO,
+        if (droppedEvent.type === 'blocked_owned') {
+          patchBlockedSlot(
+            {
+              slotID: droppedEvent.id,
+              data: {
+                start_time: startISO,
+                end_time: endISO,
+              },
             },
-          },
-          {
-            onSuccess: () => {
-              refetch();
+            {
+              onSuccess: () => {
+                refetch();
+              },
+              onError: (error) => {
+                console.error('Error updating blocked slot:', error);
+              },
             },
-            onError: (error) => {
-              console.error('Error updating event:', error);
+          );
+          return;
+        } else if (droppedEvent.type === 'event') {
+          patchEvent(
+            {
+              eventID: droppedEvent.id,
+              data: {
+                start_time: startISO,
+                end_time: endISO,
+              },
             },
-          },
-        );
+            {
+              onSuccess: () => {
+                refetch();
+              },
+              onError: (error) => {
+                console.error('Error updating event:', error);
+              },
+            },
+          );
+        }
       }}
       onEventResize={(event) => {
         const { start, end, event: resizedEvent } = event;
-        if (resizedEvent.type === 'blocked_private') return;
+        if (
+          resizedEvent.type === 'blocked_private' ||
+          (resizedEvent.organizer &&
+            resizedEvent.organizer !== sesstion.data?.user?.id)
+        )
+          return;
         const startISO = new Date(start).toISOString();
         const endISO = new Date(end).toISOString();
         if (startISO === endISO) {
           console.warn('Start and end times are the same, skipping resize.');
           return;
         }
-        patchEvent(
-          {
-            eventID: resizedEvent.id,
-            data: {
-              start_time: startISO,
-              end_time: endISO,
+        if (resizedEvent.type === 'blocked_owned') {
+          patchBlockedSlot(
+            {
+              slotID: resizedEvent.id,
+              data: {
+                start_time: startISO,
+                end_time: endISO,
+              },
             },
-          },
-          {
-            onSuccess: () => {
-              refetch();
+            {
+              onSuccess: () => {
+                refetch();
+              },
+              onError: (error) => {
+                console.error('Error resizing blocked slot:', error);
+              },
             },
-            onError: (error) => {
-              console.error('Error resizing event:', error);
+          );
+          return;
+        } else if (resizedEvent.type === 'event') {
+          patchEvent(
+            {
+              eventID: resizedEvent.id,
+              data: {
+                start_time: startISO,
+                end_time: endISO,
+              },
             },
-          },
-        );
+            {
+              onSuccess: () => {
+                refetch();
+              },
+              onError: (error) => {
+                console.error('Error resizing event:', error);
+              },
+            },
+          );
+        }
       }}
     />
   );

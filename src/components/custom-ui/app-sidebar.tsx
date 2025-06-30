@@ -14,7 +14,7 @@ import {
   SidebarMenuItem,
 } from '@/components/custom-ui/sidebar';
 
-import { ChevronDown } from 'lucide-react';
+import { CalendarMinus, CalendarMinus2, ChevronDown } from 'lucide-react';
 import {
   Collapsible,
   CollapsibleContent,
@@ -28,8 +28,8 @@ import Link from 'next/link';
 import {
   Star,
   CalendarDays,
-  User,
-  Users,
+  //User,
+  //Users,
   CalendarClock,
   CalendarPlus,
 } from 'lucide-react';
@@ -40,7 +40,7 @@ const items = [
     url: '/home',
     icon: CalendarDays,
   },
-  {
+  /*{
     title: 'Friends',
     url: '#',
     icon: User,
@@ -49,11 +49,16 @@ const items = [
     title: 'Groups',
     url: '#',
     icon: Users,
-  },
+  },*/
   {
     title: 'Events',
     url: '/events',
     icon: CalendarClock,
+  },
+  {
+    title: 'Blockers',
+    url: '/blocker',
+    icon: CalendarMinus,
   },
 ];
 
@@ -120,6 +125,17 @@ export function AppSidebar() {
                 <CalendarPlus className='size-8' />
                 <span className='group-data-[collapsible=icon]:hidden text-nowrap whitespace-nowrap'>
                   New Event
+                </span>
+              </Link>
+            </SidebarMenuItem>
+            <SidebarMenuItem className='pl-[8px]'>
+              <Link
+                href='/blocker/new'
+                className='flex items-center gap-2 text-xl font-label'
+              >
+                <CalendarMinus2 className='size-8' />
+                <span className='group-data-[collapsible=icon]:hidden text-nowrap whitespace-nowrap'>
+                  New Blocker
                 </span>
               </Link>
             </SidebarMenuItem>

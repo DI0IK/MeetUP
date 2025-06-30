@@ -12,7 +12,6 @@ export default function LabeledInput({
   error,
   ...rest
 }: {
-  type: 'text' | 'email' | 'password';
   label: string;
   placeholder?: string;
   value?: string;
