@@ -14,7 +14,9 @@ export default function Home() {
           <span style={{ whiteSpace: 'nowrap' }}>
             {isLoading
               ? 'Loading...'
-              : data?.data.user?.first_name || 'Unknown User'}{' '}
+              : data?.data.user?.first_name ||
+                data?.data.user?.name ||
+                'Unknown User'}{' '}
             &#128075;
           </span>
         </h1>
