@@ -25,14 +25,6 @@ export const BlockedSlotsSchema = zod
     created_at: zod.date(),
     updated_at: zod.date(),
   })
-  .refine(
-    (data) => {
-      return new Date(data.start_time) < new Date(data.end_time);
-    },
-    {
-      message: 'Start time must be before end time',
-    },
-  )
   .openapi('BlockedSlotsSchema', {
     description: 'Blocked time slot in the user calendar',
   });
@@ -47,11 +39,37 @@ export const BlockedSlotResponseSchema = zod.object({
   blocked_slot: BlockedSlotsSchema,
 });
 
-export const createBlockedSlotSchema = BlockedSlotsSchema.omit({
-  id: true,
-  created_at: true,
-  updated_at: true,
-});
+export const createBlockedSlotSchema = zod
+  .object({
+    start_time: eventStartTimeSchema,
+    end_time: eventEndTimeSchema,
+    reason: zod.string().nullish(),
+  })
+  .refine(
+    (data) => {
+      return new Date(data.start_time) < new Date(data.end_time);
+    },
+    {
+      message: 'Start time must be before end time',
+      path: ['end_time'],
+    },
+  );
+
+export const createBlockedSlotClientSchema = zod
+  .object({
+    start_time: zod.iso.datetime({ local: true }),
+    end_time: zod.iso.datetime({ local: true }),
+    reason: zod.string().nullish(),
+  })
+  .refine(
+    (data) => {
+      return new Date(data.start_time) < new Date(data.end_time);
+    },
+    {
+      message: 'Start time must be before end time',
+      path: ['end_time'],
+    },
+  );
 
 export const updateBlockedSlotSchema = zod.object({
   start_time: eventStartTimeSchema.optional(),
