@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import Logo from '@/components/misc/logo';
 import TimePicker from '@/components/time-picker';
 import { Label } from '@/components/ui/label';
-import { useGetApiUserMe } from '@/generated/api/user/user';
 import {
   usePostApiEvent,
   useGetApiEventEventID,
@@ -57,8 +56,11 @@ const EventForm: React.FC<EventFormProps> = (props) => {
     isSuccess,
     error,
   } = usePostApiEvent();
-  const { data, isLoading, error: fetchError } = useGetApiUserMe();
-  const { data: eventData } = useGetApiEventEventID(props.eventId!, {
+  const {
+    data: eventData,
+    isLoading,
+    isError,
+  } = useGetApiEventEventID(props.eventId!, {
     query: { enabled: props.type === 'edit' },
   });
   const patchEvent = usePatchApiEventEventID();
@@ -210,8 +212,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
   }, []);
 
   if (props.type === 'edit' && isLoading) return <div>Loading...</div>;
-  if (props.type === 'edit' && fetchError)
-    return <div>Error loading event.</div>;
+  if (props.type === 'edit' && isError) return <div>Error loading event.</div>;
 
   return (
     <Dialog open={calendarOpen} onOpenChange={setCalendarOpen}>
@@ -298,7 +299,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
                   <p className='text-[var(--color-neutral-300)]'>
                     {!isClient || isLoading
                       ? 'Loading...'
-                      : data?.data.user?.name || 'Unknown User'}
+                      : eventData?.data.event.organizer.name || 'Unknown User'}
                   </p>
                 </div>
               </div>
