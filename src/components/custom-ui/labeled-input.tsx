@@ -36,6 +36,12 @@ export default function LabeledInput({
     value || defaultValue || '',
   );
 
+  React.useEffect(() => {
+    if (value !== undefined) {
+      setInputValue(value);
+    }
+  }, [value]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
     if (rest.onChange) {
