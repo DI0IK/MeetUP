@@ -17,6 +17,7 @@ export default function LabeledInput({
   variantSize = 'default',
   autocomplete,
   error,
+  'data-cy': dataCy,
   ...rest
 }: {
   label: string;
@@ -30,6 +31,7 @@ export default function LabeledInput({
   variantSize?: 'default' | 'big' | 'textarea';
   autocomplete?: string;
   error?: string;
+  'data-cy'?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>) {
   const [passwordVisible, setPasswordVisible] = React.useState(false);
   const [inputValue, setInputValue] = React.useState(
@@ -64,6 +66,7 @@ export default function LabeledInput({
           id={name}
           name={name}
           rows={3}
+          data-cy={dataCy}
         />
       ) : (
         <span className='relative'>
@@ -82,6 +85,7 @@ export default function LabeledInput({
             id={name}
             name={name}
             autoComplete={autocomplete}
+            data-cy={dataCy}
             {...rest}
             onChange={handleInputChange}
           />

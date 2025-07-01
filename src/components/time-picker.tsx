@@ -20,6 +20,7 @@ export default function TimePicker({
   setDate,
   time,
   setTime,
+  ...props
 }: {
   dateLabel?: string;
   timeLabel?: string;
@@ -27,11 +28,11 @@ export default function TimePicker({
   setDate?: (date: Date | undefined) => void;
   time?: string;
   setTime?: (time: string) => void;
-}) {
+} & React.HTMLAttributes<HTMLDivElement>) {
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className='flex gap-4'>
+    <div className='flex gap-4' {...props}>
       <div className='flex flex-col gap-3'>
         <Label htmlFor='date' className='px-1'>
           {dateLabel}
