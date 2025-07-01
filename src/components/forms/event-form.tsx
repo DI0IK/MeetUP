@@ -58,14 +58,11 @@ const EventForm: React.FC<EventFormProps> = (props) => {
     error,
   } = usePostApiEvent();
   const { data, isLoading, error: fetchError } = useGetApiUserMe();
-  const { data: eventData } = useGetApiEventEventID(
-    props.eventId!,
-    {
-      query: { enabled: props.type === 'edit' },
-    },
-  );
+  const { data: eventData } = useGetApiEventEventID(props.eventId!, {
+    query: { enabled: props.type === 'edit' },
+  });
   const patchEvent = usePatchApiEventEventID();
-  const router = useRouter();;
+  const router = useRouter();
 
   // State for date and time fields
   const [startDate, setStartDate] = React.useState<Date | undefined>(undefined);
@@ -102,7 +99,9 @@ const EventForm: React.FC<EventFormProps> = (props) => {
       }
       setLocation(eventData?.data?.event.location || '');
       setDescription(eventData?.data?.event.description || '');
-      setSelectedParticipants(eventData?.data?.event.participants?.map((u) => u.user) || []);
+      setSelectedParticipants(
+        eventData?.data?.event.participants?.map((u) => u.user) || [],
+      );
     } else if (props.type === 'create' && startFromUrl && endFromUrl) {
       // If creating a new event with URL params, set title and dates
       setTitle('');

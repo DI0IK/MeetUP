@@ -98,7 +98,7 @@ export default function AccountTab() {
           toast.custom((t) => (
             <ToastInner
               toastId={t}
-              title='Settings saved'
+              title='Error saving settings'
               description={
                 error.response?.data.message || 'An unknown error occurred.'
               }

@@ -108,7 +108,9 @@ export default function ShowEvent() {
                   <Label className='text-[var(--color-neutral-300)] mb-2'>
                     Location
                   </Label>
-                  <Label size='large'>{eventData.data.event.location || '-'}</Label>
+                  <Label size='large'>
+                    {eventData.data.event.location || '-'}
+                  </Label>
                 </div>
                 <div className='flex flex-col gap-4'>
                   <div className='flex flex-row gap-2'>
@@ -116,7 +118,9 @@ export default function ShowEvent() {
                       created:
                     </Label>
                     <Label>
-                      {eventData.data.event.created_at ? formatDate(eventData.data.event.created_at) : '-'}
+                      {eventData.data.event.created_at
+                        ? formatDate(eventData.data.event.created_at)
+                        : '-'}
                     </Label>
                   </div>
                   <div className='flex flex-row gap-2'>
@@ -124,7 +128,9 @@ export default function ShowEvent() {
                       updated:
                     </Label>
                     <Label>
-                      {eventData.data.event.updated_at ? formatDate(eventData.data.event.updated_at) : '-'}
+                      {eventData.data.event.updated_at
+                        ? formatDate(eventData.data.event.updated_at)
+                        : '-'}
                     </Label>
                   </div>
                 </div>
@@ -136,14 +142,18 @@ export default function ShowEvent() {
                       <Label className='text-[var(--color-neutral-300)]'>
                         Organiser:
                       </Label>
-                      <Label size='large'>{userData?.data.user?.name || 'Unknown User'}</Label>
+                      <Label size='large'>
+                        {userData?.data.user?.name || 'Unknown User'}
+                      </Label>
                     </div>
                   </div>
                   <div className='h-full w-full'>
                     <Label className='text-[var(--color-neutral-300)] mb-2'>
                       Description
                     </Label>
-                    <Label size='large'>{eventData.data.event.description || '-'}</Label>
+                    <Label size='large'>
+                      {eventData.data.event.description || '-'}
+                    </Label>
                   </div>
                 </div>
                 <div className='h-full w-full mt-2'>
@@ -164,7 +174,8 @@ export default function ShowEvent() {
 
               <div className='flex flex-row gap-2 justify-end mt-4 mb-6'>
                 <div className='w-[20%] grid max-sm:w-full'>
-                  {session.data?.user?.id === eventData.data.event.organizer.id ? (
+                  {session.data?.user?.id ===
+                  eventData.data.event.organizer.id ? (
                     <Dialog
                       open={deleteDialogOpen}
                       onOpenChange={setDeleteDialogOpen}
@@ -179,7 +190,8 @@ export default function ShowEvent() {
                           <DialogTitle>Delete Event</DialogTitle>
                           <DialogDescription>
                             Are you sure you want to delete the event &ldquo;
-                            {eventData.data.event.title}&rdquo;? This action cannot be undone.
+                            {eventData.data.event.title}&rdquo;? This action
+                            cannot be undone.
                           </DialogDescription>
                         </DialogHeader>
                         <DialogFooter>
@@ -219,7 +231,8 @@ export default function ShowEvent() {
                   ) : null}
                 </div>
                 <div className='w-[20%] grid max-sm:w-full'>
-                  {session.data?.user?.id === eventData.data.event.organizer.id ? (
+                  {session.data?.user?.id ===
+                  eventData.data.event.organizer.id ? (
                     <RedirectButton
                       redirectUrl={`/events/edit/${eventID}`}
                       buttonText='edit'
