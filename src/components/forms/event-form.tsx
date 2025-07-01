@@ -64,9 +64,6 @@ const EventForm: React.FC<EventFormProps> = (props) => {
   const patchEvent = usePatchApiEventEventID();
   const router = useRouter();
 
-  // Extract event fields for form defaults
-  const event = eventData?.data?.event;
-
   // State for date and time fields
   const [startDate, setStartDate] = React.useState<Date | undefined>(undefined);
   const [startTime, setStartTime] = React.useState('');
@@ -87,22 +84,24 @@ const EventForm: React.FC<EventFormProps> = (props) => {
 
   // Update state when event data loads
   React.useEffect(() => {
-    if (props.type === 'edit' && event) {
-      setTitle(event.title || '');
+    if (props.type === 'edit' && eventData?.data?.event) {
+      setTitle(eventData?.data?.event.title || '');
       // Parse start_time and end_time
-      if (event.start_time) {
-        const start = new Date(event.start_time);
+      if (eventData?.data?.event.start_time) {
+        const start = new Date(eventData?.data?.event.start_time);
         setStartDate(start);
         setStartTime(start.toTimeString().slice(0, 5)); // "HH:mm"
       }
-      if (event.end_time) {
-        const end = new Date(event.end_time);
+      if (eventData?.data?.event.end_time) {
+        const end = new Date(eventData?.data?.event.end_time);
         setEndDate(end);
         setEndTime(end.toTimeString().slice(0, 5)); // "HH:mm"
       }
-      setLocation(event.location || '');
-      setDescription(event.description || '');
-      setSelectedParticipants(event.participants?.map((u) => u.user) || []);
+      setLocation(eventData?.data?.event.location || '');
+      setDescription(eventData?.data?.event.description || '');
+      setSelectedParticipants(
+        eventData?.data?.event.participants?.map((u) => u.user) || [],
+      );
     } else if (props.type === 'create' && startFromUrl && endFromUrl) {
       // If creating a new event with URL params, set title and dates
       setTitle('');
@@ -113,7 +112,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
       setEndDate(end);
       setEndTime(end.toTimeString().slice(0, 5)); // "HH:mm"
     }
-  }, [event, props.type, startFromUrl, endFromUrl]);
+  }, [eventData?.data?.event, props.type, startFromUrl, endFromUrl]);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -181,7 +180,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
       <ToastInner
         toastId={t}
         title='Event saved'
-        description={event?.title}
+        description={eventData?.data?.event.title}
         onAction={() => router.push(`/events/${eventID}`)}
         variant='success'
         buttonText='show'
@@ -198,12 +197,12 @@ const EventForm: React.FC<EventFormProps> = (props) => {
 
   // Use DB values for created_at/updated_at in edit mode
   const createdAtValue =
-    props.type === 'edit' && event?.created_at
-      ? event.created_at
+    props.type === 'edit' && eventData?.data?.event?.created_at
+      ? eventData.data.event.created_at
       : new Date().toISOString();
   const updatedAtValue =
-    props.type === 'edit' && event?.updated_at
-      ? event.updated_at
+    props.type === 'edit' && eventData?.data?.event?.updated_at
+      ? eventData.data.event.updated_at
       : new Date().toISOString();
 
   // Format date for display
