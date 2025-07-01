@@ -43,7 +43,10 @@ export default function EventListEntry({
   return (
     <Link href={`/events/${id}`} className='block'>
       <Card className='w-full'>
-        <div className='grid grid-cols-1 gap-2 mx-auto md:mx-4 md:grid-cols-[80px_1fr_250px]'>
+        <div
+          className='grid grid-cols-1 gap-2 mx-auto md:mx-4 md:grid-cols-[80px_1fr_250px]'
+          data-cy='event-list-entry'
+        >
           <div className='w-full items-center justify-center grid'>
             <Logo colorType='monochrome' logoType='submark' width={50} />
           </div>

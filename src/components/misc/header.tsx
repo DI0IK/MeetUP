@@ -25,7 +25,10 @@ export default function Header({
 }>) {
   return (
     <div className='w-full grid grid-rows-[50px_1fr] h-screen'>
-      <header className='border-b-1 grid-cols-[1fr_3fr_1fr] grid items-center px-2 shadow-md'>
+      <header
+        className='border-b-1 grid-cols-[1fr_3fr_1fr] grid items-center px-2 shadow-md'
+        data-cy='header'
+      >
         <span className='flex justify-start'>
           <SidebarTrigger variant='outline_primary' size='icon' />
         </span>

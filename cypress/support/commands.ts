@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-namespace */
 /// <reference types="cypress" />
 // ***********************************************
 // This example commands.ts shows you how to
@@ -44,6 +46,22 @@ Cypress.Commands.add('getBySelLike', (selector, ...args) => {
   return cy.get(`[data-cy*=${selector}]`, ...args);
 });
 
+Cypress.Commands.add('login', () => {
+  cy.session('auth', () => {
+    cy.visit('http://127.0.0.1:3000/login');
+    cy.getBySel('login-header').should('exist');
+    cy.getBySel('login-form').should('exist');
+    cy.getBySel('email-input').should('exist');
+    cy.getBySel('password-input').should('exist');
+    cy.getBySel('login-button').should('exist');
+    cy.getBySel('email-input').type('cypress@example.com');
+    cy.getBySel('password-input').type('Password123!');
+    cy.getBySel('login-button').click();
+    cy.url().should('include', '/home');
+    cy.getBySel('header').should('exist');
+  });
+});
+
 declare global {
   namespace Cypress {
     interface Chainable {
@@ -55,6 +73,7 @@ declare global {
         selector: string,
         ...args: any[]
       ): Chainable<JQuery<HTMLElement>>;
+      login(): Chainable<void>;
     }
   }
 }
