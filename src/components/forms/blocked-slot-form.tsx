@@ -3,7 +3,7 @@
 import useZodForm from '@/lib/hooks/useZodForm';
 import {
   updateBlockedSlotSchema,
-  createBlockedSlotSchema,
+  createBlockedSlotClientSchema,
 } from '@/app/api/blocked_slots/validation';
 import {
   useGetApiBlockedSlotsSlotID,
@@ -40,12 +40,7 @@ export default function BlockedSlotForm({
     handleSubmit: handleCreateSubmit,
     formState: formStateCreate,
     reset: resetCreate,
-  } = useZodForm(
-    createBlockedSlotSchema.extend({
-      start_time: eventStartTimeSchema.or(zod.iso.datetime({ local: true })),
-      end_time: eventStartTimeSchema.or(zod.iso.datetime({ local: true })),
-    }),
-  );
+  } = useZodForm(createBlockedSlotClientSchema);
 
   const {
     register: registerUpdate,
@@ -145,100 +140,146 @@ export default function BlockedSlotForm({
     });
   });
 
-  return (
-    <div className='flex items-center justify-center h-full'>
-      <Card className='w-[max(80%, 500px)] max-w-screen p-0 gap-0 max-xl:w-[95%] mx-auto'>
-        <CardHeader className='p-0 m-0 gap-0 px-6'>
-          <div className='h-full mt-0 ml-2 mb-16 flex items-center justify-between max-sm:grid max-sm:grid-row-start:auto max-sm:mb-6 max-sm:mt-10 max-sm:ml-0'>
-            <div className='w-[100px] max-sm:w-full max-sm:flex max-sm:justify-center'>
-              <Logo colorType='monochrome' logoType='submark' width={50} />
+  if (existingBlockedSlotId)
+    return (
+      <div className='flex items-center justify-center h-full'>
+        <Card className='w-[max(80%, 500px)] max-w-screen p-0 gap-0 max-xl:w-[95%] mx-auto'>
+          <CardHeader className='p-0 m-0 gap-0 px-6'>
+            <div className='h-full mt-0 ml-2 mb-16 flex items-center justify-between max-sm:grid max-sm:grid-row-start:auto max-sm:mb-6 max-sm:mt-10 max-sm:ml-0'>
+              <div className='w-[100px] max-sm:w-full max-sm:flex max-sm:justify-center'>
+                <Logo colorType='monochrome' logoType='submark' width={50} />
+              </div>
+              <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full max-sm:flex max-sm:justify-center'>
+                <h1 className='text-center'>{'Update Blocker'}</h1>
+              </div>
+              <div className='w-0 sm:w-[100px]'></div>
             </div>
-            <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full max-sm:flex max-sm:justify-center'>
-              <h1 className='text-center'>
-                {existingBlockedSlotId ? 'Update Blocker' : 'Create Blocker'}
-              </h1>
-            </div>
-            <div className='w-0 sm:w-[100px]'></div>
-          </div>
-        </CardHeader>
-        <CardContent>
-          <form
-            onSubmit={existingBlockedSlotId ? onUpdateSubmit : onCreateSubmit}
-          >
-            <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
-              <LabeledInput
-                label='Start Time'
-                type='datetime-local'
-                id='start_time'
-                {...(existingBlockedSlotId
-                  ? registerUpdate('start_time')
-                  : registerCreate('start_time'))}
-                error={
-                  formStateCreate.errors.start_time?.message ||
-                  formStateUpdate.errors.start_time?.message
-                }
-                required
-              />
-              <LabeledInput
-                label='End Time'
-                type='datetime-local'
-                id='end_time'
-                {...(existingBlockedSlotId
-                  ? registerUpdate('end_time')
-                  : registerCreate('end_time'))}
-                error={
-                  formStateCreate.errors.end_time?.message ||
-                  formStateUpdate.errors.end_time?.message
-                }
-                required
-              />
-              <LabeledInput
-                label='Reason'
-                type='text'
-                id='reason'
-                {...(existingBlockedSlotId
-                  ? registerUpdate('reason')
-                  : registerCreate('reason'))}
-                error={
-                  formStateCreate.errors.reason?.message ||
-                  formStateUpdate.errors.reason?.message
-                }
-                placeholder='Optional reason for blocking this slot'
-              />
-            </div>
-            <div className='flex justify-end gap-2 p-4'>
-              <Button
-                type='submit'
-                variant='primary'
-                disabled={
-                  formStateCreate.isSubmitting || formStateUpdate.isSubmitting
-                }
-              >
-                {existingBlockedSlotId ? 'Update Blocker' : 'Create Blocker'}
-              </Button>
-              {existingBlockedSlotId && (
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={onUpdateSubmit}>
+              <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+                <LabeledInput
+                  label='Start Time'
+                  type='datetime-local'
+                  id='start_time'
+                  {...registerUpdate('start_time')}
+                  error={formStateUpdate.errors.start_time?.message}
+                  required
+                />
+                <LabeledInput
+                  label='End Time'
+                  type='datetime-local'
+                  id='end_time'
+                  {...registerUpdate('end_time')}
+                  error={formStateUpdate.errors.end_time?.message}
+                  required
+                />
+                <LabeledInput
+                  label='Reason'
+                  type='text'
+                  id='reason'
+                  {...registerUpdate('reason')}
+                  error={formStateUpdate.errors.reason?.message}
+                  placeholder='Optional reason for blocking this slot'
+                />
+              </div>
+              <div className='flex justify-end gap-2 p-4'>
                 <Button
-                  type='button'
-                  variant='destructive'
-                  onClick={onDeleteSubmit}
+                  type='submit'
+                  variant='primary'
+                  disabled={formStateUpdate.isSubmitting}
                 >
-                  Delete Blocker
+                  {'Update Blocker'}
                 </Button>
+                {existingBlockedSlotId && (
+                  <Button
+                    type='button'
+                    variant='destructive'
+                    onClick={onDeleteSubmit}
+                  >
+                    Delete Blocker
+                  </Button>
+                )}
+              </div>
+              {formStateUpdate.errors.root && (
+                <p className='text-red-500 text-sm mt-1'>
+                  {formStateUpdate.errors.root.message}
+                </p>
               )}
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  else
+    return (
+      <div className='flex items-center justify-center h-full'>
+        <Card className='w-[max(80%, 500px)] max-w-screen p-0 gap-0 max-xl:w-[95%] mx-auto'>
+          <CardHeader className='p-0 m-0 gap-0 px-6'>
+            <div className='h-full mt-0 ml-2 mb-16 flex items-center justify-between max-sm:grid max-sm:grid-row-start:auto max-sm:mb-6 max-sm:mt-10 max-sm:ml-0'>
+              <div className='w-[100px] max-sm:w-full max-sm:flex max-sm:justify-center'>
+                <Logo colorType='monochrome' logoType='submark' width={50} />
+              </div>
+              <div className='items-center ml-auto mr-auto max-sm:mb-6 max-sm:w-full max-sm:flex max-sm:justify-center'>
+                <h1 className='text-center'>{'Create Blocker'}</h1>
+              </div>
+              <div className='w-0 sm:w-[100px]'></div>
             </div>
-            {formStateCreate.errors.root && (
-              <p className='text-red-500 text-sm mt-1'>
-                {formStateCreate.errors.root.message}
-              </p>
-            )}
-            {formStateUpdate.errors.root && (
-              <p className='text-red-500 text-sm mt-1'>
-                {formStateUpdate.errors.root.message}
-              </p>
-            )}
-          </form>
-        </CardContent>
-      </Card>
-    </div>
-  );
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={onCreateSubmit}>
+              <div className='grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3'>
+                <LabeledInput
+                  label='Start Time'
+                  type='datetime-local'
+                  id='start_time'
+                  {...registerCreate('start_time')}
+                  error={formStateCreate.errors.start_time?.message}
+                  required
+                />
+                <LabeledInput
+                  label='End Time'
+                  type='datetime-local'
+                  id='end_time'
+                  {...registerCreate('end_time')}
+                  error={formStateCreate.errors.end_time?.message}
+                  required
+                />
+                <LabeledInput
+                  label='Reason'
+                  type='text'
+                  id='reason'
+                  {...registerCreate('reason')}
+                  error={formStateCreate.errors.reason?.message}
+                  placeholder='Optional reason for blocking this slot'
+                />
+              </div>
+              <div className='flex justify-end gap-2 p-4'>
+                <Button
+                  type='submit'
+                  variant='primary'
+                  disabled={formStateCreate.isSubmitting}
+                >
+                  {'Create Blocker'}
+                </Button>
+                {existingBlockedSlotId && (
+                  <Button
+                    type='button'
+                    variant='destructive'
+                    onClick={onDeleteSubmit}
+                  >
+                    Delete Blocker
+                  </Button>
+                )}
+              </div>
+              {formStateCreate.errors.root && (
+                <p className='text-red-500 text-sm mt-1'>
+                  {formStateCreate.errors.root.message}
+                </p>
+              )}
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
 }
