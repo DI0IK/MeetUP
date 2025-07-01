@@ -32,7 +32,7 @@ export default function Header({
         <span className='flex justify-start'>
           <SidebarTrigger variant='outline_primary' size='icon' />
         </span>
-        <span className='flex justify-center'>Search</span>
+        <span className='flex justify-center'></span>
         <span className='flex gap-1 justify-end'>
           <ThemePicker />
           {items.map((item) => (

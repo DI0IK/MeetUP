@@ -5,7 +5,6 @@ import { Button } from '@/components/ui/button';
 import Logo from '@/components/misc/logo';
 import TimePicker from '@/components/time-picker';
 import { Label } from '@/components/ui/label';
-import { useGetApiUserMe } from '@/generated/api/user/user';
 import {
   usePostApiEvent,
   useGetApiEventEventID,
@@ -31,6 +30,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog';
+import { useGetApiUserMe } from '@/generated/api/user/user';
 
 type User = zod.output<typeof PublicUserSchema>;
 
@@ -57,10 +57,10 @@ const EventForm: React.FC<EventFormProps> = (props) => {
     isSuccess,
     error,
   } = usePostApiEvent();
-  const { data, isLoading, error: fetchError } = useGetApiUserMe();
   const { data: eventData } = useGetApiEventEventID(props.eventId!, {
     query: { enabled: props.type === 'edit' },
   });
+  const { data, isLoading, isError } = useGetApiUserMe();
   const patchEvent = usePatchApiEventEventID();
   const router = useRouter();
 
@@ -210,8 +210,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
   }, []);
 
   if (props.type === 'edit' && isLoading) return <div>Loading...</div>;
-  if (props.type === 'edit' && fetchError)
-    return <div>Error loading event.</div>;
+  if (props.type === 'edit' && isError) return <div>Error loading event.</div>;
 
   return (
     <Dialog open={calendarOpen} onOpenChange={setCalendarOpen}>
@@ -298,7 +297,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
                   <p className='text-[var(--color-neutral-300)]'>
                     {!isClient || isLoading
                       ? 'Loading...'
-                      : data?.data.user?.name || 'Unknown User'}
+                      : data?.data.user.name || 'Unknown User'}
                   </p>
                 </div>
               </div>
@@ -335,7 +334,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
               <DialogTrigger asChild>
                 <Button variant='primary'>Calendar</Button>
               </DialogTrigger>
-              <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
+              <div className='grid grid-cols-1 mt-3'>
                 {selectedParticipants.map((user) => (
                   <ParticipantListEntry
                     key={user.id}

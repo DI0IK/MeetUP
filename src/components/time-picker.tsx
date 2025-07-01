@@ -32,8 +32,8 @@ export default function TimePicker({
   const [open, setOpen] = React.useState(false);
 
   return (
-    <div className='flex gap-4' {...props}>
-      <div className='flex flex-col gap-3'>
+    <div className='grid grid-cols-2 gap-4' {...props}>
+      <div className='grid grid-rows-2 gap-2'>
         <Label htmlFor='date' className='px-1'>
           {dateLabel}
         </Label>
@@ -69,7 +69,7 @@ export default function TimePicker({
           </PopoverContent>
         </Popover>
       </div>
-      <div className='flex flex-col gap-3'>
+      <div className='grid grid-rows-2 gap-2'>
         <Label htmlFor='time' className='px-1'>
           {timeLabel}
         </Label>
