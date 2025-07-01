@@ -27,7 +27,7 @@ export default function BlockedSlots() {
 
       {/* Scrollable blocked slot list */}
       <div className='w-full flex justify-center overflow-hidden'>
-        <div className='grid gap-8 w-[max(90%, 500px)] p-6 overflow-y-auto'>
+        <div className='grid gap-8 p-6 overflow-y-auto'>
           {blockedSlots.length > 0 ? (
             blockedSlots.map((slot) => (
               <BlockedSlotListEntry
