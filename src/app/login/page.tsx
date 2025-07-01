@@ -61,10 +61,11 @@ export default async function LoginPage() {
           </HoverCardTrigger>
           <HoverCardContent className='flex items-center justify-center'>
             <Image
-              src='https://img1.wikia.nocookie.net/__cb20140808110649/clubpenguin/images/a/a1/Action_Dance_Light_Blue.gif'
+              src='https://i.gifer.com/22CU.gif'
               width='150'
               height='150'
-              alt='dancing penguin'
+              alt='cat gif'
+              unoptimized
             ></Image>
           </HoverCardContent>
         </HoverCard>

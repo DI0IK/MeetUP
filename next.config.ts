@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: 'https',
-        hostname: 'img1.wikia.nocookie.net',
+        hostname: 'i.gifer.com',
         port: '',
         pathname: '/**',
       },
