@@ -30,6 +30,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '../ui/dialog';
+import { useGetApiUserMe } from '@/generated/api/user/user';
 
 type User = zod.output<typeof PublicUserSchema>;
 
@@ -56,13 +57,10 @@ const EventForm: React.FC<EventFormProps> = (props) => {
     isSuccess,
     error,
   } = usePostApiEvent();
-  const {
-    data: eventData,
-    isLoading,
-    isError,
-  } = useGetApiEventEventID(props.eventId!, {
+  const { data: eventData } = useGetApiEventEventID(props.eventId!, {
     query: { enabled: props.type === 'edit' },
   });
+  const { data, isLoading, isError } = useGetApiUserMe();
   const patchEvent = usePatchApiEventEventID();
   const router = useRouter();
 
@@ -299,7 +297,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
                   <p className='text-[var(--color-neutral-300)]'>
                     {!isClient || isLoading
                       ? 'Loading...'
-                      : eventData?.data.event.organizer.name || 'Unknown User'}
+                      : data?.data.user.name || 'Unknown User'}
                   </p>
                 </div>
               </div>
@@ -336,7 +334,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
               <DialogTrigger asChild>
                 <Button variant='primary'>Calendar</Button>
               </DialogTrigger>
-              <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
+              <div className='grid grid-cols-1 mt-3'>
                 {selectedParticipants.map((user) => (
                   <ParticipantListEntry
                     key={user.id}

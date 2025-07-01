@@ -8,7 +8,6 @@ import {
   useDeleteApiEventEventID,
   useGetApiEventEventID,
 } from '@/generated/api/event/event';
-import { useGetApiUserMe } from '@/generated/api/user/user';
 import { RedirectButton } from '@/components/buttons/redirect-button';
 import { useSession } from 'next-auth/react';
 import ParticipantListEntry from '@/components/custom-ui/participant-list-entry';
@@ -35,10 +34,9 @@ export default function ShowEvent() {
 
   // Fetch event data
   const { data: eventData, isLoading, error } = useGetApiEventEventID(eventID);
-  const { data: userData, isLoading: userLoading } = useGetApiUserMe();
   const deleteEvent = useDeleteApiEventEventID();
 
-  if (isLoading || userLoading) {
+  if (isLoading) {
     return (
       <div className='flex justify-center items-center h-full'>Loading...</div>
     );
@@ -143,7 +141,7 @@ export default function ShowEvent() {
                         Organiser:
                       </Label>
                       <Label size='large'>
-                        {userData?.data.user?.name || 'Unknown User'}
+                        {eventData.data.event.organizer.name || 'Unknown User'}
                       </Label>
                     </div>
                   </div>
@@ -160,7 +158,7 @@ export default function ShowEvent() {
                   <Label className='text-[var(--color-neutral-300)] mb-2'>
                     Participants
                   </Label>{' '}
-                  <div className='grid grid-cols-1 mt-3 sm:max-h-60 sm:grid-cols-2  sm:overflow-y-auto sm:mb-0'>
+                  <div className='grid grid-cols-1 mt-3'>
                     {eventData.data.event.participants?.map((user) => (
                       <ParticipantListEntry
                         key={user.user.id}
