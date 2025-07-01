@@ -241,7 +241,7 @@ const EventForm: React.FC<EventFormProps> = (props) => {
             </div>
             <div className='w-0 sm:w-[50px]'></div>
           </div>
-          <div className='grid grid-cols-4 gap-4 h-full w-full max-lg:grid-cols-2 max-sm:grid-cols-1'>
+          <div className='grid grid-cols-4 gap-4 h-full w-full max-2xl:grid-cols-2 max-sm:grid-cols-1'>
             <div>
               <TimePicker
                 dateLabel='start Time'

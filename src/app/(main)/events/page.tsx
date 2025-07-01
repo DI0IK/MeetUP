@@ -28,7 +28,7 @@ export default function Events() {
 
       {/* Scrollable event list */}
       <div className='w-full flex justify-center overflow-hidden'>
-        <div className='grid gap-8 w-[90%] sm:w-[80%] lg:w-[60%] xl:w-[50%] p-6 overflow-y-auto'>
+        <div className='grid gap-8 not-visited:p-6 overflow-y-auto'>
           {events.length > 0 ? (
             events.map((event) => (
               <EventListEntry

@@ -25,6 +25,14 @@ export const BlockedSlotsSchema = zod
     created_at: zod.date(),
     updated_at: zod.date(),
   })
+  .refine(
+    (data) => {
+      return new Date(data.start_time) < new Date(data.end_time);
+    },
+    {
+      message: 'Start time must be before end time',
+    },
+  )
   .openapi('BlockedSlotsSchema', {
     description: 'Blocked time slot in the user calendar',
   });
