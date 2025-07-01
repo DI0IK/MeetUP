@@ -63,7 +63,7 @@ export default function ShowEvent() {
   };
 
   return (
-    <div className='flex items-center justify-center h-full'>
+    <div>
       <Card className='w-[80%] max-w-screen p-0 gap-0 max-xl:w-[95%] mx-auto'>
         <CardHeader className='p-0 m-0 gap-0' />
 
