@@ -10214,8 +10214,8 @@ __metadata:
   linkType: hard
 
 "swagger-ui-react@npm:^5.24.1":
-  version: 5.26.1
-  resolution: "swagger-ui-react@npm:5.26.1"
+  version: 5.26.2
+  resolution: "swagger-ui-react@npm:5.26.2"
   dependencies:
     "@babel/runtime-corejs3": "npm:^7.27.1"
     "@scarf/scarf": "npm:=1.4.0"
@@ -10253,7 +10253,7 @@ __metadata:
   peerDependencies:
     react: ">=16.8.0 <19"
     react-dom: ">=16.8.0 <19"
-  checksum: 10c0/b3881d4c1682b6954626168d75483cac12750e9c13ab26c864d80192a667fac97b5b27dd82eea21a44e285fd2d529f9dcc0a3cc45bada5be23e1e106b8ad560c
+  checksum: 10c0/07fa118797d9a65870892b8aa9a4cd3c383452293ecd972b428b774ef488f47a66dd2b94c7f98d399eafc0f6e9043afda467a192d234bbf6c3e1532ae21a3970
   languageName: node
   linkType: hard
 
