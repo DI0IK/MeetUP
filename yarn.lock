@@ -11305,11 +11305,11 @@ __metadata:
   linkType: hard
 
 "zod-validation-error@npm:^3.5.2":
-  version: 3.5.2
-  resolution: "zod-validation-error@npm:3.5.2"
+  version: 3.5.3
+  resolution: "zod-validation-error@npm:3.5.3"
   peerDependencies:
-    zod: ^3.25.0
-  checksum: 10c0/da50926ec91c7ad2880bacc5010a53c42de58f73f7c4629baad8132695c4daf74dd68620787198da81aca85134471182ed4c566b5fc9bc5349aefd8540946d57
+    zod: ^3.25.0 || ^4.0.0
+  checksum: 10c0/4a1054f49049a5414857a4a85ae7b853d59be83dedb89942d4966345a58bd26d939beb574f0f5592fe4cc9963b26ac306d5b0950f6905651569059ef3517c803
   languageName: node
   linkType: hard
 
