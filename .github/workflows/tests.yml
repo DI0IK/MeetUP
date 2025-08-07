@@ -10,7 +10,7 @@ jobs:
     name: Tests
     runs-on: docker
     container:
-      image: cypress/browsers:latest@sha256:30192f4e24469c4c68dfeb51598db93c1491cfb9dc465f5d397331e22bc3acea
+      image: cypress/browsers:latest@sha256:2c4e1047f7187ca028dcd968cbd3aafc9430bbd30a3ec4d6b41f9eabfdb39e59
       options: --user 1001
     steps:
       - name: Checkout
